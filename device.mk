@@ -260,6 +260,10 @@ PRODUCT_PACKAGES += \
     LineageSdkOverlayFuji
 
 PRODUCT_PACKAGES += \
+    LineageApertureOverlayFuji
+
+# Parts
+PRODUCT_PACKAGES += \
     RegulatoryInfoOverlayM08 \
     RegulatoryInfoOverlayF-51F
 
