@@ -890,6 +890,11 @@ vendor/framework/com.fingerprints.extension.jar
 vendor/lib64/com.motorola.hardware.biometric.fingerprint-V1-ndk.so
 vendor/lib64/hw/fingerprint.fpc.mt6897.so
 
+# Gatekeeper
+vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
+vendor/etc/init/android.hardware.gatekeeper-service.trustonic.rc
+vendor/etc/vintf/manifest/android.hardware.gatekeeper-service.trustonic.xml
+
 # GNSS
 vendor/bin/hw/android.hardware.gnss-service.mediatek
 vendor/bin/mnld
