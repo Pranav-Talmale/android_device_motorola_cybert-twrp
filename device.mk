@@ -136,6 +136,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libshim_fp \
     android.hardware.biometrics.fingerprint@2.3-service.fuji \
+    com.motorola.biometrics.fingerprint@1.0.vendor \
     vendor.egistec.hardware.fingerprint@4.0.vendor
 
 PRODUCT_COPY_FILES += \
