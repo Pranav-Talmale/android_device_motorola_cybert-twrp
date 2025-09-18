@@ -250,7 +250,8 @@ PRODUCT_PACKAGES += \
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.pixel-libperfmgr \
-    vendor.mediatek.hardware.mtkpower@1.2-service.stub
+    libperfctl_vendor \
+    libpowerhalwrap_vendor
 
 PRODUCT_PACKAGES += \
     libmtkperf_client_vendor
