@@ -969,6 +969,10 @@ vendor/bin/hw/android.hardware.neuralnetworks-shim-service-mtk
 vendor/etc/init/android.hardware.neuralnetworks-shim-service-mtk.rc
 vendor/etc/nnapi_powerhal.json
 vendor/etc/vintf/manifest/android.hardware.neuralnetworks-shim-service-mtk.xml
+vendor/etc/vintf/manifest/manifest_apuware_apusys_aidl.xml
+vendor/etc/vintf/manifest/manifest_apuware_utils_aidl.xml
+vendor/lib64/APUWareApusysAidlServer.so
+vendor/lib64/APUWareUtilsAidlServer.so
 vendor/lib64/libapu_mdw.so
 vendor/lib64/libapu_mdw_batch.so
 vendor/lib64/libapusys.so
@@ -989,6 +993,8 @@ vendor/lib64/mt6897/libneuron_wrapper.so;SYMLINK=vendor/lib64/libneuron_wrapper.
 vendor/lib64/mt6897/libnir_neon_driver.so;SYMLINK=vendor/lib64/libnir_neon_driver.so
 vendor/lib64/vendor.mediatek.hardware.apmonitor-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.apmonitor@2.0.so
+vendor/lib64/vendor.mediatek.hardware.apuware.apusys-V3-ndk.so
+vendor/lib64/vendor.mediatek.hardware.apuware.utils-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.apuware.utils@2.0.so
 vendor/lib64/vendor.mediatek.hardware.neuropilot.agent-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.neuropilot.agent@1.0.so
