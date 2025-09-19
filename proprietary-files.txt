@@ -1255,8 +1255,18 @@ vendor/lib64/hw/vendor.mediatek.hardware.videotelephony-impl.so
 vendor/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so;MODULE_SUFFIX=_vendor
 
 # Secure element
+vendor/bin/hw/android.hardware.secure_element-service.thales
 vendor/bin/hw/android.hardware.secure_element@1.2-service-mediatek
+vendor/bin/hw/android.hardware.weaver@1.0-service-thales
 vendor/etc/init/android.hardware.secure_element@1.2-service-mediatek.rc
+vendor/etc/init/android.hardware.secure_element_gto.rc
+vendor/etc/init/android.hardware.weaver@1.0-service-thales.rc
+vendor/lib64/android.hardware.secure_element.thales.libse.so
+vendor/lib64/ese_weaver.so
+vendor/lib64/libextra-thales.so
+vendor/lib64/libjc_weaver_transport.so
+vendor/lib64/libnativecospatchkernel-thales.so
+vendor/lib64/libnativecosupdateapi-thales.so
 
 # Sensors
 vendor/etc/permissions/unavail.android.hardware.sensor.barometer.xml
