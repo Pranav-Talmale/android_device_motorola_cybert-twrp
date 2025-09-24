@@ -224,6 +224,7 @@ vendor/lib64/libbt-vendor.so
 vendor/bin/hw/mt6897/camerahalserver;SYMLINK=vendor/bin/hw/camerahalserver
 vendor/etc/init/camerahalserver.rc
 vendor/etc/vintf/manifest/manifest_cameraprovider.xml
+vendor/etc/vintf/manifest/manifest_isphal.xml
 vendor/etc/default_pd_calibration.bin
 vendor/etc/dual_golden_wide.bin
 vendor/bin/sns_mot_client
@@ -656,7 +657,12 @@ vendor/lib64/vendor.mediatek.hardware.camera.isphal@1.1.so
 vendor/lib64/vendor.mediatek.hardware.camera.postproc@1.0.so
 vendor/lib64/vendor.mediatek.hardware.camera.security@1.0.so
 
+# Camera OIS
+vendor/firmware/mot_tele_dw9784.prog
+
 # Camera (arcsoft)
+vendor/etc/ArcCustomParams.json
+vendor/etc/arc_uw_dc_calibration.bin
 vendor/etc/arcsoft_calibration_u_dc.bin
 vendor/lib64/libarc.ion.so
 vendor/lib64/libarcsoft_faceid.so
