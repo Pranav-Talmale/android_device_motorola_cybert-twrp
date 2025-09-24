@@ -24,9 +24,9 @@ PRODUCT_MODEL := M08
 
 CUSTOM_PROCESSOR_INFO := MediaTek Dimensity 8350 Extreme
 
-PRODUCT_GMS_CLIENTID_BASE := android-fcnt
+PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    DeviceName=M08 \
+    DeviceName=fuji \
     BuildDesc="M08-user 15 V2VH35.58-32-11 98dcb-acfb2 release-keys MV-324" \
     BuildFingerprint=FCNT/fuji_g_hal/fuji:14/V2VH35.58-32-11/98dcb:user/release-keys
