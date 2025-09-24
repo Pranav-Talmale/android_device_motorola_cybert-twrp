@@ -1084,8 +1084,15 @@ vendor/etc/libnfc-hal-st-felica.conf
 vendor/etc/libnfc-hal-st.conf
 vendor/etc/libnfc-nci-st-felica.conf
 vendor/etc/libnfc-nci-st.conf
+vendor/etc/libse-gto-hal.conf
+vendor/etc/st54l_conf_ds.txt
+vendor/etc/st54l_conf_felica_ds.txt
+vendor/etc/st54l_conf_felica_ss.txt
+vendor/etc/st54l_conf_ss.txt
 vendor/firmware/st21nfc_fw.bin
 vendor/firmware/st21nfc_fw7.bin
+vendor/firmware/st54l_fw.bin
+vendor/firmware/st54l_fw_felica.bin
 vendor/lib64/libstnfc-auth.so
 vendor/lib64/libstnfc-streset.so
 vendor/lib64/nfc_nci.st21nfc.st.so
@@ -1261,6 +1268,12 @@ vendor/lib64/libextra-thales.so
 vendor/lib64/libjc_weaver_transport.so
 vendor/lib64/libnativecospatchkernel-thales.so
 vendor/lib64/libnativecosupdateapi-thales.so
+
+# Secure element - configs
+vendor/etc/hal_uuid_map_config.xml
+vendor/etc/hal_uuid_map_dns.xml
+vendor/etc/hal_uuid_map_dnsf.xml
+vendor/etc/hal_uuid_map_ns.xml
 
 # Sensors
 vendor/etc/permissions/unavail.android.hardware.sensor.barometer.xml
