@@ -42,7 +42,9 @@ TARGET_NO_BOOTLOADER := true
 TARGET_SCREEN_DENSITY := 450
 
 # HIDL
-DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/hidl/manifest.xml
+DEVICE_MANIFEST_FILE += \
+    $(DEVICE_PATH)/configs/hidl/manifest.xml \
+    hardware/st/nfc/aidl/nfc-service-default.xml
 DEVICE_MATRIX_FILE += $(DEVICE_PATH)/configs/hidl/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     vendor/2by2/config/device_framework_matrix.xml \
