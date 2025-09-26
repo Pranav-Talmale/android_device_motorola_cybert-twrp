@@ -22,17 +22,18 @@
     <integer-array name="config_autoBrightnessLevels">
         <item>2</item>
         <item>4</item>
-        <item>5</item>
         <item>10</item>
+        <item>20</item>
         <item>40</item>
         <item>100</item>
         <item>325</item>
         <item>1250</item>
         <item>3500</item>
-        <item>5500</item>
+        <item>5000</item>
         <item>10000</item>
-        <item>50000</item>
-        <item>100000</item>
+        <item>20000</item>
+        <item>30000</item>
+        <item>200000</item>
     </integer-array>
 
     <!-- Array of desired screen brightness in nits corresponding to the lux values
@@ -52,17 +53,18 @@
         <item>3</item>
         <item>7</item>
         <item>10</item>
-        <item>12</item>
         <item>24</item>
+        <item>64</item>
         <item>82</item>
-        <item>96</item>
-        <item>130</item>
+        <item>90</item>
+        <item>105</item>
         <item>192</item>
-        <item>325</item>
+        <item>412</item>
         <item>500</item>
         <item>700</item>
-        <item>800</item>
         <item>1000</item>
+        <item>1200</item>
+        <item>1600</item>
     </array>
 
     <!-- An array describing the screen's backlight values corresponding to the brightness
@@ -72,16 +74,17 @@
         <item>9</item>
         <item>26</item>
         <item>34</item>
-        <item>36</item>
-        <item>52</item>
-        <item>95</item>
-        <item>102</item>
-        <item>118</item>
+        <item>53</item>
+        <item>85</item>
+        <item>96</item>
+        <item>100</item>
+        <item>107</item>
         <item>141</item>
-        <item>175</item>
-        <item>219</item>
-        <item>233</item>
-        <item>241</item>
+        <item>201</item>
+        <item>220</item>
+        <item>227</item>
+        <item>236</item>
+        <item>243</item>
         <item>255</item>
     </array>
 
@@ -96,23 +99,25 @@
         <item>3</item>
         <item>7</item>
         <item>10</item>
-        <item>12</item>
         <item>24</item>
+        <item>64</item>
         <item>82</item>
-        <item>96</item>
-        <item>130</item>
+        <item>90</item>
+        <item>105</item>
         <item>192</item>
-        <item>325</item>
+        <item>412</item>
         <item>500</item>
         <item>700</item>
-        <item>800</item>
         <item>1000</item>
+        <item>1200</item>
+        <item>1600</item>
     </array>
 
      <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
     <array name="config_availableColorModes">
         <item>0</item>
-        <item>2</item>
+        <item>1</item>
+        <item>300</item>
     </array>
 
     <!-- Indicates whether device has a power button fingerprint sensor. -->
@@ -161,7 +166,7 @@
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <item name="config_screenBrightnessDimFloat" format="float" type="dimen">0.03418803</item>
+    <item name="config_screenBrightnessDimFloat" format="float" type="dimen">0.033404917</item>
 
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
@@ -191,6 +196,27 @@
          rates are available from hardware composer. Only has an effect if the value is
          non-zero. -->
     <integer name="config_defaultPeakRefreshRate">144</integer>
+
+    <!-- The display uses different gamma curves for different refresh rates. It's hard for panel
+         vendors to tune the curves to have exact same brightness for different refresh rate. So
+         flicker could be observed at switch time. The issue is worse at the gamma lower end.
+         In addition, human eyes are more sensitive to the flicker at darker environment.
+         To prevent flicker, we only support higher refresh rates if the display brightness is above
+         a threshold.
+         For example, no higher refresh rate if
+             display brightness <= disp0 && ambient brightness <= amb0
+             || display brightness <= disp1 && ambient brightness <= amb1
+         Brightness thresholds are paired with lux thresholds - they both have to be met.
+         A negative brightness or lux value means that only one threshold should be used - e.g. if
+         the brightness value is negative, only the lux threshold is applied. -->
+    <!-- Low zone brightness thresholds in the range [0, 255] -->
+    <integer-array translatable="false" name="config_brightnessThresholdsOfPeakRefreshRate">
+        <item>-1</item>
+    </integer-array>
+    <!-- Low zone lux thresholds -->
+    <integer-array translatable="false" name="config_ambientThresholdsOfPeakRefreshRate">
+        <item>-1</item>
+    </integer-array>
 
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->
@@ -249,7 +275,7 @@
          To facilitate writing device-independent emulation overlays, the marker `@dp` can be
          appended after the path string to interpret coordinates in dp instead of px units.
          Note that a physical cutout should be configured in pixels for the best results. -->
-    <string name="config_mainBuiltInDisplayCutout">M -35,0 L 35,0 L 35,105 L -35,105 Z</string>
+    <string name="config_mainBuiltInDisplayCutout">M -48,0 L 48,0 L 48,112 L -48,112 Z</string>
 
     <!-- Type of the single tap sensor. Empty if single tap is not supported. -->
     <string name="config_dozeTapSensorType" translatable="false">org.lineageos.sensor.single_tap</string>
@@ -313,34 +339,20 @@
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <array name="config_virtualKeyVibePattern">
         <item>0</item>
-        <item>10</item>
-        <item>20</item>
-        <item>30</item>
+        <item>45</item>
     </array>
+
+    <!-- Vibrator pattern for feedback when selecting an hour/minute tick of a Clock -->
+    <integer-array name="config_clockTickVibePattern">
+        <item>0</item>
+        <item>15</item>
+    </integer-array>
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <array name="config_longPressVibePattern">
         <item>0</item>
-        <item>1</item>
-        <item>20</item>
-        <item>21</item>
+        <item>75</item>
     </array>
-
-    <!-- Vibrator pattern for feedback about hitting a scroll barrier -->
-    <integer-array name="config_scrollBarrierVibePattern">
-        <item>0</item>
-        <item>30</item>
-        <item>5</item>
-    </integer-array>
-
-    <!-- Vibrator pattern for feedback that simulates a double click effect -->
-    <integer-array name="config_doubleClickVibePattern">
-        <item>0</item>
-        <item>150</item>
-        <item>0</item>
-        <item>150</item>
-        <item>20</item>
-    </integer-array>
 
     <!-- Whether WiFi display is supported by this device.
          There are many prerequisites for this feature to work correctly.
