@@ -1,0 +1,9 @@
+# Fingerprint
+com.motorola.hardware.biometric.fingerprint.IMotoFingerPrint/default            u:object_r:hal_fingerprint_test_service:s0
+com.motorola.hardware.biometric.fingerprint.IMotoFodSensorTest/default          u:object_r:hal_fingerprint_test_service:s0
+com.motorola.hardware.biometric.fingerprint.IMotoCaptiveSensorTest/default      u:object_r:hal_fingerprint_test_service:s0
+com.motorola.hardware.biometric.fingerprint.IMotoFpsNavigate/default            u:object_r:hal_fingerprint_test_service:s0
+com.fingerprints.fpc.extension.IFpcExtension/default                            u:object_r:hal_fingerprint_test_service:s0
+
+# Shared Secret
+android.hardware.security.sharedsecret.ISharedSecret/strongbox                  u:object_r:hal_sharedsecret_service:s0
