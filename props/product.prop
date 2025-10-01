@@ -1,3 +1,6 @@
+# Camera
+ro.com.google.lens.oem_camera_package=com.motorola.camera5
+
 # Motorola
 ro.mot.product_wave=2023.3
 ro.mot.build.customerid=global
