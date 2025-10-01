@@ -5,7 +5,7 @@
 
 
 runtime_resource_overlay {
-    name: "SystenUIOverlayFuji",
+    name: "SystemUIOverlayFuji",
     resource_dirs: ["res"],
     vendor: true,
 }
