@@ -955,11 +955,13 @@ vendor/etc/vintf/manifest/android.hardware.gatekeeper-service.trustonic.xml
 
 # GNSS
 vendor/bin/hw/android.hardware.gnss-service.mediatek
+vendor/bin/hw/vendor.mediatek.hardware.gnss-service
 vendor/bin/mnld
 vendor/bin/mtk_agpsd
 vendor/etc/init/android.hardware.gnss-service.mediatek.rc
 vendor/etc/init/init.gps_drv.rc
 vendor/etc/init/init.gps_pwr.rc
+vendor/etc/init/init.gps_scp.rc
 vendor/etc/init/mtk_agpsd_p.rc
 vendor/etc/init/mtk_gnss.rc
 vendor/etc/mpe.conf
@@ -969,6 +971,8 @@ vendor/etc/vintf/manifest/gnss-mtk.xml
 vendor/etc/vintf/manifest/mtkgnss-batching.xml
 vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so
 vendor/lib64/hw/gps.default.so
+vendor/lib64/hw/mtkflp.default.so
+vendor/lib64/hw/mtkgeofence.default.so
 vendor/lib64/hw/vendor.mediatek.hardware.gnss-impl.so
 vendor/lib64/hw/vendor.mediatek.hardware.gnss.batching-impl.so
 vendor/lib64/vendor.mediatek.hardware.gnss-V1-ndk.so
