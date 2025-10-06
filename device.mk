@@ -211,11 +211,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
 
-# Moto hardware
-PRODUCT_PACKAGES += \
-    MotoActions \
-    MotoCommonOverlay
-
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
