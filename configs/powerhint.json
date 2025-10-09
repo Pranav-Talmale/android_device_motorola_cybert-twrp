@@ -420,14 +420,6 @@
         "0,1,2,3,4,5,6,7"
       ],
       "Type": "Property"
-    },
-    {
-      "Name": "DoubleTapToWakeEnable",
-      "Path": "/sys/class/sensors/dt-gesture/enable",
-      "Values": [
-        "1",
-        "0"
-      ],
     }
   ],
   "Actions": [
@@ -538,12 +530,6 @@
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 2000,
       "Value": "51"
-    },
-    {
-      "PowerHint": "DOUBLE_TAP_TO_WAKE",
-      "Node": "DoubleTapToWakeEnable",
-      "Duration": 0,
-      "Value": "1"
     }
   ]
 }
