@@ -29,5 +29,8 @@ vendor.mediatek.hardware.lbs.ILbs/mtk_mtklogger2mnld                            
 vendor.mediatek.hardware.lbs.ILbs/mtk_jam2mnl                                   u:object_r:mtk_hal_lbs_service:s0
 vendor.mediatek.hardware.lbs.ILbs/mtk_mnl2jam                                   u:object_r:mtk_hal_lbs_service:s0
 
+# NWK OPT Service
+vendor.mediatek.hardware.nwk_opt_new.INwkOptNew/default                         u:object_r:mtk_hal_nwk_opt_service:s0
+
 # Shared Secret
 android.hardware.security.sharedsecret.ISharedSecret/strongbox                  u:object_r:hal_sharedsecret_service:s0
