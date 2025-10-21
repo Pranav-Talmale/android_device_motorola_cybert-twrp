@@ -246,7 +246,8 @@ PRODUCT_PACKAGES += \
     TetheringConfigOverlay \
     WifiOverlay \
     EuiccOverlay \
-    SecureElementOverlayFuji
+    SecureElementOverlayFuji \
+    DeviceSettingsResOverlayFuji
 
 PRODUCT_PACKAGES += \
     RegulatoryInfoOverlayM08 \
