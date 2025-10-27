@@ -15,6 +15,9 @@
 # Gatekeeper
 /vendor/bin/hw/android\.hardware\.gatekeeper-service\.trustonic                        u:object_r:hal_gatekeeper_default_exec:s0
 
+# Health Care
+/dev/goodix_health                                                                     u:object_r:goodix_health_device:s0
+
 # Init Scripts
 /vendor/bin/init\.mmi\.block_perm\.sh                                                  u:object_r:vendor_moto_init_shell_exec:s0
 /vendor/bin/init\.mmi\.boot\.sh                                                        u:object_r:vendor_moto_init_shell_exec:s0
