@@ -290,7 +290,7 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@2.1-service.fuji-multihal
 
 # Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 31
+PRODUCT_SHIPPING_API_LEVEL := 34
 
 # SKU
 # Variant Properties
