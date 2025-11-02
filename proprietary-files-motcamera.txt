@@ -15,6 +15,7 @@ system/framework/moto-core_services.jar
 system/framework/moto-settings.jar
 system_ext/bin/motsettings
 system_ext/etc/permissions/com.motorola.camera.desktop.xml
+system_ext/etc/permissions/privapp-permissions-com.motorola.motcameradesktop.xml
 system_ext/etc/public.libraries-moto.txt
 system_ext/etc/public.libraries-motocameradesktop.txt
 system_ext/lib64/libenginepostproc.moto.so
