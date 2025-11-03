@@ -255,7 +255,8 @@ PRODUCT_PACKAGES += \
     WifiOverlay \
     EuiccOverlay \
     SecureElementOverlayFuji \
-    DeviceSettingsResOverlayFuji
+    DeviceSettingsResOverlayFuji \
+    LineageSdkOverlayFuji
 
 PRODUCT_PACKAGES += \
     RegulatoryInfoOverlayM08 \
