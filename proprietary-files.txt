@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from arrows Alpha M08 (15 V2VH35.58-32-11-109 643876-ac801d).
+## are from arrows Alpha M08 (15 V2VH35.58-32-41 af8fa-f6822).
 ## variant: RETJP
 
 # AEE
