@@ -723,6 +723,10 @@ vendor/lib64/libarcsoft_tfs_sn.so
 vendor/lib64/libarcsoft_tfs_sr.so
 
 # Camera (configs)
+vendor/etc/bstai_hdr
+vendor/etc/SwadAIMod.bin
+vendor/etc/SwadCalib.bin
+vendor/etc/SwadParamList.txt
 vendor/etc/camera/vidhance.lic
 vendor/etc/camera/vidhance_calibration
 
@@ -1035,10 +1039,15 @@ vendor/lib64/libkmsetkey.so
 # Neural networks
 vendor/bin/hw/android.hardware.neuralnetworks-shim-service-mtk
 vendor/etc/init/android.hardware.neuralnetworks-shim-service-mtk.rc
-vendor/etc/nnapi_powerhal.json
+vendor/etc/nn/ot/neuron_detection.mdla5_0
+vendor/etc/nn/ot/neuron_tracking.mdla5_0
 vendor/etc/vintf/manifest/android.hardware.neuralnetworks-shim-service-mtk.xml
 vendor/etc/vintf/manifest/manifest_apuware_apusys_aidl.xml
 vendor/etc/vintf/manifest/manifest_apuware_utils_aidl.xml
+vendor/etc/nhw
+vendor/etc/nhw_minus
+vendor/etc/nnapi_powerhal.json
+vendor/etc/nnapi_powerhal_minus.json
 vendor/lib64/APUWareApusysAidlServer.so
 vendor/lib64/APUWareUtilsAidlServer.so
 vendor/lib64/libapu_mdw.so
