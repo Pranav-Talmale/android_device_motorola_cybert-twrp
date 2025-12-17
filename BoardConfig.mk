@@ -58,7 +58,7 @@ DEVICE_MANIFEST_FILE += \
     $(DEVICE_PATH)/configs/vintf/manifest.xml
 DEVICE_MATRIX_FILE += $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    vendor/2by2/config/device_framework_matrix.xml \
+    vendor/lineage/config/device_framework_matrix.xml \
     hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml \
     $(DEVICE_PATH)/configs/vintf/framework_compatibility_matrix.xml
 
@@ -132,7 +132,7 @@ TARGET_KERNEL_SOURCE := $(DEVICE_PATH)-kernel/headers/
 
 # Partitions
 BOARD_PRODUCTIMAGE_MINIMAL_PARTITION_RESERVED_SIZE := false
--include vendor/2by2/config/BoardConfigReservedSize.mk
+-include vendor/lineage/config/BoardConfigReservedSize.mk
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_EROFS_PCLUSTER_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
