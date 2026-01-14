@@ -190,10 +190,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
     $(LOCAL_PATH)/configs/linker.config.json
 
-# Linker
-PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
-    $(LOCAL_PATH)/configs/linker.config.json
-
 # Keymint
 PRODUCT_PACKAGES += \
     libkeymint.vendor \
@@ -244,23 +240,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
-    FrameworkResOverlayFuji \
-    SettingsResOverlayFuji \
-    SystemUIOverlayFuji \
+    FrameworkResOverlayCybert \
+    SettingsResOverlayCybert \
+    SystemUIOverlayCybert \
     TetheringConfigOverlay \
     WifiOverlay \
     EuiccOverlay \
-    SecureElementOverlayFuji \
-    DeviceSettingsResOverlayFuji \
-    LineageSdkOverlayFuji
+    SecureElementOverlayCybert
 
 PRODUCT_PACKAGES += \
-    LineageApertureOverlayFuji
-
-# Parts
-PRODUCT_PACKAGES += \
-    RegulatoryInfoOverlayM08 \
-    RegulatoryInfoOverlayF-51F
+    LineageApertureOverlayCybert
 
 # Power
 PRODUCT_PACKAGES += \

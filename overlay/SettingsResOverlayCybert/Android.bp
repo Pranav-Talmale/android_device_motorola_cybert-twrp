@@ -5,7 +5,7 @@
 
 
 runtime_resource_overlay {
-    name: "FrameworkResOverlayFuji",
+    name: "SettingsResOverlayCybert",
     resource_dirs: ["res"],
     vendor: true,
 }

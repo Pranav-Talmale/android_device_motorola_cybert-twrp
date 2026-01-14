@@ -1,10 +1,11 @@
 //
-// SPDX-FileCopyrightText: The 2by2 Project
+// SPDX-FileCopyrightText: The LineageOS Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
+
 runtime_resource_overlay {
-    name: "DeviceSettingsResOverlayFuji",
+    name: "SystemUIOverlayCybert",
     resource_dirs: ["res"],
     vendor: true,
 }

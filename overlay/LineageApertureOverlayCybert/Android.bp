@@ -5,6 +5,6 @@
 //
 
 runtime_resource_overlay {
-    name: "LineageApertureOverlayFuji",
+    name: "LineageApertureOverlayCybert",
     product_specific: true,
 }
