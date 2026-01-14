@@ -14,48 +14,15 @@
       "Name": "MemSwappiness",
       "Controller": "memory",
       "File": "memory.swappiness"
-    },
-    {
-      "Name": "FreezerState",
-      "Controller": "freezer",
-      "File": "cgroup.freeze"
     }
   ],
-
   "Profiles": [
-    {
-      "Name": "Frozen",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "FreezerState",
-            "Value": "1"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "Unfrozen",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "FreezerState",
-            "Value": "0"
-          }
-        }
-      ]
-    },
     {
       "Name": "LowIoPriority",
       "Actions": [
         {
           "Name": "JoinCgroup",
-          "Params":
-          {
+          "Params": {
             "Controller": "blkio",
             "Path": "background"
           }
@@ -67,8 +34,7 @@
       "Actions": [
         {
           "Name": "JoinCgroup",
-          "Params":
-          {
+          "Params": {
             "Controller": "blkio",
             "Path": ""
           }
@@ -80,8 +46,7 @@
       "Actions": [
         {
           "Name": "JoinCgroup",
-          "Params":
-          {
+          "Params": {
             "Controller": "blkio",
             "Path": ""
           }
@@ -93,22 +58,19 @@
       "Actions": [
         {
           "Name": "JoinCgroup",
-          "Params":
-          {
+          "Params": {
             "Controller": "blkio",
             "Path": ""
           }
         }
       ]
     },
-
     {
       "Name": "TimerSlackHigh",
       "Actions": [
         {
           "Name": "SetTimerSlack",
-          "Params":
-          {
+          "Params": {
             "Slack": "50000"
           }
         }
@@ -119,21 +81,18 @@
       "Actions": [
         {
           "Name": "SetTimerSlack",
-          "Params":
-          {
+          "Params": {
             "Slack": "50000"
           }
         }
       ]
     },
-
     {
       "Name": "PerfBoost",
       "Actions": [
         {
           "Name": "SetClamps",
-          "Params":
-          {
+          "Params": {
             "Boost": "50%",
             "Clamp": "0"
           }
@@ -145,33 +104,28 @@
       "Actions": [
         {
           "Name": "SetClamps",
-          "Params":
-          {
+          "Params": {
             "Boost": "0",
             "Clamp": "30%"
           }
         }
       ]
     },
-
     {
       "Name": "LowMemoryUsage",
       "Actions": [
         {
           "Name": "SetAttribute",
-          "Params":
-          {
+          "Params": {
             "Name": "MemSoftLimit",
             "Value": "16MB"
           }
         },
         {
           "Name": "SetAttribute",
-          "Params":
-          {
+          "Params": {
             "Name": "MemSwappiness",
             "Value": "150"
-
           }
         }
       ]
@@ -181,16 +135,14 @@
       "Actions": [
         {
           "Name": "SetAttribute",
-          "Params":
-          {
+          "Params": {
             "Name": "MemSoftLimit",
             "Value": "512MB"
           }
         },
         {
           "Name": "SetAttribute",
-          "Params":
-          {
+          "Params": {
             "Name": "MemSwappiness",
             "Value": "100"
           }
@@ -202,86 +154,99 @@
       "Actions": [
         {
           "Name": "JoinCgroup",
-          "Params":
-          {
+          "Params": {
             "Controller": "memory",
             "Path": "system"
           }
         }
       ]
-    },
-    {
-      "Name": "FreezerThawed",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "FreezerState",
-            "Value": "THAWED"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "FreezerFrozen",
-      "Actions": [
-        {
-          "Name": "SetAttribute",
-          "Params":
-          {
-            "Name": "FreezerState",
-            "Value": "FROZEN"
-          }
-        }
-      ]
     }
   ],
-
   "AggregateProfiles": [
     {
       "Name": "SCHED_SP_DEFAULT",
-      "Profiles": [ "TimerSlackNormal" ]
+      "Profiles": [
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "SCHED_SP_BACKGROUND",
-      "Profiles": [ "HighEnergySaving", "LowIoPriority", "TimerSlackHigh" ]
+      "Profiles": [
+        "HighEnergySaving",
+        "LowIoPriority",
+        "TimerSlackHigh"
+      ]
     },
     {
       "Name": "SCHED_SP_FOREGROUND",
-      "Profiles": [ "HighPerformance", "HighIoPriority", "TimerSlackNormal" ]
+      "Profiles": [
+        "HighPerformance",
+        "HighIoPriority",
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "SCHED_SP_TOP_APP",
-      "Profiles": [ "MaxPerformance", "MaxIoPriority", "TimerSlackNormal" ]
+      "Profiles": [
+        "MaxPerformance",
+        "MaxIoPriority",
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "SCHED_SP_RT_APP",
-      "Profiles": [ "RealtimePerformance", "MaxIoPriority", "TimerSlackNormal" ]
+      "Profiles": [
+        "RealtimePerformance",
+        "MaxIoPriority",
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "CPUSET_SP_DEFAULT",
-      "Profiles": [ "TimerSlackNormal" ]
+      "Profiles": [
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "CPUSET_SP_BACKGROUND",
-      "Profiles": [ "HighEnergySaving", "ProcessCapacityLow", "LowIoPriority", "TimerSlackHigh" ]
+      "Profiles": [
+        "HighEnergySaving",
+        "ProcessCapacityLow",
+        "LowIoPriority",
+        "TimerSlackHigh"
+      ]
     },
     {
       "Name": "CPUSET_SP_FOREGROUND",
-      "Profiles": [ "HighPerformance", "ProcessCapacityHigh", "HighIoPriority", "TimerSlackNormal" ]
+      "Profiles": [
+        "HighPerformance",
+        "ProcessCapacityHigh",
+        "HighIoPriority",
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "CPUSET_SP_TOP_APP",
-      "Profiles": [ "MaxPerformance", "ProcessCapacityMax", "MaxIoPriority", "TimerSlackNormal" ]
+      "Profiles": [
+        "MaxPerformance",
+        "ProcessCapacityMax",
+        "MaxIoPriority",
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "CPUSET_SP_SYSTEM",
-      "Profiles": [ "ServiceCapacityLow", "TimerSlackNormal" ]
+      "Profiles": [
+        "ServiceCapacityLow",
+        "TimerSlackNormal"
+      ]
     },
     {
       "Name": "CPUSET_SP_RESTRICTED",
-      "Profiles": [ "ServiceCapacityRestricted", "TimerSlackNormal" ]
+      "Profiles": [
+        "ServiceCapacityRestricted",
+        "TimerSlackNormal"
+      ]
     }
   ]
 }
