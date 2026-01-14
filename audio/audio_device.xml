@@ -216,18 +216,16 @@
             <kctl name="UL2_SRC_MUX" value="AMIC" />
         </path>
         <path name="builtin_Mic_DualMic" value="turnon">
-            <kctl name="MISO0_MUX" value="UL1_CH2" />
-            <kctl name="MISO1_MUX" value="UL1_CH1" />
+            <kctl name="MISO0_MUX" value="UL1_CH1" />
+            <kctl name="MISO1_MUX" value="UL1_CH2" />
             <kctl name="ADC_L_Mux" value="Left Preamplifier" />
             <kctl name="PGA_L_Mux" value="AIN0" />
             <kctl name="ADC_R_Mux" value="Right Preamplifier" />
             <kctl name="PGA_R_Mux" value="AIN2" />
-            <kctl name="DMIC0_MUX" value="DMIC_DATA1_L_1" />
-            <kctl name="DMIC1_MUX" value="DMIC_DATA0" />
+            <kctl name="DMIC0_MUX" value="DMIC_DATA0" />
+            <kctl name="DMIC1_MUX" value="DMIC_DATA1_L_1" />
         </path>
         <path name="builtin_Mic_DualMic" value="turnoff">
-            <kctl name="MISO0_MUX" value="UL1_CH1" />
-            <kctl name="MISO1_MUX" value="UL1_CH2" />
             <kctl name="ADC_L_Mux" value="Idle" />
             <kctl name="ADC_R_Mux" value="Idle" />
             <kctl name="PGA_L_Mux" value="None" />
