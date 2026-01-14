@@ -4,12 +4,16 @@
         device/mediatek/vendor/common/project_manifest/odm_manifest_secure_element_ss_ese.xml
         device/mediatek/vendor/common/project_manifest/odm_manifest_op_ss.xml
         device/mediatek/vendor/common/project_manifest/odm_manifest_ss.xml
-        vendor/st/opensource/keymaster/keymint/3.0/hal/android.hardware.security.keymint-non-rkp-service.strongbox-thales.xml
+        vendor/st/opensource/keymaster/keymint/3.0/hal/android.hardware.security.keymint-service.strongbox-thales.xml
         vendor/st/opensource/keymaster/keymint/3.0/hal/android.hardware.security.sharedsecret-service.strongbox-thales.xml
         vendor/st/opensource/keymaster/weaver/1.0/android.hardware.weaver@1.0-service-thales.xml
-        fcnt/security/lib/ese_tools/mtk/SecureElement/secure_element-service.xml
+        motorola/security/lib/ese_tools/mtk/SecureElement/secure_element-service.xml
 -->
 <manifest version="7.0" type="device">
+    <hal format="aidl">
+        <name>android.hardware.nfc</name>
+        <fqname>INfc/default</fqname>
+    </hal>
     <hal format="aidl" override="true">
         <name>android.hardware.radio.data</name>
         <version>2</version>
@@ -63,6 +67,11 @@
         <name>android.hardware.security.keymint</name>
         <version>3</version>
         <fqname>IKeyMintDevice/strongbox</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.security.keymint</name>
+        <version>3</version>
+        <fqname>IRemotelyProvisionedComponent/strongbox</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.security.sharedsecret</name>

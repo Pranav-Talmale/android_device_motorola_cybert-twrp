@@ -1,1 +1,1 @@
-require board=M08|fuji
+require board=cybert|mgvi_64_ww_armv82

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 BUILD_BROKEN_DUP_RULES := true
-DEVICE_PATH := device/fcnt/fuji
+DEVICE_PATH := device/motorola/cybert
 
 # A/B
 AB_OTA_UPDATER := true
@@ -47,7 +47,7 @@ TARGET_DYNAMIC_64_32_MEDIASERVER := true
 ZYGOTE_FORCE_64 := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := fuji
+TARGET_BOOTLOADER_BOARD_NAME := cybert
 TARGET_NO_BOOTLOADER := true
 
 # Display
@@ -75,7 +75,7 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/init/fstab.mt6897
 TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
 TARGET_USERIMAGES_USE_F2FS := true
 
-# Kernel
+# Kernel - May need to change - TODO
 BOARD_KERNEL_BASE := 0x3fff8000
 BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_PAGESIZE := 0x00001000
@@ -133,14 +133,14 @@ TARGET_KERNEL_SOURCE := $(DEVICE_PATH)-kernel/headers/
 BOARD_PRODUCTIMAGE_MINIMAL_PARTITION_RESERVED_SIZE := false
 -include vendor/lineage/config/BoardConfigReservedSize.mk
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
-BOARD_EROFS_PCLUSTER_SIZE := 262144
+BOARD_EROFS_PCLUSTER_SIZE := 65536
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE := 8388608
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_SUPER_PARTITION_SIZE := 19327352832
+BOARD_SUPER_PARTITION_SIZE := 16508780544
 BOARD_SUPER_PARTITION_GROUPS := motorola_dynamic_partitions
 BOARD_MOTOROLA_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_dlkm system_ext vendor vendor_dlkm product
-BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 19125356832
+BOARD_MOTOROLA_DYNAMIC_PARTITIONS_SIZE := 16506683392
 
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -167,7 +167,7 @@ TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/props/product.prop
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # Security patch level
-BOOT_SECURITY_PATCH := 2025-10-01
+BOOT_SECURITY_PATCH := 2025-08-01
 VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 
 # Sepolicy
@@ -178,13 +178,14 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 
 # SKU
-ODM_MANIFEST_SKUS += dn dns dnsf dsds n ns qsqs ss tsts
+ODM_MANIFEST_SKUS += dn dns dnsf dsds n ns nsf qsqs ss tsts
 ODM_MANIFEST_DN_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dn.xml
 ODM_MANIFEST_DNS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dns.xml
 ODM_MANIFEST_DNSF_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dnsf.xml
 ODM_MANIFEST_DSDS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dsds.xml
 ODM_MANIFEST_N_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_n.xml
 ODM_MANIFEST_NS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_ns.xml
+ODM_MANIFEST_NSF_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_nsf.xml
 ODM_MANIFEST_QSQS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_qsqs.xml
 ODM_MANIFEST_SS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_ss.xml
 ODM_MANIFEST_TSTS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_tsts.xml
@@ -220,5 +221,5 @@ WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{NAN}, 1}}
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # Inherit the proprietary files
-include vendor/fcnt/fuji/BoardConfigVendor.mk
-include vendor/fcnt/fuji-motcamera/BoardConfigVendor.mk
+include vendor/motorola/cybert/BoardConfigVendor.mk
+# include vendor/fcnt/fuji-motcamera/BoardConfigVendor.mk #disable for now

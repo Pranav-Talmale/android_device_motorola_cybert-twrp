@@ -4,9 +4,12 @@
         device/mediatek/vendor/common/project_manifest/odm_manifest_secure_element_dsds.xml
         device/mediatek/vendor/common/project_manifest/odm_manifest_op_dsds.xml
         device/mediatek/vendor/common/project_manifest/odm_manifest_dsds.xml
-        device/mediatek/vendor/common/project_manifest/odm_manifest_secure_element_dsds_ese.xml
 -->
 <manifest version="7.0" type="device">
+    <hal format="aidl">
+        <name>android.hardware.nfc</name>
+        <fqname>INfc/default</fqname>
+    </hal>
     <hal format="aidl" override="true">
         <name>android.hardware.radio.data</name>
         <version>2</version>
@@ -69,7 +72,6 @@
         <name>android.hardware.secure_element</name>
         <fqname>ISecureElement/SIM1</fqname>
         <fqname>ISecureElement/SIM2</fqname>
-        <fqname>ISecureElement/eSE1</fqname>
     </hal>
     <hal format="aidl" override="true">
         <name>vendor.mediatek.hardware.mtkradioex.data</name>

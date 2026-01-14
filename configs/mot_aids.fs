@@ -13,29 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-[AID_VENDOR_BRIDGE_RW]
-value: 5001
-
-[AID_VENDOR_PWRIC]
-value: 5101
-
 [AID_VENDOR_TCMD]
-value: 5104
-
-[AID_VENDOR_DBVC]
-value: 5114
-
-[AID_VENDOR_FINGERP]
-value: 5115
-
-[AID_VENDOR_DTV]
-value: 5119
-
-[AID_VENDOR_MOD]
-value: 5120
-
-[AID_VENDOR_PROD_PERSIST]
-value: 5121
+value:2990
 
 [AID_VENDOR_APUSYS]
-value: 5200
+value:2991
+
+[AID_VENDOR_PWRIC]
+value:2992
+
+[AID_VENDOR_PROD_PERSIST]
+value:2993
+
+[AID_VENDOR_FINGERP]
+value:2994

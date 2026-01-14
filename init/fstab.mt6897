@@ -51,28 +51,7 @@ system_dlkm /system_dlkm ext4 ro wait,slotselect,avb,logical,first_stage_mount
 /dev/block/by-name/prodpersist /mnt/product/persist ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
 # 198 "vendor/mediatek/proprietary/hardware/fstab/mt6897/fstab.in.mt6897"
 /dev/block/by-name/tzapp_a /mnt/vendor/tzapp ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
-
-
-
-
-
-
-/devices/platform/soc/11240000.mmc* auto auto defaults voldmanaged=sdcard1:auto
-
-
-
-
-/dev/block/by-name/makerlog /mnt/vendor/makerlog ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
-
-
-
-/dev/block/by-name/makerlog2 /mnt/vendor/persist2 ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
-
-
-
-/dev/block/by-name/persist_oem /mnt/vendor/persist_oem ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
-
-
+# 221 "vendor/mediatek/proprietary/hardware/fstab/mt6897/fstab.in.mt6897"
 /devices/platform/usb_xhci* auto vfat defaults voldmanaged=usbotg:auto
 /devices/platform/soc/11201000.usb0/11200000.xhci* auto vfat defaults voldmanaged=usbotg:auto
 /devices/platform/soc/11211000.usb1/11210000.xhci* auto vfat defaults voldmanaged=usbotg:auto
