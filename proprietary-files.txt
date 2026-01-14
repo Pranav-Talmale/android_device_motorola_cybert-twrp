@@ -19,11 +19,8 @@ vendor/etc/aurisys_config_hifi3.xml
 vendor/etc/aurisys_config_rv.xml
 vendor/etc/audio_policy.conf
 vendor/etc/smartpa_param/tfa98xx_music.bin
-vendor/etc/smartpa_param/tfa98xx_music_m.bin
 vendor/etc/smartpa_param/tfa98xx_ringtone.bin
-vendor/etc/smartpa_param/tfa98xx_ringtone_m.bin
 vendor/etc/smartpa_param/tfa98xx_voice.bin
-vendor/etc/smartpa_param/tfa98xx_voice_m.bin
 vendor/etc/init/bootperf.rc
 vendor/lib64/hw/audio.primary.mediatek.so;SYMLINK=vendor/lib64/hw/audio.primary.mt6897.so
 vendor/lib64/hw/audio.r_submix.mediatek.so;SYMLINK=vendor/lib64/hw/audio.r_submix.mt6897.so
@@ -237,7 +234,6 @@ vendor/etc/nlc_param/nlc.bin
 
 # Audio Firmware
 vendor/firmware/tfa98xx.cnt
-vendor/firmware/tfa98xx_m.cnt
 
 # Bluetooth
 vendor/bin/hw/android.hardware.bluetooth@1.1-service-mediatek
@@ -631,12 +627,18 @@ vendor/lib64/mt6897/libDBAccessor_ISP.so;SYMLINK=vendor/lib64/libDBAccessor_ISP.
 vendor/lib64/mt6897/libMtkMediaController.so;SYMLINK=vendor/lib64/libMtkMediaController.so
 vendor/lib64/mt6897/libMtkMediaController_SAL.so;SYMLINK=vendor/lib64/libMtkMediaController_SAL.so
 vendor/lib64/mt6897/libSonyIMX519PdafWrapper.so;SYMLINK=vendor/lib64/libSonyIMX519PdafWrapper.so
-vendor/lib64/mt6897/mot_fuji_imx896_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_fuji_imx896_mipi_raw_IdxMgr.so
-vendor/lib64/mt6897/mot_fuji_imx896_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_fuji_imx896_mipi_raw_tuning.so
-vendor/lib64/mt6897/mot_fuji_s5kjns_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_fuji_s5kjns_mipi_raw_IdxMgr.so
-vendor/lib64/mt6897/mot_fuji_s5kjns_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_fuji_s5kjns_mipi_raw_tuning.so
-vendor/lib64/mt6897/mot_fuji_s5kjns_uw_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_fuji_s5kjns_uw_mipi_raw_IdxMgr.so
-vendor/lib64/mt6897/mot_fuji_s5kjns_uw_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_fuji_s5kjns_uw_mipi_raw_tuning.so
+vendor/lib64/mt6897/mot_cybert_gc13a2_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_cybert_gc13a2_mipi_raw_IdxMgr.so
+vendor/lib64/mt6897/mot_cybert_gc13a2_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_cybert_gc13a2_mipi_raw_tuning.so
+vendor/lib64/mt6897/mot_cybert_gc32e1_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_cybert_gc32e1_mipi_raw_IdxMgr.so
+vendor/lib64/mt6897/mot_cybert_gc32e1_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_cybert_gc32e1_mipi_raw_tuning.so
+vendor/lib64/mt6897/mot_cybert_imx896_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_cybert_imx896_mipi_raw_IdxMgr.so
+vendor/lib64/mt6897/mot_cybert_imx896_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_cybert_imx896_mipi_raw_tuning.so
+vendor/lib64/mt6897/mot_cybert_s5k3k1_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_cybert_s5k3k1_mipi_raw_IdxMgr.so
+vendor/lib64/mt6897/mot_cybert_s5k3k1_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_cybert_s5k3k1_mipi_raw_tuning.so
+vendor/lib64/mt6897/mot_cybert_s5kjns_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_cybert_s5kjns_mipi_raw_IdxMgr.so
+vendor/lib64/mt6897/mot_cybert_s5kjns_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_cybert_s5kjns_mipi_raw_tuning.so
+vendor/lib64/mt6897/mot_cybert_s5kjns_uw_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mot_cybert_s5kjns_uw_mipi_raw_IdxMgr.so
+vendor/lib64/mt6897/mot_cybert_s5kjns_uw_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mot_cybert_s5kjns_uw_mipi_raw_tuning.so
 vendor/lib64/mt6897/mtk000_mipi_raw_IdxMgr.so;SYMLINK=vendor/lib64/mtk000_mipi_raw_IdxMgr.so
 vendor/lib64/mt6897/mtk000_mipi_raw_tuning.so;SYMLINK=vendor/lib64/mtk000_mipi_raw_tuning.so
 vendor/lib64/lib3a.ae.pipe.so
@@ -659,8 +661,8 @@ vendor/lib64/libcamalgo.sat.so
 vendor/lib64/libcamalgo.utility.so
 vendor/lib64/libcamalgo.vsdofUtil.so
 vendor/lib64/libcamalgo.warp.so
-vendor/lib64/libdualcam_optical_zoom_control.so
-vendor/lib64/libdualcam_video_optical_zoom.so
+vendor/lib64/libtriplecam_optical_zoom_control.so
+vendor/lib64/libtriplecam_video_optical_zoom.so
 vendor/lib64/libfeaturepolicy.so
 vendor/lib64/libfeature.hdr10.so
 vendor/lib64/libheichal.so
@@ -711,7 +713,6 @@ vendor/etc/ArcCustomParams.json
 vendor/etc/arc_uw_dc_calibration.bin
 vendor/etc/arcsoft_calibration_u_dc.bin
 vendor/lib64/libarc.ion.so
-vendor/lib64/libarcsoft_faceid.so
 vendor/lib64/libarcsoft_pic_trace.so
 vendor/lib64/libarcsoft_portrait_distortion_correction.so
 vendor/lib64/libarcsoft_stellartrack.so
@@ -927,7 +928,7 @@ vendor/etc/cust_pq.xml
 vendor/etc/cust_color.xml
 
 # Display (Firmware)
-vendor/firmware/focaltech_ts_fw_csot.bin
+vendor/firmware/focaltech_ts_fw_tm.bin
 
 # DRM
 vendor/lib64/mediadrm/libmockdrmcryptoplugin.so
@@ -946,13 +947,13 @@ product/etc/felica/mfs.cfg
 product/priv-app/MobileFeliCaClient/MobileFeliCaClient.apk;PRESIGNED
 
 # Fingerprint
-vendor/bin/fpc_tee_test
-vendor/bin/hw/android.hardware.biometrics.fingerprint-service.fpc
-vendor/etc/init/android.hardware.biometrics.fingerprint-service-fpc2.rc
+vendor/bin/hw/android.hardware.biometrics.fingerprint-service-rbs
+vendor/etc/init/android.hardware.biometrics.fingerprint-service-rbs2.rc
+vendor/bin/hw/android.hardware.biometrics.fingerprint-service.goodix
+vendor/etc/init/android.hardware.biometrics.fingerprint-service-goodix2.rc
 vendor/etc/vintf/manifest/manifest_IMoto_AIDL_Fingerprint.xml
-vendor/framework/com.fingerprints.extension.jar
-vendor/lib64/com.motorola.hardware.biometric.fingerprint-V1-ndk.so
-vendor/lib64/hw/fingerprint.fpc.mt6897.so
+vendor/lib64/com.motorola.hardware.biometric.fingerprint-V2-ndk.so
+vendor/lib64/hw/fingerprint.goodix.default.so
 
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
@@ -1022,10 +1023,6 @@ vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Verizon_Wireless.xml
 vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_Virgin_Mobile.xml
 vendor/etc/gnss/carrier/agps_profiles_conf2_carrier_nTelos.xml
 vendor/etc/gnss/agps_profiles_conf2.xml
-
-# Health Care
-product/etc/permissions/privapp-permissions-com.fujitsu.mobile_phone.healthcare.xml
-product/priv-app/FjHealthcareApp/FjHealthcareApp.apk;PRESIGNED
 
 # Keystore
 vendor/bin/hw/android.hardware.security.keymint@3.0-service.trustonic
@@ -1193,8 +1190,8 @@ vendor/bin/hw/vendor.mediatek.hardware.mmagent-service
 vendor/bin/hw/vendor.mediatek.hardware.nwk_opt@1.0-service
 vendor/bin/ipsec_mon
 vendor/bin/muxreport
-vendor/etc/apdb/APDB_MT6897___W2517
-vendor/etc/apdb/APDB_MT6897___W2517_ENUM
+vendor/etc/apdb/APDB_MT6897___W2506
+vendor/etc/apdb/APDB_MT6897___W2506_ENUM
 vendor/etc/ecc_list.xml
 vendor/etc/ecc_list_OP01.xml
 vendor/etc/ecc_list_OP02.xml
@@ -1351,7 +1348,6 @@ vendor/lib64/libhfmanager.so
 vendor/lib64/libhfmanagerwrapper.so
 vendor/lib64/libhwm.so
 vendor/lib64/libksensor.so
-vendor/lib64/libledpulsehal.so
 vendor/lib64/sensors.moto.so
 
 # Thermal
@@ -1386,15 +1382,14 @@ vendor/etc/thermal/thermal_policy_08.conf
 vendor/etc/thermal/thermal_policy_09.conf
 vendor/etc/thermal/thermal_policy_11.conf
 vendor/etc/thermal/thermal_policy_12.conf
-vendor/etc/thermal/thermal_policy_13.conf
-vendor/etc/thermal/thermal_policy_17.conf
 
 # Trusted Execution Environment (TEE)
 vendor/app/mcRegistry/020f0000000000000000000000000000.drbin
 vendor/app/mcRegistry/020f0000000000000000000000000000.tlbin
 vendor/app/mcRegistry/031c0000000000000000000000000000.drbin
 vendor/app/mcRegistry/031c0000000000000000000000000000.tlbin
-vendor/app/mcRegistry/04010000000000000000000000000000.tlbin
+vendor/app/mcRegistry/05070000000000000000000000000000.drbin
+vendor/app/mcRegistry/05070000000000000000000000000000.tlbin
 vendor/app/mcRegistry/05120000000000000000000000000001.drbin
 vendor/app/mcRegistry/05120000000000000000000000000001.tlbin
 vendor/app/mcRegistry/06090000000000000000000000000000.drbin
@@ -1408,18 +1403,14 @@ vendor/app/mcRegistry/07170000000000000000000000000000.drbin
 vendor/app/mcRegistry/07170000000000000000000000000000.tlbin
 vendor/app/mcRegistry/07210000000000000000000000000000.drbin
 vendor/app/mcRegistry/07210000000000000000000000000000.tlbin
-vendor/app/mcRegistry/08040000000000000000000000003419.tabin
 vendor/app/mcRegistry/08050000000000000000000000003419.drbin
 vendor/app/mcRegistry/08050000000000000000000000003419.tlbin
-vendor/app/mcRegistry/08110000000000000000000000000000.tabin
+vendor/app/mcRegistry/08080000000000000000000000000000.tlbin
 vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.drbin
 vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.tlbin
 vendor/app/mcRegistry/5020170115e016302017012521300000.drbin
 vendor/app/mcRegistry/5020170115e016302017012521300000.tlbin
 vendor/app/mcRegistry/6b3f5fa0f8cf55a7be2582587d62d63a.drbin
-vendor/app/mcRegistry/abcd270ea5c44c58bcd3384a2fa2539e.tabin
-vendor/app/mcRegistry/e97c270ea5c44c58bcd3384a2fa2539e.tabin
-vendor/app/mcRegistry/ffffffff000000000000000000000003.tabin
 vendor/bin/hw/vendor.trustonic.tee@1.1-service
 vendor/bin/mcDriverDaemon
 vendor/etc/init/tee.rc

@@ -68,9 +68,8 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace('@1.0', '@1.2')
         .regex_replace('default9', 'default'),
 
-    ('vendor/lib64/mt6897/lib3a.flash.so', 'vendor/lib64/mt6897/lib3a.ae.stat.so',
-     'vendor/lib64/mt6897/lib3a.sensors.flicker.so', 'vendor/lib64/mt6897/lib3a.sensors.color.so',
-     'vendor/lib64/lib3a.ae.pipe.so'): blob_fixup()
+    ('vendor/lib64/mt6897/lib3a.ae.stat.so','vendor/lib64/mt6897/lib3a.sensors.flicker.so',
+     'vendor/lib64/mt6897/lib3a.sensors.color.so'): blob_fixup()
         .add_needed('liblog.so'),
 
     'vendor/lib64/mt6897/libmnl.so': blob_fixup()
@@ -80,9 +79,6 @@ blob_fixups: blob_fixups_user_type = {
         .binary_regex_replace(b'/virtual', b'/default')
         .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V4-ndk.so')
         .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'android.hardware.biometrics.fingerprint-V4-ndk.so'),
-
-    'vendor/etc/vintf/manifest/manifest_IMoto_AIDL_Fingerprint.xml': blob_fixup()
-        .regex_replace('IFingerprint/virtual', 'IFingerprint/default'),
 
     'vendor/lib64/mt6897/libmtkcam_hal_aidl_common.so': blob_fixup()
         .replace_needed('android.hardware.camera.common-V2-ndk.so', 'android.hardware.camera.common-V1-ndk.so'),
