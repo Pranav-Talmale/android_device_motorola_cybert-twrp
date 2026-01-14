@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/fcnt/fuji
+DEVICE_PATH := device/motorola/cybert
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -133,7 +133,7 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # FCNTParts
-include packages/apps/FCNTParts/device.mk
+# include packages/apps/FCNTParts/device.mk
 
 # Felica (docomo)
 PRODUCT_COPY_FILES += \
@@ -184,7 +184,6 @@ PRODUCT_COPY_FILES += \
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/idc/,$(TARGET_COPY_OUT_VENDOR)/usr/idc) \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/keylayout/,$(TARGET_COPY_OUT_VENDOR)/usr/keylayout)
 
 # Linker
