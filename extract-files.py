@@ -124,7 +124,7 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libui_shim.so'),
 
     'vendor/etc/init/thermal-mediatek.rc': blob_fixup()
-        .regex_replace('android.hardware.thermal-service.mediatek', 'android.hardware.thermal-service.mediatek.fuji'),
+        .regex_replace('android.hardware.thermal-service.mediatek', 'android.hardware.thermal-service.mediatek.cybert'),
 
     'vendor/etc/init/hw/init.vendor.st21nfc.rc': blob_fixup()
         .regex_replace('libnfc-nci-st-felica.conf', 'libnfc-hal-st-felica.conf'),

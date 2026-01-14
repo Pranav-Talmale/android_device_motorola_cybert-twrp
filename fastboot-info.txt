@@ -1,4 +1,4 @@
-# fastboot-info for fuji
+# fastboot-info for cybert
 version 1
 flash init_boot
 flash --apply-vbmeta vbmeta

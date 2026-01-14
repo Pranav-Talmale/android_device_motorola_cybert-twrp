@@ -263,7 +263,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
-$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(LOCAL_PATH):power-ext-fuji)
+$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(LOCAL_PATH):power-ext-cybert)
 
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
