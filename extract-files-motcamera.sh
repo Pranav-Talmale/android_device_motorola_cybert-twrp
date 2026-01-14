@@ -7,8 +7,8 @@
 
 set -e
 
-DEVICE=fuji-motcamera
-VENDOR=fcnt
+DEVICE=cybert-motcamera
+VENDOR=motorola
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"

@@ -18,7 +18,7 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
-    'device/fcnt/fuji',
+    'device/motorola/cybert',
     'hardware/mediatek/libmtkperf_client',
     'hardware/mediatek',
     'hardware/motorola',
@@ -135,8 +135,8 @@ blob_fixups: blob_fixups_user_type = {
 }  # fmt: skip
 
 module = ExtractUtilsModule(
-    'fuji',
-    'fcnt',
+    'cybert',
+    'motorola',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
