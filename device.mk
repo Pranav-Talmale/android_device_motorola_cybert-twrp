@@ -290,11 +290,6 @@ PRODUCT_PACKAGES += \
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 34
 
-# SKU
-# Variant Properties
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,product.*.prop,$(LOCAL_PATH)/configs/props/sku/,$(TARGET_COPY_OUT_PRODUCT))
-
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
@@ -332,5 +327,5 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 
 # Inherit the proprietary files
-$(call inherit-product, vendor/fcnt/fuji/fuji-vendor.mk)
-$(call inherit-product, vendor/fcnt/fuji-motcamera/fuji-motcamera-vendor.mk)
+$(call inherit-product, vendor/motorola/cybert/cybert-vendor.mk)
+#$(call inherit-product, vendor/motorola/cybert-motcamera/cybert-motcamera-vendor.mk) #disable for now
