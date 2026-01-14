@@ -350,18 +350,6 @@ on property:ro.carrier=ymobile
 on property:ro.carrier=docomo
     setprop audio.camerasound.force true
 
-# IKSWV-155333: Force shutter tone on Japan retjp carrier
-on property:ro.carrier=retjp
-    setprop audio.camerasound.force true
-
-# IKSWV-155333: Force shutter tone on Japan kddi carrier
-on property:ro.carrier=kddi
-    setprop audio.camerasound.force true
-
-# IKSWV-155333: Force shutter tone on Japan rakuten carrier
-on property:ro.carrier=rakuten
-    setprop audio.camerasound.force true
-
 # IKSWU-165346: Force shutter tone on Korea carriers
 on property:ro.carrier=retkr
     setprop audio.camerasound.force true
@@ -371,9 +359,6 @@ on property:ro.sys.force_max_chrg_temp=*
 
 on property:ro.sys.force_demo_mode=*
     write /sys/devices/platform/charger/force_demo_mode ${ro.sys.force_demo_mode}
-
-on property:ro.vendor.hw.pvtui=*
-    setprop ro.hardware.device.pvtui ${ro.vendor.hw.pvtui}
 
 on property:ro.vendor.hw.felica=true && property:ro.vendor.hw.nfc=ese_st
    setprop persist.vendor.nfc.st_nfc_felica_ese 1
