@@ -222,4 +222,4 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # Inherit the proprietary files
 include vendor/motorola/cybert/BoardConfigVendor.mk
-# include vendor/motorola/cybert-motcamera/BoardConfigVendor.mk #disable for now
+include vendor/motorola/cybert-motcamera/BoardConfigVendor.mk

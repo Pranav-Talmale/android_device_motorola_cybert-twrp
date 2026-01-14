@@ -328,4 +328,4 @@ PRODUCT_COPY_FILES += \
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/motorola/cybert/cybert-vendor.mk)
-#$(call inherit-product, vendor/motorola/cybert-motcamera/cybert-motcamera-vendor.mk) #disable for now
+$(call inherit-product, vendor/motorola/cybert-motcamera/cybert-motcamera-vendor.mk)
