@@ -10,6 +10,12 @@ sh_binary {
     vendor: true,
 }
 
+sh_binary {
+    name: "init.mmi.usb.sh",
+    src: "init.mmi.usb.sh",
+    vendor: true,
+}
+
 prebuilt_etc {
     name: "init.sku.rc",
     src: "init.sku.rc",
