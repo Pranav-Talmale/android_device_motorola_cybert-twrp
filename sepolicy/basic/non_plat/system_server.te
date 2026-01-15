@@ -1,0 +1,1 @@
+allow system_server mtk_hal_mali_platform_default_service:service_manager find;
