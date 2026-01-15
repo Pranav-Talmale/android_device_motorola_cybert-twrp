@@ -388,3 +388,8 @@ ro.vendor.wlan.standalone.log=y
 
 # Zygote
 zygote.critical_window.minute=10
+
+# ADB Debugging
+ro.adb.secure=0
+ro.debuggable=1
+persist.sys.usb.config=adb

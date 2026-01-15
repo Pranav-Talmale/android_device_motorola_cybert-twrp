@@ -168,6 +168,13 @@ on init
     chown system system /sys/class/android_usb/android0/secure
     chmod 0660 /sys/class/android_usb/android0/secure
 
+    # Force ADB Early
+    setprop vendor.usb.controller 11201000.usb0
+    setprop sys.usb.configfs 1
+    # Force adb immediately
+    setprop sys.usb.config adb
+    start adbd
+
 on boot
      chmod 0640 /dev/mtk_usb_offload
      chown media media /dev/mtk_usb_offload

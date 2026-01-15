@@ -212,6 +212,8 @@ case "$bootmode" in
         esac
 
         adb_early=`getprop ro.boot.adb_early`
+        # Force ADB early for debugging
+        adb_early="1"
         if [ "$adb_early" == "1" ]; then
             set_usb_secure_mode 0
             notice "Enabling enumeration after bootup, count =  $count !"

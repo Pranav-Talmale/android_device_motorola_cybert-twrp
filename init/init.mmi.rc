@@ -15,6 +15,10 @@ on early-init && property:ro.boot.mmi.bootlog=true
     start mmi-bootlog-dmesg
 
 on early-init
+    # Force ADB Early
+    setprop ro.adb.secure 0
+    setprop ro.debuggable 1
+
     wait /dev/block/by-name/hw
     exec_start vendor.oem-hw-sh
     # Make sure ro.boot.product.hardware.sku is set before hwservicemanager startup.
