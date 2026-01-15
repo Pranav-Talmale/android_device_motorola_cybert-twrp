@@ -128,6 +128,13 @@ blob_fixups: blob_fixups_user_type = {
 
     'vendor/etc/init/hw/init.vendor.st21nfc.rc': blob_fixup()
         .regex_replace('libnfc-nci-st-felica.conf', 'libnfc-hal-st-felica.conf'),
+
+    'vendor/bin/hw/android.hardware.biometrics.fingerprint-service-rbs': blob_fixup()
+        .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'lib.biometric.fingerprint-V3-shim.so')
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V4-ndk.so'),
+    'vendor/lib64/lib.biometric.fingerprint-V3-shim.so': blob_fixup()
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V4-ndk.so'),
+
 }  # fmt: skip
 
 module = ExtractUtilsModule(

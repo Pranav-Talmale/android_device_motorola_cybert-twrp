@@ -1,6 +1,6 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from arrows Alpha M08 (15 V2VH35.58-32-41 af8fa-f6822).
-## variant: RETJP
+## are from motorola edge 60 pro (16 W1VV36M.7-21-5 bb36b3).
+## variant: RETIN
 
 # AEE
 vendor/lib64/libaedv.so
@@ -954,6 +954,9 @@ vendor/etc/init/android.hardware.biometrics.fingerprint-service-goodix2.rc
 vendor/etc/vintf/manifest/manifest_IMoto_AIDL_Fingerprint.xml
 vendor/lib64/com.motorola.hardware.biometric.fingerprint-V2-ndk.so
 vendor/lib64/hw/fingerprint.goodix.default.so
+vendor/lib64/libgf_hal.so
+vendor/lib64/com.motorola.hardware.display.panel-V1-ndk.so
+vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk.so:vendor/lib64/lib.biometric.fingerprint-V3-shim.so;FIX_SONAME
 
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
