@@ -168,6 +168,7 @@ PRODUCT_PACKAGES += \
     init_conninfra.rc \
     init.mmi.overlay.rc \
     init.mmi.rc \
+    init.mmi.usb.configfs.rc \
     init.modem.rc \
     init.recovery.mt6897.rc \
     init.mt6897.rc \
