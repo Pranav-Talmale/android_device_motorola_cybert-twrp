@@ -234,6 +234,22 @@ vendor/etc/nlc_param/nlc.bin
 
 # Audio Firmware
 vendor/firmware/tfa98xx.cnt
+vendor/firmware/aw8693x_rtp_Attentive.bin
+vendor/firmware/aw8693x_rtp_Balinese_Camelan.bin
+vendor/firmware/aw8693x_rtp_Bird_Loop.bin
+vendor/firmware/aw8693x_rtp_Hello.bin
+vendor/firmware/aw8693x_rtp_Momentum.bin
+vendor/firmware/aw8693x_rtp_Moto.bin
+vendor/firmware/aw8693x_rtp_Moto_Classic.bin
+vendor/firmware/aw8693x_rtp_Moto_Original.bin
+vendor/firmware/aw8693x_rtp_Moto_Retro.bin
+vendor/firmware/aw8693x_rtp_Natural.bin
+vendor/firmware/aw8693x_rtp_New_Hello_Moto.bin
+vendor/firmware/aw8693x_rtp_Simple.bin
+vendor/firmware/aw963xx_reg_0.bin
+vendor/firmware/cps4038.bin
+vendor/firmware/cps4038_cn.bin
+
 
 # Bluetooth
 vendor/bin/hw/android.hardware.bluetooth@1.1-service-mediatek
@@ -815,6 +831,7 @@ vendor/firmware/lib3a.ccu_dummy
 vendor/bin/conninfra_loader
 vendor/etc/init/init.connfem.rc
 vendor/firmware/conninfra.cfg
+vendor/firmware/connfem.cfg
 vendor/firmware/soc7_0_ram_bt_1_1_hdr.bin
 vendor/firmware/soc7_0_ram_bt_1a_1_hdr.bin
 vendor/firmware/soc7_0_ram_bt_1b_1_hdr.bin
@@ -851,6 +868,7 @@ vendor/etc/vintf/manifest/manifest_hwcomposer.xml
 vendor/etc/vintf/manifest/manifest_mmlpq.xml
 vendor/etc/vintf/manifest/mapper.mediatek.xml
 vendor/firmware/mali_csffw.bin
+vendor/firmware/valhall-1691526.wa
 vendor/lib/egl/egl.cfg
 vendor/lib/egl/libMEOW_data.so
 vendor/lib64/egl/libGLES_meow.so
@@ -947,6 +965,8 @@ product/etc/felica/mfs.cfg
 product/priv-app/MobileFeliCaClient/MobileFeliCaClient.apk;PRESIGNED
 
 # Fingerprint
+vendor/firmware/goodix_firmware.bin
+vendor/firmware/goodix_cfg_group.bin
 vendor/bin/hw/android.hardware.biometrics.fingerprint-service-rbs
 vendor/etc/init/android.hardware.biometrics.fingerprint-service-rbs2.rc
 vendor/bin/hw/android.hardware.biometrics.fingerprint-service.goodix
@@ -957,6 +977,7 @@ vendor/lib64/hw/fingerprint.goodix.default.so
 vendor/lib64/libgf_hal.so
 vendor/lib64/com.motorola.hardware.display.panel-V1-ndk.so
 vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk.so:vendor/lib64/lib.biometric.fingerprint-V3-shim.so;FIX_SONAME
+vendor/lib64/libRbsFlow.so
 
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
@@ -1153,6 +1174,7 @@ vendor/etc/st54l_conf_felica_ss.txt
 vendor/etc/st54l_conf_ss.txt
 vendor/firmware/st21nfc_fw.bin
 vendor/firmware/st21nfc_fw7.bin
+vendor/firmware/st54j_fw.bin
 vendor/firmware/st54l_fw.bin
 vendor/firmware/st54l_fw_felica.bin
 vendor/lib64/libstnfc-auth.so
@@ -1179,6 +1201,11 @@ vendor/lib64/vendor.mediatek.hardware.nvram-V1-ndk.so
 # Power
 vendor/lib64/vendor.mediatek.hardware.power@1.1.so
 vendor/lib64/vendor.mediatek.hardware.power@2.0.so
+
+# Power (Battery Firmware)
+vendor/firmware/NFG1000A_battery_parameter_ATLRE50NVT.bin
+vendor/firmware/NFG1000A_battery_parameter_ATLRE60NVT.bin
+vendor/firmware/NFG1000A_battery_parameter_LWNRE60SWD.bin
 
 # Public libraries
 vendor/etc/public.libraries.txt
@@ -1289,6 +1316,25 @@ vendor/lib64/vendor.mediatek.hardware.mtkradioex.voice-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.netdagent-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.netdagent@1.0.so
 vendor/lib64/vendor.mediatek.hardware.nwk_opt_new-V1-ndk.so
+
+# FM Radio (Firmware)
+vendor/firmware/fm_cust.cfg
+vendor/firmware/mt6627_fm_v1_coeff.bin
+vendor/firmware/mt6627_fm_v1_patch.bin
+vendor/firmware/mt6630_fm_v1_coeff.bin
+vendor/firmware/mt6630_fm_v1_patch.bin
+vendor/firmware/mt6630_fm_v2_coeff.bin
+vendor/firmware/mt6630_fm_v2_coeff_tx.bin
+vendor/firmware/mt6630_fm_v2_patch.bin
+vendor/firmware/mt6630_fm_v2_patch_tx.bin
+vendor/firmware/mt6631_fm_v1_coeff.bin
+vendor/firmware/mt6631_fm_v1_patch.bin
+vendor/firmware/mt6632_fm_v1_coeff.bin
+vendor/firmware/mt6632_fm_v1_patch.bin
+vendor/firmware/mt6635_fm_v1_coeff.bin
+vendor/firmware/mt6635_fm_v1_patch.bin
+vendor/firmware/soc_fm_v1_coeff.bin
+vendor/firmware/soc_fm_v1_patch.bin
 
 # Radio (IMS)
 vendor/bin/mtk_lbs_service
@@ -1440,6 +1486,9 @@ vendor/bin/hw/android.hardware.vibrator-service.mediatek
 vendor/etc/init/vibrator-mtk-default.rc
 vendor/etc/vintf/manifest/vibrator-mtk-default.xml
 vendor/firmware/haptic_ram.bin
+vendor/firmware/tiktap_config.txt
+vendor/firmware/tiktap_params.bin
+vendor/firmware/tiktap_wave.bin
 vendor/lib64/hw/vibrator.default.so
 vendor/lib64/libaacvibrator.so
 vendor/lib64/libtiktapvibrator.so
@@ -1496,3 +1545,6 @@ vendor/lib64/libwifitest.so
 # WIFI (firmware)
 vendor/firmware/txpowerctrl.cfg
 vendor/firmware/wifi.cfg
+vendor/firmware/txpowerctrl_INDIA.cfg
+vendor/firmware/txpowerctrl_JAPAN.cfg
+vendor/firmware/txpowerctrl_ROW.cfg
