@@ -227,6 +227,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
 
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/seccomp_policy/android.hardware.media.c2@1.2-mediatek-64b.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/android.hardware.media.c2@1.2-mediatek-64b.policy
+
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc-service.st \
