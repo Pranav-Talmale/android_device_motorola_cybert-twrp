@@ -978,6 +978,8 @@ vendor/lib64/libgf_hal.so
 vendor/lib64/com.motorola.hardware.display.panel-V1-ndk.so
 vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk.so:vendor/lib64/lib.biometric.fingerprint-V3-shim.so;FIX_SONAME
 vendor/lib64/libRbsFlow.so
+vendor/lib64/com.motorola.hardware.display.panel@1.0.so
+vendor/lib64/com.motorola.hardware.display.panel@1.1.so
 
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
