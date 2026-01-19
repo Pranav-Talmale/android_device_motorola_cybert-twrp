@@ -20,20 +20,23 @@
          Zone N + 1     array[N] <= LUX < infinity
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>2</item>
-        <item>4</item>
-        <item>10</item>
-        <item>20</item>
-        <item>40</item>
-        <item>100</item>
-        <item>325</item>
-        <item>1250</item>
-        <item>3500</item>
-        <item>5000</item>
-        <item>10000</item>
-        <item>20000</item>
-        <item>30000</item>
-        <item>200000</item>
+        <item>128</item>
+        <item>256</item>
+        <item>384</item>
+        <item>512</item>
+        <item>640</item>
+        <item>768</item>
+        <item>896</item>
+        <item>1024</item>
+        <item>2048</item>
+        <item>4096</item>
+        <item>6144</item>
+        <item>8192</item>
+        <item>10240</item>
+        <item>12288</item>
+        <item>14336</item>
+        <item>16384</item>
+        <item>18432</item>
     </integer-array>
 
     <!-- Array of desired screen brightness in nits corresponding to the lux values
@@ -51,9 +54,9 @@
       overridden in platform specific overlays -->
     <array name="config_autoBrightnessDisplayValuesNits">
         <item>3</item>
-        <item>7</item>
         <item>10</item>
-        <item>24</item>
+        <item>16</item>
+        <item>32</item>
         <item>64</item>
         <item>82</item>
         <item>90</item>
@@ -62,29 +65,31 @@
         <item>412</item>
         <item>500</item>
         <item>700</item>
+        <item>800</item>
         <item>1000</item>
-        <item>1200</item>
-        <item>1600</item>
+        <item>1400</item>
+        <item>1850</item>
     </array>
 
     <!-- An array describing the screen's backlight values corresponding to the brightness
          values in the config_screenBrightnessNits array.
          This array should be equal in size to config_screenBrightnessBacklight. -->
     <array name="config_screenBrightnessBacklight">
-        <item>9</item>
-        <item>26</item>
-        <item>34</item>
-        <item>53</item>
-        <item>85</item>
-        <item>96</item>
-        <item>100</item>
-        <item>107</item>
-        <item>141</item>
-        <item>201</item>
-        <item>220</item>
-        <item>227</item>
-        <item>236</item>
-        <item>243</item>
+        <item>7</item>
+        <item>27</item>
+        <item>35</item>
+        <item>49</item>
+        <item>70</item>
+        <item>80</item>
+        <item>83</item>
+        <item>90</item>
+        <item>116</item>
+        <item>164</item>
+        <item>179</item>
+        <item>209</item>
+        <item>222</item>
+        <item>232</item>
+        <item>252</item>
         <item>255</item>
     </array>
 
@@ -97,9 +102,9 @@
          This array should be equal in size to config_screenBrightnessBacklight -->
     <array name="config_screenBrightnessNits">
         <item>3</item>
-        <item>7</item>
         <item>10</item>
-        <item>24</item>
+        <item>16</item>
+        <item>32</item>
         <item>64</item>
         <item>82</item>
         <item>90</item>
@@ -108,9 +113,10 @@
         <item>412</item>
         <item>500</item>
         <item>700</item>
+        <item>800</item>
         <item>1000</item>
-        <item>1200</item>
-        <item>1600</item>
+        <item>1400</item>
+        <item>1850</item>
     </array>
 
      <!-- Indicate available ColorDisplayManager.COLOR_MODE_xxx. -->
@@ -120,22 +126,15 @@
         <item>300</item>
     </array>
 
-    <!-- Indicates whether device has a power button fingerprint sensor. -->
-    <bool name="config_is_powerbutton_fps">true</bool>
+    <bool name="config_is_powerbutton_fps">false</bool>
 
-    <!-- An array of arrays of side fingerprint sensor properties relative to each display.
-         Note: this value is temporary and is expected to be queried directly
-         from the HAL in the future. -->
-    <array name="config_sfps_sensor_props" translatable="false">
-        <item>@array/config_sfps_sensor_props_0</item>
-    </array>
+    <bool name="config_supportsUdfps">true</bool>
 
-    <array name="config_sfps_sensor_props_0" translatable="false">
-        <item>local:4627039422300187648</item> <!--item>displayId</item-->
-        <item>1080</item> <!--item>sensorLocationX</item-->
-        <item>1200</item> <!--item>sensorLocationY</item-->
-        <item>180</item> <!--item>sensorRadius</item-->
-    </array>
+    <integer-array name="config_udfps_sensor_props">
+        <item>610</item>
+        <item>2440</item>
+        <item>101</item>
+    </integer-array>
 
     <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
          for debouncing the light sensor.  Different constants are used to debounce the light sensor
@@ -150,7 +149,7 @@
          -2 is invalid so setting will resort to int value specified above.
          Set this to 0.0 to allow screen to go to minimal brightness.
          The user is forbidden from setting the brightness below this level. -->
-    <item name="config_screenBrightnessSettingMinimumFloat" format="float" type="dimen">0.03418803</item>
+    <item name="config_screenBrightnessSettingMinimumFloat" format="float" type="dimen">0.033404917</item>
 
     <!-- Maximum screen brightness allowed by the power manager.
          -2 is invalid so setting will resort to int value specified above.
@@ -175,11 +174,11 @@
     <!-- Control whether the always on display mode is available. This should only be enabled on
          devices where the display has been tuned to be power efficient in DOZE and/or DOZE_SUSPEND
          states. -->
-    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
+    <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
 
     <!-- Control whether the always on display mode is enabled by default. This value will be used
          during initialization when the setting is still null. -->
-    <bool name="config_dozeAlwaysOnEnabled">false</bool>
+    <bool name="config_dozeAlwaysOnEnabled">true</bool>
 
     <!-- The default refresh rate for a given device. Change this value to set a higher default
          refresh rate. If the hardware composer on the device supports display modes with a higher
@@ -195,7 +194,7 @@
          the framework from using higher refresh rates, even if display modes with higher refresh
          rates are available from hardware composer. Only has an effect if the value is
          non-zero. -->
-    <integer name="config_defaultPeakRefreshRate">144</integer>
+    <integer name="config_defaultPeakRefreshRate">120</integer>
 
     <!-- The display uses different gamma curves for different refresh rates. It's hard for panel
          vendors to tune the curves to have exact same brightness for different refresh rate. So
@@ -211,11 +210,13 @@
          the brightness value is negative, only the lux threshold is applied. -->
     <!-- Low zone brightness thresholds in the range [0, 255] -->
     <integer-array translatable="false" name="config_brightnessThresholdsOfPeakRefreshRate">
-        <item>-1</item>
+        <item>56</item>
+        <item>68</item>
     </integer-array>
     <!-- Low zone lux thresholds -->
     <integer-array translatable="false" name="config_ambientThresholdsOfPeakRefreshRate">
         <item>-1</item>
+        <item>70</item>
     </integer-array>
 
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
@@ -275,7 +276,7 @@
          To facilitate writing device-independent emulation overlays, the marker `@dp` can be
          appended after the path string to interpret coordinates in dp instead of px units.
          Note that a physical cutout should be configured in pixels for the best results. -->
-    <string name="config_mainBuiltInDisplayCutout">M -48,0 L 48,0 L 48,112 L -48,112 Z</string>
+    <string name="config_mainBuiltInDisplayCutout">M -45,0 L 45,0 L 45,128 L -45,128 Z</string>
 
     <!-- Set to true to add links to Cell Broadcast app from Settings and MMS app. -->
     <bool name="config_cellBroadcastAppLinks">true</bool>
@@ -336,19 +337,19 @@
     <!-- Vibrator pattern for feedback about touching a virtual key -->
     <array name="config_virtualKeyVibePattern">
         <item>0</item>
-        <item>45</item>
+        <item>20</item>
     </array>
 
     <!-- Vibrator pattern for feedback when selecting an hour/minute tick of a Clock -->
     <integer-array name="config_clockTickVibePattern">
         <item>0</item>
-        <item>15</item>
+        <item>10</item>
     </integer-array>
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <array name="config_longPressVibePattern">
         <item>0</item>
-        <item>75</item>
+        <item>30</item>
     </array>
 
     <!-- Whether WiFi display is supported by this device.
