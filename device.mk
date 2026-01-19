@@ -174,7 +174,6 @@ PRODUCT_PACKAGES += hwservicemanager
 # Init
 PRODUCT_PACKAGES += \
     fstab.mt6897 \
-    init.sku.rc \
     init.connectivity.rc \
     init.connectivity.common.rc \
     init_conninfra.rc \
