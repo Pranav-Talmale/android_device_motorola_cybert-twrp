@@ -9,4 +9,10 @@ ro.mot.product_wave=2025.2
 ro.mot.build.customerid=global
 
 # SKU
-import /product/product.${ro.boot.hardware.sku}.prop
+import /product/etc/motorola/props/sku.${ro.boot.sku_variant}.prop
+import /product/etc/motorola/props/hardware.sku.${ro.boot.hardware.sku}.prop
+import /product/etc/motorola/props/sku.variant.${ro.boot.hardware.sku}.${ro.boot.sku_variant}.prop
+import /product/etc/motorola/props/carrier.${ro.boot.carrier}.prop
+import /product/etc/motorola/props/carrier.${ro.boot.carrier}.${ro.boot.device}.prop
+import /product/etc/motorola/props/carrier.${ro.boot.carrier}.sku.${ro.boot.hardware.sku}.prop
+

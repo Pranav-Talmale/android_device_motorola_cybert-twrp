@@ -393,3 +393,9 @@ zygote.critical_window.minute=10
 ro.adb.secure=0
 ro.debuggable=1
 persist.sys.usb.config=adb
+
+# SKU Props
+import /vendor/etc/motorola/props/sku.${ro.boot.sku_variant}.prop
+import /vendor/etc/motorola/props/hardware.sku.${ro.boot.hardware.sku}.prop
+import /vendor/etc/motorola/props/carrier.${ro.boot.carrier}.prop
+
