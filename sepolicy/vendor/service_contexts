@@ -34,3 +34,6 @@ vendor.mediatek.hardware.nwk_opt_new.INwkOptNew/default                         
 
 # Shared Secret
 android.hardware.security.sharedsecret.ISharedSecret/strongbox                  u:object_r:hal_sharedsecret_service:s0
+
+# Motorola SensorExt
+motorola.hardware.sensors.ISensorExt/default                                    u:object_r:mot_sensorext_service:s0

@@ -1,0 +1,16 @@
+type hal_dms_default, domain;
+type hal_dms_default_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_dms_default)
+
+# Allow HwBinder IPC
+hwbinder_use(hal_dms_default)
+get_prop(hal_dms_default, hwservicemanager_prop)
+allow hal_dms_default hidl_base_hwservice:hwservice_manager add;
+
+# Allow access to audio devices and properties
+allow hal_dms_default audio_device:dir r_dir_perms;
+allow hal_dms_default audio_device:chr_file rw_file_perms;
+
+# Properties
+get_prop(hal_dms_default, vendor_audio_prop)
