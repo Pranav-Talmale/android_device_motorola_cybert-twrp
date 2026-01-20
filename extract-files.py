@@ -148,6 +148,9 @@ blob_fixups: blob_fixups_user_type = {
 
     'vendor/bin/hw/motorola.hardware.sensorext-service': blob_fixup()
         .add_needed('libui_shim.so'),
+
+    'vendor/lib64/libtpa.so': blob_fixup()
+        .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 }
 
 module = ExtractUtilsModule(

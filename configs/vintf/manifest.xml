@@ -41,11 +41,6 @@
         <transport arch="32+64">passthrough</transport>
         <fqname>@4.0::IMapper/default</fqname>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <transport>hwbinder</transport>
-        <fqname>@3.2::IComposer/default</fqname>
-    </hal>
     <hal format="aidl">
         <name>android.hardware.radio.config</name>
         <version>2</version>
@@ -242,5 +237,10 @@
     <hal format="aidl">
         <name>motorola.hardware.sensors</name>
         <fqname>ISensorExt/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.light</name>
+        <version>2</version>
+        <fqname>ILights/default</fqname>
     </hal>
 </manifest>

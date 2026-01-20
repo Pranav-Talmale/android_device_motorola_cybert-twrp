@@ -171,6 +171,9 @@ on boot
 
  # change ownership and permission for lcd-backlight
    chown system system /sys/class/leds/lcd-backlight/max_brightness
+   symlink /sys/class/leds/lcd-backlight /sys/class/leds/lcd-backlight1
+   chmod 0664 /sys/class/leds/lcd-backlight1/brightness
+   chown system system /sys/class/leds/lcd-backlight1/brightness
 
 on property:sys.boot_completed=*
     setprop vendor.boot_completed ${sys.boot_completed}

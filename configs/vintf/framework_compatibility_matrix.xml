@@ -38,9 +38,9 @@
             <instance>internal/0</instance>
         </interface>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.graphics.composer</name>
-        <version>3.2</version>
+    <hal format="aidl">
+        <name>android.hardware.graphics.composer3</name>
+        <version>2</version>
         <interface>
             <name>IComposer</name>
             <instance>default</instance>
@@ -56,6 +56,7 @@
     </hal>
     <hal format="aidl" optional="true">
         <name>android.hardware.light</name>
+        <version>2</version>
         <interface>
             <name>ILights</name>
             <instance>default</instance>
