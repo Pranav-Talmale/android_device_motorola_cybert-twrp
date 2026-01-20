@@ -6,6 +6,10 @@ ro.vendor.audio.moto_sst_supported=true
 ro.vendor.mtk_audio_tuning_tool_ver=V1
 ro.vendor.mtk_hifiaudio_support=1
 vendor.audio.powerhal.power.hi_res=true
+vendor.audio.powerhal.power.dl=true
+vendor.audio.powerhal.power.ul=true
+vendor.audio.usb.super_hifi=true
+persist.vendor.audio.usb.offload=true
 
 # Bluetooth
 bluetooth.device.class_of_device=90,2,12
@@ -26,6 +30,15 @@ bluetooth.profile.sap.server.enabled?=true
 ro.vendor.bt.platform=6879
 ro.vendor.mtk.bt_sap_enable=true
 vendor.bluetooth.ldac.abr=true
+
+# Bluetooth LeAudio & Offload
+ro.bluetooth.leaudio_offload.supported=true
+persist.bluetooth.leaudio_offload.disabled=false
+persist.vendor.bluetooth.leaudio_mode=ums-cg
+persist.vendor.bluetooth.broadcaster.tx_pwr=10
+bluetooth.profile.bap.unicast.client.enabled=true
+bluetooth.profile.hap.client.enabled=true
+bluetooth.profile.csip.set_coordinator.enabled=true
 
 # Camera
 camera.disable_zsl_mode=1
@@ -221,6 +234,7 @@ debug.stagefright.omx_default_rank=1000
 media.c2.dmabuf.padding=3072
 ro.vendor.mtk.c2.vdec.fmt.support.level=2
 ro.vendor.mtk_hdr_video_support=1
+ro.vendor.mtk_backlight_hwc_support=1
 ro.vendor.mtk_video_hevc_enc_support=1
 vendor.media.omx=0
 vendor.mtk.vdec.waitkeyframeforplay=9
