@@ -15,6 +15,15 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>android.hardware.bluetooth</name>
+        <transport>hwbinder</transport>
+        <version>1.0-1</version>
+        <interface>
+            <name>IBluetoothHci</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>android.hardware.cas</name>
         <version>1.2</version>
         <interface>
@@ -27,6 +36,22 @@
         <interface>
             <name>ICameraProvider</name>
             <instance>internal/0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.graphics.composer</name>
+        <version>3.2</version>
+        <interface>
+            <name>IComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.graphics.allocator</name>
+        <version>2.0</version>
+        <interface>
+            <name>IAllocator</name>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="aidl" optional="true">
@@ -208,11 +233,29 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="hidl" optional="true">
+        <name>android.hardware.soundtrigger</name>
+        <transport>hwbinder</transport>
+        <version>2.0-3</version>
+        <interface>
+            <name>ISoundTriggerHw</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="aidl" optional="true">
         <name>android.se.omapi</name>
         <interface>
             <name>ISecureElementService</name>
             <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>android.hardware.secure_element</name>
+        <interface>
+            <name>ISecureElement</name>
+            <instance>SIM1</instance>
+            <instance>SIM2</instance>
+            <instance>eSE1</instance>
         </interface>
     </hal>
     <hal format="aidl" optional="true">
@@ -306,7 +349,7 @@
     </hal>
     <hal format="aidl" optional="true">
         <name>com.motorola.hardware.display.touch</name>
-        <version>1-2</version>
+        <version>1-3</version>
         <interface>
             <name>IMotTouch</name>
             <instance>default</instance>
@@ -333,6 +376,13 @@
         <name>motorola.hardware.camera.imgtuner</name>
         <version>1.0</version>
         <version>2.0</version>
+        <interface>
+            <name>IImageTuning</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>motorola.hardware.camera.imgtuner.aidl</name>
         <interface>
             <name>IImageTuning</name>
             <instance>default</instance>
@@ -500,6 +550,7 @@
     </hal>
     <hal format="aidl" optional="true">
         <name>motorola.hardware.wireless.powershare</name>
+        <version>1-2</version>
         <interface>
             <name>IMotPowerShare</name>
             <instance>default</instance>
@@ -1578,6 +1629,14 @@
         <name>vendor.zuialarm.hardware.alarm</name>
         <interface>
             <name>IAlarm</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.dolby.dms</name>
+        <version>1</version>
+        <interface>
+            <name>IDms</name>
             <instance>default</instance>
         </interface>
     </hal>
