@@ -136,6 +136,14 @@
         <item>101</item>
     </integer-array>
 
+    <!-- UDFPS HBM (High Brightness Mode) settings for fingerprint illumination -->
+    <!-- UDFPS HBM Configuration -->
+    <bool name="config_udfps_full_keys_supported">true</bool>
+    <bool name="config_udfps_local_hbm_supported">true</bool>
+    <integer name="config_udfps_local_hbm_fix_refresh_rate">120</integer>
+    <integer name="config_hbmSessionLimit">0</integer>
+    <!-- End UDFPS HBM Configuration -->
+
     <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
          for debouncing the light sensor.  Different constants are used to debounce the light sensor
          when adapting to brighter or darker environments.  This parameter controls how quickly

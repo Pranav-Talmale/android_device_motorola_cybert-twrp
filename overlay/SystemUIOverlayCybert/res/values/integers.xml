@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- UDFPS pointer down delay - time to wait before capturing fingerprint after touch -->
+    <integer name="udfps_aod_pointer_down_delay">20</integer>
+    <integer name="udfps_pointer_down_delay">20</integer>
+</resources>
