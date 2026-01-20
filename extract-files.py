@@ -130,12 +130,25 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace('libnfc-nci-st-felica.conf', 'libnfc-hal-st-felica.conf'),
 
     'vendor/bin/hw/android.hardware.biometrics.fingerprint-service-rbs': blob_fixup()
-        .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'lib.biometric.fingerprint-V3-shim.so')
-        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V4-ndk.so'),
-    'vendor/lib64/lib.biometric.fingerprint-V3-shim.so': blob_fixup()
-        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V4-ndk.so'),
+        .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'android.hardware.biometrics.fingerprint-V3-ndk-moto.so')
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so')
+        .replace_needed('android.hardware.biometrics.common.util.so', 'android.hardware.biometrics.common.util-moto.so')
+        .replace_needed('android.hardware.biometrics.common.thread.so', 'android.hardware.biometrics.common.thread-moto.so'),
 
-}  # fmt: skip
+    'vendor/bin/hw/android.hardware.biometrics.fingerprint-service.goodix': blob_fixup()
+        .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'android.hardware.biometrics.fingerprint-V3-ndk-moto.so')
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
+
+    'vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk-moto.so': blob_fixup()
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
+    'vendor/lib64/android.hardware.biometrics.common.util-moto.so': blob_fixup()
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
+    'vendor/lib64/android.hardware.biometrics.common.thread-moto.so': blob_fixup()
+        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
+
+    'vendor/bin/hw/motorola.hardware.sensorext-service': blob_fixup()
+        .add_needed('libui_shim.so'),
+}
 
 module = ExtractUtilsModule(
     'cybert',
