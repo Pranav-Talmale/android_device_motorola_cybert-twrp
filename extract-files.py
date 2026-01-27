@@ -74,12 +74,7 @@ blob_fixups: blob_fixups_user_type = {
 
     'vendor/lib64/mt6897/libmnl.so': blob_fixup()
         .add_needed('libcutils.so'),
-
-    'vendor/bin/hw/android.hardware.biometrics.fingerprint-service.fpc': blob_fixup()
-        .binary_regex_replace(b'/virtual', b'/default')
-        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V4-ndk.so')
-        .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'android.hardware.biometrics.fingerprint-V4-ndk.so'),
-
+        
     'vendor/lib64/mt6897/libmtkcam_hal_aidl_common.so': blob_fixup()
         .replace_needed('android.hardware.camera.common-V2-ndk.so', 'android.hardware.camera.common-V1-ndk.so'),
 
@@ -132,8 +127,7 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/android.hardware.biometrics.fingerprint-service-rbs': blob_fixup()
         .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'android.hardware.biometrics.fingerprint-V3-ndk-moto.so')
         .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so')
-        .replace_needed('android.hardware.biometrics.common.util.so', 'android.hardware.biometrics.common.util-moto.so')
-        .replace_needed('android.hardware.biometrics.common.thread.so', 'android.hardware.biometrics.common.thread-moto.so'),
+        .replace_needed('android.hardware.biometrics.common.util.so', 'android.hardware.biometrics.common.util-moto.so'),
 
     'vendor/bin/hw/android.hardware.biometrics.fingerprint-service.goodix': blob_fixup()
         .replace_needed('android.hardware.biometrics.fingerprint-V3-ndk.so', 'android.hardware.biometrics.fingerprint-V3-ndk-moto.so')
@@ -142,8 +136,6 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk-moto.so': blob_fixup()
         .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
     'vendor/lib64/android.hardware.biometrics.common.util-moto.so': blob_fixup()
-        .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
-    'vendor/lib64/android.hardware.biometrics.common.thread-moto.so': blob_fixup()
         .replace_needed('android.hardware.biometrics.common-V3-ndk.so', 'android.hardware.biometrics.common-V3-ndk-moto.so'),
 
     'vendor/bin/hw/motorola.hardware.sensorext-service': blob_fixup()

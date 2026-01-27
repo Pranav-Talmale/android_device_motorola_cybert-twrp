@@ -6,4 +6,5 @@
 <resources>
     <!-- Whether to felica reset feature is supported by device -->
     <bool name="config_felica_reset_supported">true</bool>
+    <bool name="config_felica_reset_feature_enabled">true</bool>
 </resources>

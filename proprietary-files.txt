@@ -1022,22 +1022,21 @@ vendor/etc/vintf/manifest/motorola.hardware.fdr.service.xml
 vendor/lib64/motorola.hardware.fdr-V1-ndk.so
 
 # Fingerprint
-# vendor/firmware/goodix_firmware.bin
-# vendor/firmware/goodix_cfg_group.bin
+vendor/firmware/goodix_firmware.bin
+vendor/firmware/goodix_cfg_group.bin
 vendor/bin/hw/android.hardware.biometrics.fingerprint-service-rbs
 vendor/etc/init/android.hardware.biometrics.fingerprint-service-rbs2.rc
-# vendor/bin/hw/android.hardware.biometrics.fingerprint-service.goodix
-# vendor/etc/init/android.hardware.biometrics.fingerprint-service-goodix2.rc
+vendor/bin/hw/android.hardware.biometrics.fingerprint-service.goodix
+vendor/etc/init/android.hardware.biometrics.fingerprint-service-goodix2.rc
 vendor/etc/vintf/manifest/manifest_IMoto_AIDL_Fingerprint.xml
 vendor/lib64/com.motorola.hardware.biometric.fingerprint-V2-ndk.so
-# vendor/lib64/hw/fingerprint.goodix.default.so
-# vendor/lib64/libgf_hal.so
+vendor/lib64/hw/fingerprint.goodix.default.so
+vendor/lib64/libgf_hal.so
 vendor/lib64/libRbsFlow.so
 vendor/lib/libRbsFlow.so
-vendor/lib64/android.hardware.biometrics.common-V3-ndk.so:vendor/lib64/android.hardware.biometrics.common-V3-ndk-moto.so;FIX_SONAME
 vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk.so:vendor/lib64/android.hardware.biometrics.fingerprint-V3-ndk-moto.so;FIX_SONAME
+vendor/lib64/android.hardware.biometrics.common-V3-ndk.so:vendor/lib64/android.hardware.biometrics.common-V3-ndk-moto.so;FIX_SONAME
 vendor/lib64/android.hardware.biometrics.common.util.so:vendor/lib64/android.hardware.biometrics.common.util-moto.so;FIX_SONAME
-vendor/lib64/android.hardware.biometrics.common.thread.so:vendor/lib64/android.hardware.biometrics.common.thread-moto.so;FIX_SONAME
 
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-service.trustonic
@@ -1495,6 +1494,10 @@ vendor/etc/permissions/unavail.android.hardware.sensor.barometer.xml
 vendor/lib64/hw/sensors.mediatek.V2.0.so;SYMLINK=vendor/lib64/hw/sensors.mt6897.so
 vendor/lib64/hw/android.hardware.sensors@2.X-subhal-mediatek.so
 vendor/lib64/hw/sensors.dynamic_sensor_hal.so
+vendor/lib64/hw/sensors.light_compensate.so
+vendor/etc/sensors/als_comp_config.xml
+vendor/etc/sensors/als_comp_tf_csot.config
+vendor/etc/sensors/als_comp_tf_tianma.config
 vendor/lib64/libhfmanager.so
 vendor/lib64/libhfmanagerwrapper.so
 vendor/lib64/libhwm.so

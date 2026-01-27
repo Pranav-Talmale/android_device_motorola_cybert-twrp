@@ -17,6 +17,18 @@
         <item>ap_br_ap\\d</item>
     </string-array>
 
+    <!-- List of regular expressions matching network interface names
+         that should be considered valid USB tethering interfaces -->
+    <string-array translatable="false" name="config_tether_usb_regexs">
+        <item>rndis\\d</item>
+    </string-array>
+
+    <!-- List of regular expressions matching network interface names
+         that should be considered valid Bluetooth tethering interfaces -->
+    <string-array translatable="false" name="config_tether_bluetooth_regexs">
+        <item>bt-pan</item>
+    </string-array>
+
     <!-- This setting is deprecated, please use
          com.android.networkstack.tethering.R.array.config_dhcp_range instead. -->
     <string-array translatable="false" name="config_tether_dhcp_range">
@@ -40,12 +52,5 @@
         <item>192.168.50.254</item>
         <item>192.168.51.2</item>
         <item>192.168.51.254</item>
-    </string-array>
-
-    <!-- This setting is deprecated, please use
-         com.android.networkstack.tethering.R.array.config_tether_usb_regexs instead. -->
-    <string-array translatable="false" name="config_tether_usb_regexs">
-        <item>usb\\d</item>
-        <item>rndis\\d</item>
     </string-array>
 </resources>

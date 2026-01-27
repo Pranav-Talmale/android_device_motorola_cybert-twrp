@@ -20,23 +20,21 @@
          Zone N + 1     array[N] <= LUX < infinity
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>128</item>
-        <item>256</item>
-        <item>384</item>
-        <item>512</item>
-        <item>640</item>
-        <item>768</item>
-        <item>896</item>
-        <item>1024</item>
-        <item>2048</item>
-        <item>4096</item>
-        <item>6144</item>
-        <item>8192</item>
-        <item>10240</item>
-        <item>12288</item>
-        <item>14336</item>
-        <item>16384</item>
-        <item>18432</item>
+        <item>2</item>
+        <item>4</item>
+        <item>10</item>
+        <item>20</item>
+        <item>40</item>
+        <item>100</item>
+        <item>325</item>
+        <item>1250</item>
+        <item>3500</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>30000</item>
+        <item>80000</item>
+        <item>100000</item>
+        <item>200000</item>
     </integer-array>
 
     <!-- Array of desired screen brightness in nits corresponding to the lux values
@@ -126,23 +124,43 @@
         <item>300</item>
     </array>
 
-    <bool name="config_is_powerbutton_fps">false</bool>
-
-    <bool name="config_supportsUdfps">true</bool>
-
+    <!-- Properties defining the under-display fingerprint sensor (UDFPS) location
+         and size, typically expressed as center X, center Y, and sensor radius
+         in pixels -->
     <integer-array name="config_udfps_sensor_props">
         <item>610</item>
         <item>2440</item>
         <item>101</item>
     </integer-array>
 
-    <!-- UDFPS HBM (High Brightness Mode) settings for fingerprint illumination -->
-    <!-- UDFPS HBM Configuration -->
+    <!-- Enrollment progress thresholds used to advance between different
+         UDFPS enrollment UI stages -->
+    <array name="config_udfps_enroll_stage_thresholds">
+        <item>0.25</item>
+        <item>0.5</item>
+        <item>0.75</item>
+        <item>0.875</item>
+    </array>
+
+    <!-- Whether UDFPS supports full navigation key interaction during
+         fingerprint authentication -->
     <bool name="config_udfps_full_keys_supported">true</bool>
+
+    <!-- Whether UDFPS supports enabling local High Brightness Mode (HBM)
+         directly through the display driver -->
     <bool name="config_udfps_local_hbm_supported">true</bool>
+
+    <!-- Whether UDFPS authentication is allowed while the screen is off,
+         typically used for ambient / always-on display interactions -->
+    <bool name="config_screen_off_udfps_enabled">true</bool>
+
+    <!-- Fixed display refresh rate to be used while local HBM is active
+         for UDFPS to ensure stable illumination and sensor readings -->
     <integer name="config_udfps_local_hbm_fix_refresh_rate">120</integer>
+
+    <!-- Maximum number of concurrent High Brightness Mode (HBM) sessions
+         allowed; 0 indicates no explicit limit -->
     <integer name="config_hbmSessionLimit">0</integer>
-    <!-- End UDFPS HBM Configuration -->
 
     <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
          for debouncing the light sensor.  Different constants are used to debounce the light sensor
@@ -186,7 +204,7 @@
 
     <!-- Control whether the always on display mode is enabled by default. This value will be used
          during initialization when the setting is still null. -->
-    <bool name="config_dozeAlwaysOnEnabled">true</bool>
+    <bool name="config_dozeAlwaysOnEnabled">false</bool>
 
     <!-- The default refresh rate for a given device. Change this value to set a higher default
          refresh rate. If the hardware composer on the device supports display modes with a higher
@@ -196,7 +214,19 @@
          If a non-zero value is set for config_defaultPeakRefreshRate, then
          config_defaultRefreshRate may be set to 0, in which case the value set for
          config_defaultPeakRefreshRate will act as the default frame rate. -->
-    <integer name="config_defaultRefreshRate">0</integer>
+    <integer name="config_defaultRefreshRate">60</integer>
+
+    <!-- Default minimum display refresh rate in Hz used by the system
+         when no higher constraints are imposed -->
+    <integer name="config_defaultMinRefreshRate">24</integer>
+
+    <!-- Default minimum display refresh rate in Hz when the device is in
+         CLI / cover display mode -->
+    <integer name="config_defaultMinRefreshRateCli">60</integer>
+
+    <!-- Default display refresh rate in Hz used when the device enters
+         a defined refresh rate zone (e.g. high-performance or scrolling zones) -->
+    <integer name="config_defaultRefreshRateInZone">90</integer>
 
     <!-- The default peak refresh rate for a given device. Change this value if you want to prevent
          the framework from using higher refresh rates, even if display modes with higher refresh
@@ -300,9 +330,13 @@
         <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
         <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
+        <item>"/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/system_ext/priv-app/SystemUI/oat/arm64/SystemUI.odex"</item>
+        <item>"/system/lib64/libsurfaceflinger.so"</item>
+        <item>"/system/lib64/libhwui.so"</item>
+        <item>"/system/lib64/libaudioprocessing.so"</item>
         <item>"/product/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
         <item>"/product/priv-app/SystemUIGoogle/oat/arm64/SystemUIGoogle.odex"</item>
-        <item>"/system/lib64/libsurfaceflinger.so"</item>
     </string-array>
 
     <!-- Should the pinner service pin the Camera application? -->
@@ -310,19 +344,6 @@
 
     <!-- Should the pinner service pin the Home application? -->
     <bool name="config_pinnerHomeApp">true</bool>
-
-    <!-- List of files pinned by the Pinner Service with the apex boot image b/119800099 -->
-    <string-array translatable="false" name="config_apexBootImagePinnerServiceFiles">
-        <item>"/system/framework/framework.jar"</item>
-        <item>"/system/framework/services.jar"</item>
-        <item>"/system/framework/arm64/apex.oat"</item>
-        <item>"/system/framework/arm64/apex-core-libart.oat"</item>
-        <item>"/apex/com.android.runtime/javalib/core-oj.jar"</item>
-        <item>"/apex/com.android.runtime/javalib/core-libart.jar"</item>
-        <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-        <item>"/system/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
-        <item>"/system/lib64/libsurfaceflinger.so"</item>
-    </string-array>
 
     <!-- Remove MTK IMS app from privacy (location) indicators -->
     <string name="config_systemAudioIntelligence" translatable="false">com.mediatek.ims</string>
