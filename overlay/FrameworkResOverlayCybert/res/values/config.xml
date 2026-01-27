@@ -135,12 +135,12 @@
 
     <!-- Enrollment progress thresholds used to advance between different
          UDFPS enrollment UI stages -->
-    <array name="config_udfps_enroll_stage_thresholds">
+    <string-array name="config_udfps_enroll_stage_thresholds">
         <item>0.25</item>
         <item>0.5</item>
         <item>0.75</item>
         <item>0.875</item>
-    </array>
+    </string-array>
 
     <!-- Whether UDFPS supports full navigation key interaction during
          fingerprint authentication -->
@@ -161,6 +161,9 @@
     <!-- Maximum number of concurrent High Brightness Mode (HBM) sessions
          allowed; 0 indicates no explicit limit -->
     <integer name="config_hbmSessionLimit">0</integer>
+
+    <!-- Ambient Light Sensor used for auto-brightness (matches Sensor HAL name) -->
+    <string name="config_autoBrightnessLightSensorName">tcs3720_als</string>
 
     <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
          for debouncing the light sensor.  Different constants are used to debounce the light sensor

@@ -195,6 +195,10 @@ ODM_MANIFEST_QSQS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_qsqs.xml
 ODM_MANIFEST_SS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_ss.xml
 ODM_MANIFEST_TSTS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_tsts.xml
 
+# Udfps
+TARGET_USES_FOD_ZPOS := true
+$(call soong_config_set,surfaceflinger,udfps_lib,//device/motorola/cybert/udfps:libudfps_extension.cybert)
+
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_ALGORITHM := SHA256_RSA2048
