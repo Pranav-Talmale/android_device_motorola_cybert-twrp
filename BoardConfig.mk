@@ -93,45 +93,16 @@ BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=11201000.usb0
 
-TARGET_KERNEL_SOURCE := kernel/motorola/cybert
-TARGET_KERNEL_CONFIG := \
-    gki_defconfig
-
-TARGET_DTB_LIST_WILDCARD := mt6897.dtb mt6897-cybert*.dtb
-
-TARGET_KERNEL_EXT_MODULE_ROOT := kernel/motorola/cybert-modules
-TARGET_KERNEL_CONFIG_EXT := \
-    $(TARGET_KERNEL_EXT_MODULE_ROOT)/arch/arm64/configs/mgk_64_k61_defconfig \
-    $(TARGET_KERNEL_EXT_MODULE_ROOT)/arch/arm64/configs/ext_config/moto-mgk_64_k61.config \
-    $(TARGET_KERNEL_EXT_MODULE_ROOT)/arch/arm64/configs/ext_config/moto-mgk_64_k61-cybert.config
-
-TARGET_KERNEL_EXT_MODULES += \
-    vendor/mediatek/kernel_modules/connectivity/common \
-    vendor/mediatek/kernel_modules/connectivity/conninfra \
-    vendor/mediatek/kernel_modules/connectivity/connfem \
-    vendor/mediatek/kernel_modules/connectivity/gps/gps_stp \
-    vendor/mediatek/kernel_modules/connectivity/gps/data_link \
-    vendor/mediatek/kernel_modules/connectivity/gps/gps_pwr \
-    vendor/mediatek/kernel_modules/connectivity/gps/gps_scp \
-    vendor/mediatek/kernel_modules/gpu \
-    vendor/mediatek/kernel_modules/connectivity/fmradio \
-    vendor/mediatek/kernel_modules/connectivity/wlan/adaptor \
-    vendor/mediatek/kernel_modules/connectivity/wlan/adaptor/wlan_page_pool \
-    vendor/mediatek/kernel_modules/connectivity/bt/linux_v2 \
-    vendor/mediatek/kernel_modules/hbt_driver_cus \
-    vendor/mediatek/kernel_modules/mtkcam
-
-# TARGET_FORCE_PREBUILT_KERNEL := true
-# BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)-kernel/dtb
-# PRODUCT_COPY_FILES += \
+TARGET_FORCE_PREBUILT_KERNEL := true
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)-kernel/dtb
+PRODUCT_COPY_FILES += \
 	$(DEVICE_PATH)-kernel/Image.gz:kernel
 
-# BOARD_SYSTEM_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/system/*.ko)
+BOARD_SYSTEM_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/system/*.ko)
 BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.system))
-SYSTEM_KERNEL_MODULES := $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)
-# BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor/*.ko)
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor/*.ko)
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.vendor))
-# BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor_ramdisk/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor_ramdisk/*.ko)
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.vendor_ramdisk))
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.recovery))
 BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)
@@ -144,7 +115,7 @@ RECOVERY_KERNEL_MODULES := \
     touchscreen_u_mmi \
     focaltech_touch_v3_u_mmi
 
-# BOARD_VENDOR_RAMDISK_KERNEL_MODULES += $(addprefix $(DEVICE_PATH)-kernel/vendor/,$(addsuffix .ko,$(RECOVERY_KERNEL_MODULES)))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES += $(addprefix $(DEVICE_PATH)-kernel/vendor/,$(addsuffix .ko,$(RECOVERY_KERNEL_MODULES)))
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD += $(RECOVERY_KERNEL_MODULES)
 
 BOARD_MKBOOTIMG_ARGS += \
@@ -157,8 +128,8 @@ BOARD_MKBOOTIMG_ARGS += \
 BOARD_MKBOOTIMG_INIT_ARGS += \
     --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
-# TARGET_NO_KERNEL_OVERRIDE := true
-# TARGET_PREBUILT_KERNEL_HEADERS := $(DEVICE_PATH)-kernel/kernel-uapi-headers.tar.gz
+TARGET_NO_KERNEL_OVERRIDE := true
+TARGET_PREBUILT_KERNEL_HEADERS := $(DEVICE_PATH)-kernel/kernel-uapi-headers.tar.gz
 
 # Partitions
 BOARD_PRODUCTIMAGE_MINIMAL_PARTITION_RESERVED_SIZE := false
