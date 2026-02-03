@@ -10,6 +10,36 @@ if [ ! -f "${GKI_ROOT_DIR}/build/kernel/kleaf/bazel.sh" ]; then
     exit 1
 fi
 
+# Function to manage Android.bp files (enable/disable) to avoid Soong conflicts
+manage_android_bp() {
+    local action=$1
+    echo "Managing Android.bp files in kernel/motorola (prebuilts, build, system and external): ${action}"
+    
+    local dirs=("prebuilts" "build" "system" "external")
+    
+    for d in "${dirs[@]}"; do
+        if [ -d "${GKI_ROOT_DIR}/${d}" ]; then
+            if [ "${action}" == "disable" ]; then
+                # Find valid Android.bp files and rename them to .disabled
+                find "${GKI_ROOT_DIR}/${d}" -name "Android.bp" -type f | while read file; do
+                    mv "${file}" "${file}.disabled"
+                done
+            elif [ "${action}" == "enable" ]; then
+                # Find disabled files and restore them
+                find "${GKI_ROOT_DIR}/${d}" -name "Android.bp.disabled" -type f | while read file; do
+                    mv "${file}" "${file%.disabled}"
+                done
+            fi
+        fi
+    done
+}
+
+# Ensure Android.bp files are enabled (restored) at start for Bazel visibility (if needed)
+manage_android_bp "enable"
+
+# Trap to ensure we disable them even if script fails/exits
+trap 'manage_android_bp "disable"' EXIT
+
 TARGET_PRODUCT=cybert
 KERNEL_DEFCONFIG="mgk_64_k61_defconfig"
 KERNEL_BUILD_VARIANT=user
