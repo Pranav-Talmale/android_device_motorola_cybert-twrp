@@ -10,35 +10,40 @@ if [ ! -f "${GKI_ROOT_DIR}/build/kernel/kleaf/bazel.sh" ]; then
     exit 1
 fi
 
-# Function to manage Android.bp files (enable/disable) to avoid Soong conflicts
-manage_android_bp() {
+# Function to manage build files (enable/disable) to avoid Soong/Make conflicts
+manage_build_files() {
     local action=$1
-    echo "Managing Android.bp files in kernel/motorola (prebuilts, build, system and external): ${action}"
+    echo "Managing build files in kernel/motorola: ${action}"
     
-    local dirs=("prebuilts" "build" "system" "external")
+    local dirs=("prebuilts" "build" "system" "external" "motorola")
+    local files=("Android.bp" "Android.mk")
     
     for d in "${dirs[@]}"; do
         if [ -d "${GKI_ROOT_DIR}/${d}" ]; then
             if [ "${action}" == "disable" ]; then
-                # Find valid Android.bp files and rename them to .disabled
-                find "${GKI_ROOT_DIR}/${d}" -name "Android.bp" -type f | while read file; do
-                    mv "${file}" "${file}.disabled"
+                # Disable files
+                for f in "${files[@]}"; do
+                    find "${GKI_ROOT_DIR}/${d}" -name "${f}" -type f | while read file; do
+                        mv "${file}" "${file}.disabled"
+                    done
                 done
             elif [ "${action}" == "enable" ]; then
-                # Find disabled files and restore them
-                find "${GKI_ROOT_DIR}/${d}" -name "Android.bp.disabled" -type f | while read file; do
-                    mv "${file}" "${file%.disabled}"
+                # Enable files
+                for f in "${files[@]}"; do
+                    find "${GKI_ROOT_DIR}/${d}" -name "${f}.disabled" -type f | while read file; do
+                        mv "${file}" "${file%.disabled}"
+                    done
                 done
             fi
         fi
     done
 }
 
-# Ensure Android.bp files are enabled (restored) at start for Bazel visibility (if needed)
-manage_android_bp "enable"
+# Ensure build files are enabled (restored) at start for Bazel visibility (if needed)
+manage_build_files "enable"
 
 # Trap to ensure we disable them even if script fails/exits
-trap 'manage_android_bp "disable"' EXIT
+trap 'manage_build_files "disable"' EXIT
 
 TARGET_PRODUCT=cybert
 KERNEL_DEFCONFIG="mgk_64_k61_defconfig"
@@ -69,7 +74,8 @@ rm -rf "${KERNEL_BAZEL_DIST_OUT}/dtbs"
 rm -rf "${KERNEL_BAZEL_DIST_OUT}/system"
 rm -rf "${KERNEL_BAZEL_DIST_OUT}/vendor"
 rm -rf "${KERNEL_BAZEL_DIST_OUT}/vendor_ramdisk"
-rm -f "${KERNEL_BAZEL_DIST_OUT}/Image.lz4"
+rm -rf "${KERNEL_BAZEL_DIST_OUT}/recovery"
+rm -f "${KERNEL_BAZEL_DIST_OUT}/Image.gz"
 mkdir -p "${KERNEL_BAZEL_DIST_OUT}"
 
 echo "Reference Kernel Build Script"
@@ -78,7 +84,6 @@ echo "GKI Dir: ${GKI_ROOT_DIR}"
 echo "Kernel Dir: ${KERNEL_DIR}"
 echo "Output Dir: ${KERNEL_BAZEL_BUILD_OUT}"
 
-# Generate MODULE.bazel with MGK extension
 # Generate MODULE.bazel with MGK extension (Only if missing to preserve incremental builds)
 if [ ! -f "MODULE.bazel" ]; then
     echo "Generating MODULE.bazel..."
@@ -163,16 +168,15 @@ if [ -d "${MODULES_SEARCH_PATH}" ]; then
     echo "  Searching for modules in: ${MODULES_SEARCH_PATH}"
     
     # Ensure dist dir is writable and executable (Bazel might leave it read-only/non-executable)
-    if [ -d "${DIST_DIR}" ]; then
-        chmod -R u+rwx "${DIST_DIR}"
-    fi
+    chmod -R u+rwx "${DIST_DIR}"
 
     # Define destination directories - keeping strict structure for BoardConfig usage
     SYSTEM_MOD_DIR="${DIST_DIR}/system"
     VENDOR_MOD_DIR="${DIST_DIR}/vendor"
     VENDOR_RAMDISK_MOD_DIR="${DIST_DIR}/vendor_ramdisk"
+    RECOVERY_MOD_DIR="${DIST_DIR}/recovery"
     
-    mkdir -p "${SYSTEM_MOD_DIR}" "${VENDOR_MOD_DIR}" "${VENDOR_RAMDISK_MOD_DIR}"
+    mkdir -p "${SYSTEM_MOD_DIR}" "${VENDOR_MOD_DIR}" "${VENDOR_RAMDISK_MOD_DIR}" "${RECOVERY_MOD_DIR}"
     
     # Track missing modules
     declare -a MISSING_MODULES=()
@@ -215,64 +219,70 @@ if [ -d "${MODULES_SEARCH_PATH}" ]; then
         fi
     }
 
-    # Iterate over modules.load files and copy modules to respective directories
-    # Format: local_file_suffix:destination_dir:description
-    declare -a MODULE_GROUPS=(
-        "system:${SYSTEM_MOD_DIR}:System Modules"
-        "vendor:${VENDOR_MOD_DIR}:Vendor Modules"
-        "vendor_ramdisk:${VENDOR_RAMDISK_MOD_DIR}:Vendor Ramdisk Modules"
-        "recovery:${VENDOR_RAMDISK_MOD_DIR}:Recovery Modules"
-    )
+    # 1. System Modules
+    if [ -f "${SCRIPT_DIR}/modules.load.system" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.system" "${SYSTEM_MOD_DIR}" "System Modules"
+    else
+        echo "    Warning: System module list not found."
+    fi
 
-    for group in "${MODULE_GROUPS[@]}"; do
-        IFS=':' read -r suffix dest_dir desc <<< "$group"
-        load_file="${SCRIPT_DIR}/modules.load.${suffix}"
-        
-        if [ -f "${load_file}" ]; then
-             copy_modules "${load_file}" "${dest_dir}" "${desc}"
-        else
-             echo "    Warning: ${desc} list (${suffix}) not found in ${SCRIPT_DIR}."
-        fi
-    done
+    # 2. Vendor Modules
+    if [ -f "${SCRIPT_DIR}/modules.load.vendor" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules"
+    else
+        echo "    Warning: Vendor module list not found."
+    fi
+
+    if [ -f "${SCRIPT_DIR}/modules.load.vendor_ramdisk" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.vendor_ramdisk" "${VENDOR_RAMDISK_MOD_DIR}" "Vendor Ramdisk Modules"
+    else
+        echo "    Warning: Vendor Ramdisk module list not found."
+    fi
+
+    if [ -f "${SCRIPT_DIR}/modules.load.recovery" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.recovery" "${RECOVERY_MOD_DIR}" "Recovery Modules"
+    else
+        echo "    Warning: Recovery module list not found."
+    fi
 
 else
     echo "Warning: Could not find modules installation directory in dist: ${MODULES_SEARCH_PATH}"
 fi
 
-# Ensure Image.lz4 exists (Moved to end to be part of final artifact check)
+# Ensure Image.gz exists (Moved to end to be part of final artifact check)
 echo ""
 echo "Checking for Kernel Image..."
-# Ensure Image.lz4 exists in DIST_DIR root
+# Ensure Image.gz exists in DIST_DIR root
 echo ""
 echo "Checking for Kernel Image..."
 
-# Try to find Image.lz4 anywhere in dist (it might be in a subdir)
-IMAGE_LZ4_FOUND=$(find "${KERNEL_BAZEL_DIST_OUT}" -name "Image.lz4" -type f | head -1)
+# Try to find Image.gz anywhere in dist (it might be in a subdir)
+IMAGE_gz_FOUND=$(find "${KERNEL_BAZEL_DIST_OUT}" -name "Image.gz" -type f | head -1)
 
-if [ -f "${IMAGE_LZ4_FOUND}" ]; then
-    echo "  Found Image.lz4 at: ${IMAGE_LZ4_FOUND}"
+if [ -f "${IMAGE_gz_FOUND}" ]; then
+    echo "  Found Image.gz at: ${IMAGE_gz_FOUND}"
     # Copy to root of dist if not already there
-    if [ "${IMAGE_LZ4_FOUND}" != "${KERNEL_BAZEL_DIST_OUT}/Image.lz4" ]; then
-        cp "${IMAGE_LZ4_FOUND}" "${KERNEL_BAZEL_DIST_OUT}/Image.lz4"
-        echo "  -> Copied to ${KERNEL_BAZEL_DIST_OUT}/Image.lz4"
+    if [ "${IMAGE_gz_FOUND}" != "${KERNEL_BAZEL_DIST_OUT}/Image.gz" ]; then
+        cp "${IMAGE_gz_FOUND}" "${KERNEL_BAZEL_DIST_OUT}/Image.gz"
+        echo "  -> Copied to ${KERNEL_BAZEL_DIST_OUT}/Image.gz"
     fi
 else
-    # Fallback to compressing Image if Image.lz4 not found anywhere
+    # Fallback to compressing Image if Image.gz not found anywhere
     IMAGE_FOUND=$(find "${KERNEL_BAZEL_DIST_OUT}" -name "Image" -type f | head -1)
     
     if [ -f "${IMAGE_FOUND}" ]; then
-        echo "  Image.lz4 not found, compressing Image from: ${IMAGE_FOUND}..."
-        LZ4_CMD="${GKI_ROOT_DIR}/prebuilts/kernel-build-tools/linux-x86/bin/lz4"
-        [ ! -f "${LZ4_CMD}" ] && LZ4_CMD=$(which lz4 2>/dev/null || echo "")
+        echo "  Image.gz not found, compressing Image from: ${IMAGE_FOUND}..."
+        gz_CMD="${GKI_ROOT_DIR}/prebuilts/kernel-build-tools/linux-x86/bin/gz"
+        [ ! -f "${gz_CMD}" ] && gz_CMD=$(which gz 2>/dev/null || echo "")
 
-        if [ -x "${LZ4_CMD}" ]; then
-            "${LZ4_CMD}" -f "${IMAGE_FOUND}" "${KERNEL_BAZEL_DIST_OUT}/Image.lz4"
-            echo "  -> Created Image.lz4"
+        if [ -x "${gz_CMD}" ]; then
+            "${gz_CMD}" -f "${IMAGE_FOUND}" "${KERNEL_BAZEL_DIST_OUT}/Image.gz"
+            echo "  -> Created Image.gz"
         else
-             echo "  Warning: lz4 tool not found. Image.lz4 output missing!"
+             echo "  Warning: gz tool not found. Image.gz output missing!"
         fi
     else
-        echo "  Warning: neither Image.lz4 nor Image found in dist!"
+        echo "  Warning: neither Image.gz nor Image found in dist!"
     fi
 fi
 
