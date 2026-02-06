@@ -1,14 +1,20 @@
 #!/bin/bash
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-KERNEL_ROOT_DIR="$(readlink -f "${SCRIPT_DIR}/../../..")"
-GKI_ROOT_DIR="${KERNEL_ROOT_DIR}/kernel/motorola"
+LINEAGE_ROOT_DIR="$(readlink -f "${SCRIPT_DIR}/../../..")"
+KERNEL_ROOT_DIR="${LINEAGE_ROOT_DIR}/kernel/motorola"
 
-# Verify GKI Root has build tools
-if [ ! -f "${GKI_ROOT_DIR}/build/kernel/kleaf/bazel.sh" ]; then
-    echo "Error: Could not find Bazel build script at ${GKI_ROOT_DIR}/build/kernel/kleaf/bazel.sh"
-    exit 1
-fi
+cd ${KERNEL_ROOT_DIR}
+
+TARGET_PRODUCT=cybert
+KERNEL_DEFCONFIG="mgk_64_k61_defconfig"
+KERNEL_BUILD_VARIANT=user
+KERNEL_TARGET_ARCH=arm64
+KERNEL_DIR="kernel_device_modules-6.1"
+LINUX_KERNEL_VERSION="kernel-6.1"
+KERNEL_DEFCONFIG_OVERLAYS="mgk_64_k61_defconfig"
+KERNEL_BAZEL_BUILD_OUT="${LINEAGE_ROOT_DIR}/out/target/product/${TARGET_PRODUCT}/obj/KLEAF_OBJ"
+KERNEL_BAZEL_DIST_OUT="${KERNEL_BAZEL_BUILD_OUT}/dist"
 
 # Function to manage build files (enable/disable) to avoid Soong/Make conflicts
 manage_build_files() {
@@ -45,91 +51,94 @@ manage_build_files "enable"
 # Trap to ensure we disable them even if script fails/exits
 trap 'manage_build_files "disable"' EXIT
 
-TARGET_PRODUCT=cybert
-KERNEL_DEFCONFIG="mgk_64_k61_defconfig"
-KERNEL_BUILD_VARIANT=user
-KERNEL_TARGET_ARCH=arm64
-
-# Switch to GKI Root for build
-cd "${GKI_ROOT_DIR}"
-echo "Switched to GKI Root: ${PWD}"
-
-# Kernel source relative to GKI root
-KERNEL_DIR="kernel_device_modules-6.1"
-LINUX_KERNEL_VERSION="kernel-6.1"
-KERNEL_DEFCONFIG_OVERLAYS="mgk_64_k61_defconfig"
-
-# Symlinking common if not present in GKI root (it usually is, but just in case)
-if [ ! -L "common" ] && [ ! -d "common" ]; then
-    echo "Symlinking common -> ${LINUX_KERNEL_VERSION}..."
-    ln -s "${LINUX_KERNEL_VERSION}" "common"
+# Clear DIST_DIR to ensure a clean build
+if [ -d "${KERNEL_BAZEL_DIST_OUT}" ]; then
+    echo "Cleaning DIST_DIR: ${KERNEL_BAZEL_DIST_OUT}"
+    rm -rf "${KERNEL_BAZEL_DIST_OUT:?}"/*
 fi
 
-# New output directory (Absolute path)
-KERNEL_BAZEL_BUILD_OUT="${KERNEL_ROOT_DIR}/out/target/product/${TARGET_PRODUCT}/KERNEL_OBJ"
-# Clean up specific artifacts to enable delta builds
-KERNEL_BAZEL_DIST_OUT=${KERNEL_BAZEL_BUILD_OUT}/dist
-echo "Cleaning old artifacts..."
-rm -rf "${KERNEL_BAZEL_DIST_OUT}/dtbs"
-rm -rf "${KERNEL_BAZEL_DIST_OUT}/system"
-rm -rf "${KERNEL_BAZEL_DIST_OUT}/vendor"
-rm -rf "${KERNEL_BAZEL_DIST_OUT}/vendor_ramdisk"
-rm -rf "${KERNEL_BAZEL_DIST_OUT}/recovery"
-rm -f "${KERNEL_BAZEL_DIST_OUT}/Image.gz"
-mkdir -p "${KERNEL_BAZEL_DIST_OUT}"
-
-echo "Reference Kernel Build Script"
-echo "Root Dir: ${KERNEL_ROOT_DIR}"
-echo "GKI Dir: ${GKI_ROOT_DIR}"
-echo "Kernel Dir: ${KERNEL_DIR}"
-echo "Output Dir: ${KERNEL_BAZEL_BUILD_OUT}"
-
-# Generate MODULE.bazel with MGK extension (Only if missing to preserve incremental builds)
-if [ ! -f "MODULE.bazel" ]; then
-    echo "Generating MODULE.bazel..."
-    cat "${GKI_ROOT_DIR}/build/kernel/kleaf/bzlmod/bazel.MODULE.bazel" > MODULE.bazel
-    cat >> MODULE.bazel << 'EOF'
-
-# MGK extension for Motorola kernel builds
-mgk_ext = use_extension("//build/bazel_mgk_rules:mgk_ext.bzl", "mgk_ext")
-use_repo(mgk_ext, "mgk_info")
-use_repo(mgk_ext, "mgk_internal")
-use_repo(mgk_ext, "mgk_ko")
-EOF
-else
-    echo "MODULE.bazel exists, skipping generation."
+# Disable Bzlmod as we are missing mgk_ext.bzl
+if [ -f "MODULE.bazel" ]; then
+    echo "Disabling MODULE.bazel (Bzlmod) as mgk_ext is missing..."
+    mv MODULE.bazel MODULE.bazel.disabled
+fi
+if [ -f "WORKSPACE.bzlmod" ]; then
+    rm -f WORKSPACE.bzlmod
 fi
 
-if [ ! -f "WORKSPACE.bzlmod" ]; then
-    touch WORKSPACE.bzlmod
-fi
+# Create WORKSPACE with legacy definitions
 if [ ! -L "WORKSPACE" ] && [ ! -f "WORKSPACE" ]; then
-    touch WORKSPACE
+    echo "Creating WORKSPACE..."
+    cat > WORKSPACE << 'EOF'
+load("//build/kernel/kleaf:workspace.bzl", "define_kleaf_workspace")
+load("//build/bazel_mgk_rules:kleaf/key_value_repo.bzl", "key_value_repo")
+
+key_value_repo(
+    name = "mgk_info",
+)
+
+load("@mgk_info//:dict.bzl","KERNEL_VERSION")
+define_kleaf_workspace(common_kernel_package = "@//"+KERNEL_VERSION)
+
+load("//build/kernel/kleaf:workspace_epilog.bzl", "define_kleaf_workspace_epilog")
+define_kleaf_workspace_epilog()
+
+new_local_repository(
+    name="mgk_internal",
+    path="vendor/mediatek",
+    build_file = "//build/bazel_mgk_rules:kleaf/BUILD.internal"
+)
+
+new_local_repository(
+    name="mgk_ko",
+    path="vendor/mediatek/kernel_modules",
+    build_file = "//build/bazel_mgk_rules:kleaf/BUILD.ko"
+)
+EOF
 fi
 
-export BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1 DEFCONFIG_OVERLAYS="../../arch/arm64/configs/ext_config/moto-mgk_64_k61-cybert.config" KERNEL_VERSION=kernel-6.1 JAVA_HOME="${GKI_ROOT_DIR}/prebuilts/jdk/jdk11/linux-x86" PATH="${GKI_ROOT_DIR}/prebuilts/jdk/jdk11/linux-x86/bin:${PATH}"
+export BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1 DEFCONFIG_OVERLAYS="../../arch/arm64/configs/ext_config/moto-mgk_64_k61-cybert.config" KERNEL_VERSION=kernel-6.1 SOURCE_DATE_EPOCH=0 JAVA_HOME="${KERNEL_ROOT_DIR}/prebuilts/jdk/jdk11/linux-x86" PATH="${KERNEL_ROOT_DIR}/prebuilts/jdk/jdk11/linux-x86/bin:${PATH}"
 
-PRIVATE_BAZEL_BUILD_FLAG="--experimental_writable_outputs --noincompatible_disallow_empty_glob --repo_manifest=${GKI_ROOT_DIR}/${KERNEL_DIR}/fake_manifest.xml"
+PRIVATE_BAZEL_BUILD_FLAG="--//build/bazel_mgk_rules:kernel_version=${LINUX_KERNEL_VERSION#kernel-} --experimental_writable_outputs --noenable_bzlmod --config=stamp --lto=default --repo_manifest=${KERNEL_ROOT_DIR}/${KERNEL_DIR}/fake_manifest.xml"
 
-PRIVATE_BAZEL_DIST_GOAL="//${KERNEL_DIR}:mgk_64_k61_customer_dist.${KERNEL_BUILD_VARIANT}"
+my_kernel_target=${KERNEL_DEFCONFIG%_defconfig}
+
+PRIVATE_BAZEL_BUILD_GOAL="//${KERNEL_DIR#kernel/}:${my_kernel_target}_customer_modules_install.${KERNEL_BUILD_VARIANT}"
+
+PRIVATE_BAZEL_DIST_GOAL="//${KERNEL_DIR#kernel/}:${my_kernel_target}_customer_dist.${KERNEL_BUILD_VARIANT}"
 
 # Run Bazel build
+build/kernel/kleaf/bazel.sh --output_root=${KERNEL_BAZEL_BUILD_OUT} --output_base=${KERNEL_BAZEL_BUILD_OUT}/bazel/output_user_root/output_base build ${PRIVATE_BAZEL_BUILD_FLAG} ${PRIVATE_BAZEL_BUILD_GOAL}
+
 build/kernel/kleaf/bazel.sh --output_root=${KERNEL_BAZEL_BUILD_OUT} --output_base=${KERNEL_BAZEL_BUILD_OUT}/bazel/output_user_root/output_base run ${PRIVATE_BAZEL_BUILD_FLAG} --nokmi_symbol_list_violations_check ${PRIVATE_BAZEL_DIST_GOAL} -- --dist_dir=${KERNEL_BAZEL_DIST_OUT}
+
+build/kernel/kleaf/bazel.sh --output_root=${KERNEL_BAZEL_BUILD_OUT} --output_base=${KERNEL_BAZEL_BUILD_OUT}/bazel/output_user_root/output_base run ${PRIVATE_BAZEL_BUILD_FLAG} //${LINUX_KERNEL_VERSION}:kernel_aarch64_abi_dist -- --dist_dir=${KERNEL_BAZEL_DIST_OUT}/abi
+
+# Copy Image.gz to DIST_DIR
+# The kernel image is located deep in the dist directory structure by the Bazel build rules
+IMAGE_GZ_SRC="${KERNEL_BAZEL_DIST_OUT}/${KERNEL_DIR}/mgk_64_k61_kernel_aarch64.user/Image.gz"
+if [ -f "${IMAGE_GZ_SRC}" ]; then
+    echo "Copying Image.gz to dist root..."
+    cp "${IMAGE_GZ_SRC}" "${KERNEL_BAZEL_DIST_OUT}/"
+else
+    echo "Warning: Image.gz not found at ${IMAGE_GZ_SRC}"
+fi
 
 # Build DTBs for cybert (mt6897) from device modules sources
 echo "Building DTBs for ${TARGET_PRODUCT}..."
 mkdir -p ${KERNEL_BAZEL_DIST_OUT}/dtbs
 
-# Set up paths - relative to PWD (GKI_ROOT_DIR)
-DTS_DIR="${PWD}/${KERNEL_DIR}/arch/${KERNEL_TARGET_ARCH}/boot/dts/mediatek"
-CLANG="${GKI_ROOT_DIR}/prebuilts/clang/host/linux-x86/clang-r547379/bin/clang"
-# DTC path is in the bazel-out which is in output_root
-DTC="${KERNEL_BAZEL_BUILD_OUT}/bazel/output_user_root/output_base/execroot/_main/bazel-out/k8-fastbuild/bin/${KERNEL_DIR}/mgk_64_k61.${KERNEL_BUILD_VARIANT}/scripts/dtc/dtc"
+# Set up paths
+DTS_DIR="${KERNEL_ROOT_DIR}/${KERNEL_DIR}/arch/${KERNEL_TARGET_ARCH}/boot/dts/mediatek"
+CLANG="${KERNEL_ROOT_DIR}/prebuilts/clang/host/linux-x86/clang-r487747c/bin/clang"
+DTC="${KERNEL_BAZEL_DIST_OUT}/bazel/output_user_root/output_base/execroot/_main/bazel-out/k8-fastbuild/bin/${KERNEL_DIR}/mgk_64_k61.${KERNEL_BUILD_VARIANT}/scripts/dtc/dtc"
 
 # Include paths for DTS preprocessing
-DTC_INCLUDES="-I${PWD}/${KERNEL_DIR}/include \
-    -I${PWD}/common/include \
-    -I${PWD}/${KERNEL_DIR}/arch/${KERNEL_TARGET_ARCH}/boot/dts \
+# CRITICAL FIX: Device modules include path must come BEFORE kernel include path
+# to pick up the correct header definitions (e.g. mtk-memory-port.h with MTK_M4U_PORT_ID macro)
+DTC_INCLUDES="-I${KERNEL_ROOT_DIR}/${KERNEL_DIR}/include \
+    -I${KERNEL_ROOT_DIR}/${LINUX_KERNEL_VERSION}/include \
+    -I${KERNEL_ROOT_DIR}/${KERNEL_DIR}/arch/${KERNEL_TARGET_ARCH}/boot/dts \
     -I${DTS_DIR}"
 
 # Check if DTC exists (use system dtc as fallback)
@@ -137,16 +146,19 @@ if [ ! -f "${DTC}" ]; then
     DTC=$(which dtc 2>/dev/null || echo "")
     if [ -z "${DTC}" ]; then
         echo "Warning: dtc not found, skipping DTB build"
+        echo "Build complete! Outputs in: ${KERNEL_BAZEL_DIST_OUT}"
+        exit 0
     fi
 fi
 
 # Build base DTB: mt6897.dtb
 if [ -f "${DTS_DIR}/mt6897.dts" ]; then
     echo "  Building mt6897.dtb..."
+    # Using -nostdinc to ensure we use only our explicit include paths in correct order
     ${CLANG} -E -nostdinc -undef -D__DTS__ -x assembler-with-cpp ${DTC_INCLUDES} \
-        -o /tmp/mt6897.dts.preprocessed "${DTS_DIR}/mt6897.dts" 2>/dev/null && \
+        -o /tmp/mt6897.dts.preprocessed "${DTS_DIR}/mt6897.dts" && \
     ${DTC} -@ -I dts -O dtb -o "${KERNEL_BAZEL_DIST_OUT}/dtbs/mt6897.dtb" \
-        /tmp/mt6897.dts.preprocessed 2>/dev/null && echo "    -> mt6897.dtb OK" || echo "    -> Failed"
+        /tmp/mt6897.dts.preprocessed && echo "    -> mt6897.dtb OK" || echo "    -> Failed"
 fi
 
 # Clean up temp files
@@ -157,35 +169,39 @@ echo ""
 echo "DTBs built:"
 ls -la ${KERNEL_BAZEL_DIST_OUT}/dtbs/*.dtb* 2>/dev/null || echo "  (none)"
 
-
 # --- Module Organization ---
 echo ""
 echo "Organizing modules..."
+
 DIST_DIR="${KERNEL_BAZEL_DIST_OUT}"
-MODULES_SEARCH_PATH="${DIST_DIR}"
 
-if [ -d "${MODULES_SEARCH_PATH}" ]; then
-    echo "  Searching for modules in: ${MODULES_SEARCH_PATH}"
+# Search paths
+# System modules (GKI) are in the abi folder
+SYSTEM_MODULES_SEARCH_PATH="${DIST_DIR}/abi"
+# Vendor modules are in the device modules install directory
+VENDOR_MODULES_SEARCH_PATH="${DIST_DIR}/kernel_device_modules-6.1/mgk_64_k61_customer_modules_install.user"
+# Fallback path for vendor modules
+VENDOR_MODULES_FALLBACK_PATH="${DIST_DIR}/kernel_device_modules-6.1/mgk_64_k61.user"
+
+if [ -d "${VENDOR_MODULES_SEARCH_PATH}" ]; then
+    echo "  System modules path: ${SYSTEM_MODULES_SEARCH_PATH}"
+    echo "  Vendor modules path: ${VENDOR_MODULES_SEARCH_PATH}"
+    echo "  Vendor fallback path: ${VENDOR_MODULES_FALLBACK_PATH}"
     
-    # Ensure dist dir is writable and executable (Bazel might leave it read-only/non-executable)
-    chmod -R u+rwx "${DIST_DIR}"
-
-    # Define destination directories - keeping strict structure for BoardConfig usage
+    # Define destination directories
     SYSTEM_MOD_DIR="${DIST_DIR}/system"
     VENDOR_MOD_DIR="${DIST_DIR}/vendor"
     VENDOR_RAMDISK_MOD_DIR="${DIST_DIR}/vendor_ramdisk"
-    RECOVERY_MOD_DIR="${DIST_DIR}/recovery"
     
-    mkdir -p "${SYSTEM_MOD_DIR}" "${VENDOR_MOD_DIR}" "${VENDOR_RAMDISK_MOD_DIR}" "${RECOVERY_MOD_DIR}"
+    mkdir -p "${SYSTEM_MOD_DIR}" "${VENDOR_MOD_DIR}" "${VENDOR_RAMDISK_MOD_DIR}"
     
-    # Track missing modules
-    declare -a MISSING_MODULES=()
-
     # Helper function to copy modules from list
     copy_modules() {
         local list_file="$1"
         local dest_dir="$2"
         local label="$3"
+        local search_path="$4"
+        local fallback_path="$5"
         
         if [ -f "${list_file}" ]; then
             echo "  Processing ${label} from $(basename ${list_file})..."
@@ -199,102 +215,64 @@ if [ -d "${MODULES_SEARCH_PATH}" ]; then
                 local mod_name=$(basename "$module")
                 # Find the module recursively in the search path
                 # Use head -1 to pick the first match if duplicates exist (usually identical)
-                local src_path=$(find "${MODULES_SEARCH_PATH}" -name "${mod_name}" 2>/dev/null | head -1)
+                local src_path=$(find "${search_path}" -name "${mod_name}" 2>/dev/null | head -1)
                 
+                if [ -z "${src_path}" ] && [ -n "${fallback_path}" ]; then
+                     src_path=$(find "${fallback_path}" -name "${mod_name}" 2>/dev/null | head -1)
+                     if [ -n "${src_path}" ]; then
+                         echo "    Found in fallback: ${mod_name}"
+                     fi
+                fi
+
                 if [ -n "${src_path}" ]; then
-                    # Check if we are trying to copy the file to itself
-                    if [ "${src_path}" != "${dest_dir}/${mod_name}" ]; then
-                        cp -f "${src_path}" "${dest_dir}/"
-                    else
-                        echo "    Info: Skipping copy, source and dest are same: ${mod_name}"
-                    fi
+                    cp -f "${src_path}" "${dest_dir}/"
                 else
-                    echo "    Warning: Module ${mod_name} not found in build output"
-                    MISSING_MODULES+=("${mod_name} (${label})")
+                    echo "    Warning: Module ${mod_name} not found in ${search_path} (or fallback if provided)"
                 fi
             done < "${list_file}"
             echo "    -> Copied to ${dest_dir}"
         else
-            echo "  Warning: Module list not found: ${list_file}"
+            echo "  Skipping ${label}: List file not found: ${list_file}"
         fi
     }
 
-    # 1. System Modules
-    if [ -f "${SCRIPT_DIR}/modules.load.system" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.system" "${SYSTEM_MOD_DIR}" "System Modules"
-    else
-        echo "    Warning: System module list not found."
-    fi
-
-    # 2. Vendor Modules
-    if [ -f "${SCRIPT_DIR}/modules.load.vendor" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules"
-    else
-        echo "    Warning: Vendor module list not found."
-    fi
-
-    if [ -f "${SCRIPT_DIR}/modules.load.vendor_ramdisk" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.vendor_ramdisk" "${VENDOR_RAMDISK_MOD_DIR}" "Vendor Ramdisk Modules"
-    else
-        echo "    Warning: Vendor Ramdisk module list not found."
-    fi
-
-    if [ -f "${SCRIPT_DIR}/modules.load.recovery" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.recovery" "${RECOVERY_MOD_DIR}" "Recovery Modules"
-    else
-        echo "    Warning: Recovery module list not found."
-    fi
-
-else
-    echo "Warning: Could not find modules installation directory in dist: ${MODULES_SEARCH_PATH}"
-fi
-
-# Ensure Image.gz exists (Moved to end to be part of final artifact check)
-echo ""
-echo "Checking for Kernel Image..."
-# Ensure Image.gz exists in DIST_DIR root
-echo ""
-echo "Checking for Kernel Image..."
-
-# Try to find Image.gz anywhere in dist (it might be in a subdir)
-IMAGE_gz_FOUND=$(find "${KERNEL_BAZEL_DIST_OUT}" -name "Image.gz" -type f | head -1)
-
-if [ -f "${IMAGE_gz_FOUND}" ]; then
-    echo "  Found Image.gz at: ${IMAGE_gz_FOUND}"
-    # Copy to root of dist if not already there
-    if [ "${IMAGE_gz_FOUND}" != "${KERNEL_BAZEL_DIST_OUT}/Image.gz" ]; then
-        cp "${IMAGE_gz_FOUND}" "${KERNEL_BAZEL_DIST_OUT}/Image.gz"
-        echo "  -> Copied to ${KERNEL_BAZEL_DIST_OUT}/Image.gz"
-    fi
-else
-    # Fallback to compressing Image if Image.gz not found anywhere
-    IMAGE_FOUND=$(find "${KERNEL_BAZEL_DIST_OUT}" -name "Image" -type f | head -1)
+    # 1. System Modules (No fallback)
+    copy_modules "${SCRIPT_DIR}/modules.load.system" "${SYSTEM_MOD_DIR}" "System Modules" "${SYSTEM_MODULES_SEARCH_PATH}"
     
-    if [ -f "${IMAGE_FOUND}" ]; then
-        echo "  Image.gz not found, compressing Image from: ${IMAGE_FOUND}..."
-        gz_CMD="${GKI_ROOT_DIR}/prebuilts/kernel-build-tools/linux-x86/bin/gz"
-        [ ! -f "${gz_CMD}" ] && gz_CMD=$(which gz 2>/dev/null || echo "")
-
-        if [ -x "${gz_CMD}" ]; then
-            "${gz_CMD}" -f "${IMAGE_FOUND}" "${KERNEL_BAZEL_DIST_OUT}/Image.gz"
-            echo "  -> Created Image.gz"
-        else
-             echo "  Warning: gz tool not found. Image.gz output missing!"
-        fi
-    else
-        echo "  Warning: neither Image.gz nor Image found in dist!"
+    # 2. Vendor Modules (With fallback)
+    # Check for modules.load.vendor OR modules.recovery.vendor as user hinted variability
+    if [ -f "${SCRIPT_DIR}/modules.load.vendor" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
+    elif [ -f "${SCRIPT_DIR}/modules.recovery.vendor" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.recovery.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
     fi
+
+    # Manually copy specific modules requested by user to Vendor Modules
+    # These were moved from recovery but need to be in vendor directory
+    CUSTOM_VENDOR_INCLUDES_LIST="/tmp/custom_vendor_includes.list"
+    cat > "${CUSTOM_VENDOR_INCLUDES_LIST}" <<EOF
+mmi_info.ko
+mmi_relay.ko
+sensors_class.ko
+touchscreen_u_mmi.ko
+focaltech_touch_v3_u_mmi.ko
+EOF
+    copy_modules "${CUSTOM_VENDOR_INCLUDES_LIST}" "${VENDOR_MOD_DIR}" "Custom Vendor Includes" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
+    rm -f "${CUSTOM_VENDOR_INCLUDES_LIST}"
+
+    # 3. Vendor Ramdisk Modules (With fallback)
+    if [ -f "${SCRIPT_DIR}/modules.load.vendor_ramdisk" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.vendor_ramdisk" "${VENDOR_RAMDISK_MOD_DIR}" "Vendor Ramdisk Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
+    fi
+    # Recovery modules generally go to vendor_ramdisk in generic setups, or separate recovery ramdisk.
+    # User requested: "recovery goes in vendor_ramdisk"
+    if [ -f "${SCRIPT_DIR}/modules.load.recovery" ]; then
+        copy_modules "${SCRIPT_DIR}/modules.load.recovery" "${VENDOR_RAMDISK_MOD_DIR}" "Recovery Modules (to vendor_ramdisk)" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
+    fi
+
+else
+    echo "Warning: Could not find modules installation directory in dist: ${VENDOR_MODULES_SEARCH_PATH}"
 fi
 
 echo ""
-if [ ${#MISSING_MODULES[@]} -ne 0 ]; then
-    echo "========================================================"
-    echo "WARNING: The following modules were NOT found in the build output:"
-    for mod in "${MISSING_MODULES[@]}"; do
-        echo "  - ${mod}"
-    done
-    echo "========================================================"
-fi
-echo ""
-
 echo "Build complete! Outputs in: ${KERNEL_BAZEL_DIST_OUT}"
