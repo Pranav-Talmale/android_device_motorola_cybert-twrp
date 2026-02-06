@@ -207,8 +207,3 @@ mcupm.ko
 clk-disable-unused.ko
 mtk-pm-domain-disable-unused.ko
 mtk-mmdvfs-v3-start.ko
-mmi_info.ko
-mmi_relay.ko
-sensors_class.ko
-touchscreen_u_mmi.ko
-focaltech_touch_v3_u_mmi.ko
