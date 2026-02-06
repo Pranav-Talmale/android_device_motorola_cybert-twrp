@@ -21,22 +21,22 @@ manage_build_files() {
     local action=$1
     echo "Managing build files in kernel/motorola: ${action}"
     
-    local dirs=("prebuilts" "build" "system" "external" "motorola")
+    local dirs=("prebuilts" "build" "system" "external" "motorola", "kernel", "tools")
     local files=("Android.bp" "Android.mk")
     
     for d in "${dirs[@]}"; do
-        if [ -d "${GKI_ROOT_DIR}/${d}" ]; then
+        if [ -d "${KERNEL_ROOT_DIR}/${d}" ]; then
             if [ "${action}" == "disable" ]; then
                 # Disable files
                 for f in "${files[@]}"; do
-                    find "${GKI_ROOT_DIR}/${d}" -name "${f}" -type f | while read file; do
+                    find "${KERNEL_ROOT_DIR}/${d}" -name "${f}" -type f | while read file; do
                         mv "${file}" "${file}.disabled"
                     done
                 done
             elif [ "${action}" == "enable" ]; then
                 # Enable files
                 for f in "${files[@]}"; do
-                    find "${GKI_ROOT_DIR}/${d}" -name "${f}.disabled" -type f | while read file; do
+                    find "${KERNEL_ROOT_DIR}/${d}" -name "${f}.disabled" -type f | while read file; do
                         mv "${file}" "${file%.disabled}"
                     done
                 done
