@@ -237,38 +237,13 @@ if [ -d "${VENDOR_MODULES_SEARCH_PATH}" ]; then
     }
 
     # 1. System Modules (No fallback)
-    copy_modules "${SCRIPT_DIR}/modules.load.system" "${SYSTEM_MOD_DIR}" "System Modules" "${SYSTEM_MODULES_SEARCH_PATH}"
+    copy_modules "${SCRIPT_DIR}/bazel/modules.copy.system" "${SYSTEM_MOD_DIR}" "System Modules" "${SYSTEM_MODULES_SEARCH_PATH}"
     
     # 2. Vendor Modules (With fallback)
-    # Check for modules.load.vendor OR modules.recovery.vendor as user hinted variability
-    if [ -f "${SCRIPT_DIR}/modules.load.vendor" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
-    elif [ -f "${SCRIPT_DIR}/modules.recovery.vendor" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.recovery.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
-    fi
-
-    # Manually copy specific modules requested by user to Vendor Modules
-    # These were moved from recovery but need to be in vendor directory
-    CUSTOM_VENDOR_INCLUDES_LIST="/tmp/custom_vendor_includes.list"
-    cat > "${CUSTOM_VENDOR_INCLUDES_LIST}" <<EOF
-mmi_info.ko
-mmi_relay.ko
-sensors_class.ko
-touchscreen_u_mmi.ko
-focaltech_touch_v3_u_mmi.ko
-EOF
-    copy_modules "${CUSTOM_VENDOR_INCLUDES_LIST}" "${VENDOR_MOD_DIR}" "Custom Vendor Includes" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
-    rm -f "${CUSTOM_VENDOR_INCLUDES_LIST}"
+    copy_modules "${SCRIPT_DIR}/bazel/modules.copy.vendor" "${VENDOR_MOD_DIR}" "Vendor Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
 
     # 3. Vendor Ramdisk Modules (With fallback)
-    if [ -f "${SCRIPT_DIR}/modules.load.vendor_ramdisk" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.vendor_ramdisk" "${VENDOR_RAMDISK_MOD_DIR}" "Vendor Ramdisk Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
-    fi
-    # Recovery modules generally go to vendor_ramdisk in generic setups, or separate recovery ramdisk.
-    # User requested: "recovery goes in vendor_ramdisk"
-    if [ -f "${SCRIPT_DIR}/modules.load.recovery" ]; then
-        copy_modules "${SCRIPT_DIR}/modules.load.recovery" "${VENDOR_RAMDISK_MOD_DIR}" "Recovery Modules (to vendor_ramdisk)" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
-    fi
+    copy_modules "${SCRIPT_DIR}/bazel/modules.copy.vendor_ramdisk" "${VENDOR_RAMDISK_MOD_DIR}" "Vendor Ramdisk Modules" "${VENDOR_MODULES_SEARCH_PATH}" "${VENDOR_MODULES_FALLBACK_PATH}"
 
 else
     echo "Warning: Could not find modules installation directory in dist: ${VENDOR_MODULES_SEARCH_PATH}"
