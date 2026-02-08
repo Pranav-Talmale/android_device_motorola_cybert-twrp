@@ -19,3 +19,5 @@ hal_client_domain(hal_fingerprint_default, hal_health)
 r_dir_file(hal_fingerprint_default, sysfs_batteryinfo)
 allow hal_fingerprint_default sysfs_fingerprint:file rw_file_perms;
 add_service(hal_fingerprint_default, hal_fingerprint_test_service)
+allow hal_fingerprint_default sysfs_leds:file rw_file_perms;
+allow hal_fingerprint_default sysfs_hbm:file rw_file_perms;

@@ -10,12 +10,13 @@
 
 #include <android-base/logging.h>
 #include <fcntl.h>
+#include <thread>
 #include <unistd.h>
 
-#define BACKLIGHT_PATH "/sys/class/leds/lcd-backlight/brightness"
+#define BACKLIGHT_PATH "/sys/class/leds/lcd-backlight/hbm_mode"
 
-#define HBM_ON_MAGIC_VALUE  "4294967294"
-#define HBM_OFF_MAGIC_VALUE "4294967293"
+#define HBM_ON_MAGIC_VALUE  "1"
+#define HBM_OFF_MAGIC_VALUE "0"
 
 class CybertUdfpsHandler : public UdfpsHandler {
 public:
@@ -35,11 +36,9 @@ public:
         setHbm(false);
     }
 
-    void onAcquired(int32_t result, int32_t /* vendorCode */) override {
-        // Optional: turn off HBM only on GOOD
-        if (result == FINGERPRINT_ACQUIRED_GOOD) {
-            setHbm(false);
-        }
+    void onAcquired(int32_t /* result */, int32_t /* vendorCode */) override {
+        // Turn off HBM on any acquired result to prevent stuck HBM
+        setHbm(false);
     }
 
     void cancel() override {
@@ -49,21 +48,45 @@ public:
 
 private:
     fingerprint_device_t* mDevice = nullptr;
+    std::atomic<int> mTimeoutToken{0};
 
     void setHbm(bool enable) {
         const char* value = enable ? HBM_ON_MAGIC_VALUE : HBM_OFF_MAGIC_VALUE;
 
+        LOG(INFO) << "setHbm: " << (enable ? "ON" : "OFF") << " value=" << value;
+
         int fd = open(BACKLIGHT_PATH, O_WRONLY | O_CLOEXEC);
         if (fd < 0) {
-            LOG(ERROR) << "Failed to open backlight path";
+            LOG(ERROR) << "Failed to open backlight path: " << strerror(errno);
             return;
         }
 
-        if (write(fd, value, strlen(value)) < 0) {
-            LOG(ERROR) << "Failed to write HBM value";
+        ssize_t written = write(fd, value, strlen(value));
+        if (written < 0) {
+            LOG(ERROR) << "Failed to write HBM value: " << strerror(errno);
+        } else {
+             LOG(INFO) << "Successfully wrote " << written << " bytes to backlight";
         }
 
         close(fd);
+
+        /* 
+         * Safety Timeout with Cancellation Token:
+         * Prevents stuck HBM if onFingerUp is never called.
+         * Token ensures old timeouts don't fire after new finger down events.
+         */
+        if (enable) {
+            int currentToken = ++mTimeoutToken;
+            std::thread([this, currentToken]() {
+                usleep(600000); // 600ms
+                if (mTimeoutToken.load() == currentToken) {
+                    LOG(INFO) << "Safety Timeout: Forcing HBM OFF";
+                    this->setHbm(false);
+                }
+            }).detach();
+        } else {
+            mTimeoutToken++; // Invalidate any pending timeout
+        }
     }
 };
 

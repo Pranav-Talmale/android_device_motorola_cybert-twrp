@@ -1,5 +1,6 @@
 # Backlight
 /sys/devices/platform/soc/soc:mtk-leds/leds/lcd-backlight(/.*)?                        u:object_r:sysfs_leds:s0
+/sys/devices/platform/soc/soc:mtk-leds/leds/lcd-backlight/hbm_mode                      u:object_r:sysfs_hbm:s0
 
 # Camera
 /data/vendor/misc/imager(/.*)?                                                         u:object_r:vendor_imager_data_file:s0
