@@ -21,7 +21,7 @@ manage_build_files() {
     local action=$1
     echo "Managing build files in kernel/motorola: ${action}"
     
-    local dirs=("prebuilts" "build" "system" "external" "motorola", "kernel", "tools")
+    local dirs=("prebuilts" "build" "system" "external" "motorola" "kernel" "tools")
     local files=("Android.bp" "Android.mk")
     
     for d in "${dirs[@]}"; do
