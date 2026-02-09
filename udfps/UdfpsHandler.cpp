@@ -9,7 +9,7 @@
 #include <dlfcn.h>
 #include <log/log.h>
 
-#define UDFPS_HANDLER_LIB_NAME "libudfpshandler.so"
+#define UDFPS_HANDLER_LIB_NAME "/system/lib64/libudfpshandler.so"
 #define UDFPS_HANDLER_FACTORY_SYMBOL "UDFPS_HANDLER_FACTORY"
 
 extern "C" UdfpsHandlerFactory* getUdfpsHandlerFactory() {

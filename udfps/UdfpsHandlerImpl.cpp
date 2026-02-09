@@ -36,9 +36,11 @@ public:
         setHbm(false);
     }
 
-    void onAcquired(int32_t /* result */, int32_t /* vendorCode */) override {
-        // Turn off HBM on any acquired result to prevent stuck HBM
-        setHbm(false);
+    void onAcquired(int32_t result, int32_t vendorCode) override {
+        // Do NOT turn off HBM here - this fires DURING capture, not after!
+        // Turning off HBM here interrupts the optical sensor mid-capture.
+        // The framework will call onFingerUp when the capture session ends.
+        LOG(DEBUG) << "onAcquired: result=" << result << " vendorCode=" << vendorCode;
     }
 
     void cancel() override {
@@ -49,11 +51,17 @@ public:
 private:
     fingerprint_device_t* mDevice = nullptr;
     std::atomic<int> mTimeoutToken{0};
+    std::atomic<bool> mHbmActive{false};
 
     void setHbm(bool enable) {
-        const char* value = enable ? HBM_ON_MAGIC_VALUE : HBM_OFF_MAGIC_VALUE;
+        // Skip redundant state changes
+        if (mHbmActive.load() == enable) {
+            LOG(DEBUG) << "setHbm: Already " << (enable ? "ON" : "OFF") << ", skipping";
+            return;
+        }
 
-        LOG(INFO) << "setHbm: " << (enable ? "ON" : "OFF") << " value=" << value;
+        const char* value = enable ? HBM_ON_MAGIC_VALUE : HBM_OFF_MAGIC_VALUE;
+        LOG(INFO) << "setHbm: " << (enable ? "ON" : "OFF");
 
         int fd = open(BACKLIGHT_PATH, O_WRONLY | O_CLOEXEC);
         if (fd < 0) {
@@ -65,7 +73,8 @@ private:
         if (written < 0) {
             LOG(ERROR) << "Failed to write HBM value: " << strerror(errno);
         } else {
-             LOG(INFO) << "Successfully wrote " << written << " bytes to backlight";
+            mHbmActive.store(enable);
+            LOG(INFO) << "HBM " << (enable ? "enabled" : "disabled") << " successfully";
         }
 
         close(fd);
@@ -74,12 +83,13 @@ private:
          * Safety Timeout with Cancellation Token:
          * Prevents stuck HBM if onFingerUp is never called.
          * Token ensures old timeouts don't fire after new finger down events.
+         * 800ms allows sufficient time for enrollment captures.
          */
         if (enable) {
             int currentToken = ++mTimeoutToken;
             std::thread([this, currentToken]() {
-                usleep(600000); // 600ms
-                if (mTimeoutToken.load() == currentToken) {
+                usleep(400000); // 400ms - Reduced to minimize white patch persistence
+                if (mTimeoutToken.load() == currentToken && mHbmActive.load()) {
                     LOG(INFO) << "Safety Timeout: Forcing HBM OFF";
                     this->setHbm(false);
                 }
