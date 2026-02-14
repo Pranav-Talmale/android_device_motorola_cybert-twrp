@@ -143,6 +143,10 @@ blob_fixups: blob_fixups_user_type = {
 
     'vendor/lib64/libtpa.so': blob_fixup()
         .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
+
+    ('vendor/bin/hw/vendor.mediatek.hardware.mtkpower-service.mediatek',
+     'vendor/lib64/android.hardware.power-service-mediatek.so'): blob_fixup()
+        .replace_needed('android.hardware.power-service-mediatek.so', 'android.hardware.power-service-mediatek.cybert.so'),
 }
 
 module = ExtractUtilsModule(
