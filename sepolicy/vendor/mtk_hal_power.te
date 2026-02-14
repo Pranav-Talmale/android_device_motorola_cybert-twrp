@@ -1,1 +1,9 @@
 get_prop(mtk_hal_power, boot_status_prop)
+add_service(mtk_hal_power, mtk_hal_power_service)
+
+# Proc and Property
+allow mtk_hal_power proc:file { ioctl open read };
+dontaudit mtk_hal_power vendor_default_prop:property_service set;
+
+
+get_prop(mtk_hal_power, vendor_default_prop)

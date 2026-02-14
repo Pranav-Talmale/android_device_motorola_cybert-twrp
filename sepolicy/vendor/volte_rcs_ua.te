@@ -1,0 +1,4 @@
+binder_use(volte_rcs_ua)
+binder_call(volte_rcs_ua, servicemanager)
+get_prop(volte_rcs_ua, radio_control_prop)
+

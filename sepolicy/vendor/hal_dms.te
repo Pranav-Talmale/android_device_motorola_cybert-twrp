@@ -7,6 +7,12 @@ init_daemon_domain(hal_dms_default)
 hwbinder_use(hal_dms_default)
 get_prop(hal_dms_default, hwservicemanager_prop)
 allow hal_dms_default hidl_base_hwservice:hwservice_manager add;
+allow hal_dms_default servicemanager:binder { call transfer };
+
+# Dolby service binder and heap access
+vndbinder_use(hal_dms_default)
+hal_client_domain(hal_dms_default, hal_codec2)
+allow hal_dms_default dmabuf_system_heap_device:chr_file r_file_perms;
 
 # Allow access to audio devices and properties
 allow hal_dms_default audio_device:dir r_dir_perms;

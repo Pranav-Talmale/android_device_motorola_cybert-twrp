@@ -1,0 +1,7 @@
+type vendor_kcmdlinectrl, domain;
+type vendor_kcmdlinectrl_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_kcmdlinectrl)
+
+allow vendor_kcmdlinectrl sysfs_dt_firmware_android:file { getattr open read };
+

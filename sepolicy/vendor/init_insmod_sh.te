@@ -1,0 +1,10 @@
+# Augment init_insmod_sh permissions for system_dlkm access
+allow init_insmod_sh vendor_shell_exec:file rx_file_perms;
+allow init_insmod_sh { vendor_toolbox_exec vendor_shell_exec }:file rx_file_perms;
+allow init_insmod_sh self:key write;
+
+# Loading modules from system_dlkm
+allow init_insmod_sh system_dlkm_file:dir search;
+allow init_insmod_sh system_dlkm_file:file r_file_perms;
+allow init_insmod_sh system_dlkm_file:system module_load;
+allow init_insmod_sh self:capability sys_module;

@@ -36,15 +36,20 @@
 /sys/devices/virtual/touchscreen/primary/double_tap_enabled                            u:object_r:vendor_sysfs_touchpanel:s0
 
 # Fingerprint
+/vendor/bin/hw/android\.hardware\.biometrics\.face-service\.face-isv                 u:object_r:vendor_hal_face_exec:s0
+/vendor/bin/hw/motorola\.hardware\.camera\.imgtuner\.aidl-service                       u:object_r:hal_camera_imgtuner_exec:s0
+/vendor/bin/hw/com\.motorola\.hardware.display\.touch-service                           u:object_r:hal_display_touch_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.fpc                 u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service-rbs                  u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/motorola\.hardware\.sensorext-service                                   u:object_r:hal_sensors_default_exec:s0
+/vendor/bin/kcmdlinectrl                                                                u:object_r:vendor_kcmdlinectrl_exec:s0
 
 # Fingerprint exists
 /dev/esfp0                u:object_r:fingerprint_device:s0
 
 # Fingerprint Data
 /mnt/vendor/persist/egis(/.*)?                                                         u:object_r:vendor_persist_fingerprint_file:s0
+/data/vendor/\.fps(/.*)?                                                               u:object_r:fingerprint_vendor_data_file:s0
 /data/vendor/fpdata(/.*)?                                                              u:object_r:fingerprint_vendor_data_file:s0
 
 # Gatekeeper
@@ -133,3 +138,32 @@
 # Weaver
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service-thales                           u:object_r:hal_weaver_default_exec:s0
 
+
+# Block Devices
+/dev/block/by-name/prodpersist                                                         u:object_r:prodpersist_block_device:s0
+/dev/block/by-name/tzapp                                                               u:object_r:tzapp_block_device:s0
+/dev/block/by-name/tzapp_[ab]                                                          u:object_r:tzapp_block_device:s0
+/dev/block/sdc31                                                                       u:object_r:prodpersist_block_device:s0
+/dev/block/sdc61                                                                       u:object_r:tzapp_block_device:s0
+/vendor/bin/hw/com\.motorola\.hardware\.display\.panel-service                  u:object_r:hal_display_panel_exec:s0
+/vendor/bin/hw/motorola\.hardware\.fdr-service                                  u:object_r:hal_fdr_exec:s0
+/vendor/bin/hw/vendor\.mediatek\.hardware\.mtkpower-service\.mediatek           u:object_r:mtk_hal_power_exec:s0
+/vendor/bin/hw/motorola\.hardware\.input@1\.1-service                 u:object_r:hal_motorola_input_exec:s0
+/dev/aol_geofence                                                   u:object_r:aol_geofence_device:s0
+
+# Suspend Wakeups
+/sys/devices/platform/[^/]+/power_supply/[^/]+/wakeup[0-9]+/name   u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/smart_battery/wakeup/wakeup[0-9]+/name        u:object_r:sysfs_wakeup:s0
+
+# Utility binaries
+/vendor/bin/stflashtool                                             u:object_r:stflashtool_exec:s0
+/vendor/bin/misctrl                                                 u:object_r:vendor_misctrl_exec:s0
+/vendor/bin/init_insmod_sh                                          u:object_r:init_insmod_sh_exec:s0
+
+# Missing HAL Binaries
+/vendor/bin/hw/motorola\.hardware\.wireless\.powershare-service     u:object_r:vendor_file:s0
+/vendor/bin/hw/vendor\.mediatek\.hardware\.mtkpower_applist-service\.mediatek u:object_r:vendor_file:s0
+/vendor/bin/hw/vendor\.zuialarm\.hardware\.alarm-service             u:object_r:vendor_file:s0
+
+# Metadata
+/metadata/boot_log\.txt                                             u:object_r:vendor_boot_log_file:s0

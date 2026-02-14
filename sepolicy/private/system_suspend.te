@@ -1,0 +1,2 @@
+# dontaudit generic sysfs access to suppress log noise
+dontaudit system_suspend sysfs:file r_file_perms;

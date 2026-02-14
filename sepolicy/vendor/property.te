@@ -15,3 +15,12 @@ vendor_internal_prop(vendor_sku_prop);
 
 # TEE
 vendor_internal_prop(vendor_trustonic_prop)
+
+# Face
+vendor_internal_prop(vendor_faceauth_prop)
+
+# Custom/Mediatek
+vendor_internal_prop(vendor_bluetooth_prop)
+vendor_internal_prop(vendor_mtk_rcs_prop)
+
+

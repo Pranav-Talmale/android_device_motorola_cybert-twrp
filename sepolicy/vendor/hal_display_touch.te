@@ -1,0 +1,11 @@
+type hal_display_touch, domain;
+type hal_display_touch_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_display_touch)
+
+allow hal_display_touch servicemanager:binder { call transfer };
+allow hal_display_touch self:capability sys_nice;
+
+allow hal_display_touch vendor_sysfs_touchpanel:dir search;
+allow hal_display_touch vendor_data_file:dir create_dir_perms;
+allow hal_display_touch vendor_data_file:file create_file_perms;

@@ -1,6 +1,11 @@
+# Audio
+persist.vendor.mot_audio.speaker_status u:object_r:vendor_audio_prop:s0
+
 # Camera
 vendor.mot_ota_tuning.valid      u:object_r:vendor_mot_camera_prop:s0
-persist.vendor.camera.privapp.list  u:object_r:vendor_persist_camera_prop:s0
+persist.vendor.camera.privapp.list  u:object_r:vendor_mot_camera_prop:s0
+ro.vendor.camera.               u:object_r:vendor_mot_camera_prop:s0
+vendor.camera.                  u:object_r:vendor_mot_camera_prop:s0
 
 # FPS
 vendor.hw.fingerprint.status     u:object_r:vendor_mot_prop:s0
@@ -33,3 +38,13 @@ ro.vendor.product.hardware.sku.variant  u:object_r:vendor_sku_prop:s0
 
 # TEE
 ro.vendor.trustonic.ready u:object_r:vendor_trustonic_prop:s0 exact bool
+
+# Face
+vendor.faceauth.version u:object_r:vendor_faceauth_prop:s0 exact string
+
+
+# Custom/Mediatek
+persist.vendor.bluetooth.broadcaster.tx_pwr u:object_r:vendor_bluetooth_prop:s0
+
+
+

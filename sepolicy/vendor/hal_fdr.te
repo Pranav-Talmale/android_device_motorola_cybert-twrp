@@ -1,0 +1,7 @@
+type hal_fdr, domain;
+type hal_fdr_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_fdr)
+
+allow hal_fdr servicemanager:binder { call transfer };
+add_service(hal_fdr, hal_fdrcontrol_aidl_service)

@@ -9,6 +9,12 @@ allow hal_audio_default audio_ipi_device:chr_file rw_file_perms;
 allow hal_audio_default adsp_device:file rw_file_perms;
 allow hal_audio_default adsp_device:chr_file rw_file_perms;
 allow hal_audio_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+# Add for control PowerHAL
 hal_client_domain(hal_audio_default, hal_power)
+allow hal_audio_default mtk_hal_power_service:service_manager find;
 allow hal_audio_default persist_data_file:file r_file_perms;
 set_prop(hal_audio_default, vendor_mtk_audiohal_prop)
+set_prop(hal_audio_default, vendor_audio_prop)
+dontaudit hal_audio_default vendor_default_prop:property_service set;
+
+allow hal_audio_default sysfs:file { open write };

@@ -1,5 +1,6 @@
 allow hal_sensors_default sysfs_sensor:dir r_dir_perms;
 allow hal_sensors_default sysfs_sensor:file rw_file_perms;
+allow hal_sensors_default sysfs:file r_file_perms;
 allow hal_sensors_default nvcfg_file:dir r_dir_perms;
 allow hal_sensors_default nvcfg_file:file rw_file_perms;
 allow hal_sensors_default mnt_vendor_file:dir { open search };
@@ -25,4 +26,7 @@ allow hal_sensors_default hal_audio_default:unix_stream_socket connectto;
 allow hal_sensors_default goodix_health_device:chr_file rw_file_perms;
 get_prop(hal_sensors_default, vendor_mot_prop)
 add_service(hal_sensors_default, mot_sensorext_service)
+
+allow hal_sensors_default device:dir { open read watch };
+
 

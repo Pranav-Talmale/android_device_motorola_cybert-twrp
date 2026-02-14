@@ -1,0 +1,1 @@
+dontaudit vold mnt_vendor_trustlet_file:dir { read open ioctl };

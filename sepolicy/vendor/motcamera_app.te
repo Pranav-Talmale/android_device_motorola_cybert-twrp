@@ -9,3 +9,8 @@ allow motcamera_app mtk_hal_camera:fd use;
 
 allow motcamera_app mtk_hal_isphal_service:service_manager find;
 allow motcamera_app mtk_hal_mali_platform_default_service:service_manager find;
+allow motcamera_app shortcut_service:service_manager find;
+allow motcamera_app hal_graphics_allocator_default_tmpfs:file rw_file_perms;
+
+get_prop(motcamera_app, vendor_mot_camera_prop)
+dontaudit motcamera_app vendor_default_prop:file { read open getattr map };

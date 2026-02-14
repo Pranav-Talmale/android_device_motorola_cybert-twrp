@@ -1,0 +1,3 @@
+# Augment ccci_rpcd permissions for generic block device access
+# dontaudit block_device:blk_file { read write open } (neverallow)
+dontaudit ccci_rpcd block_device:blk_file { read write open };

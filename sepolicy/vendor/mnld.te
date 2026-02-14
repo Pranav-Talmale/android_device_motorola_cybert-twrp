@@ -1,1 +1,14 @@
 get_prop(mnld, vendor_mot_prop)
+allow mnld proc_bootconfig:file r_file_perms;
+
+# CCCI and Device
+allow mnld sysfs_ccci:dir r_dir_perms;
+allow mnld sysfs_ccci:file r_file_perms;
+allow mnld device:dir r_dir_perms;
+# dontaudit device:chr_file { read write open } (neverallow)
+dontaudit mnld device:chr_file { read write open };
+allow mnld device:chr_file ioctl;
+
+dontaudit mnld default_prop:file { read open getattr map };
+
+

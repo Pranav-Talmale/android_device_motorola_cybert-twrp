@@ -1,0 +1,1 @@
+type hal_motinput_hwservice, hwservice_manager_type;

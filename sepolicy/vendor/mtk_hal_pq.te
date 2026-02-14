@@ -1,0 +1,9 @@
+binder_use(mtk_hal_pq)
+binder_call(mtk_hal_pq, servicemanager)
+
+get_prop(mtk_hal_pq, boot_status_prop)
+allow mtk_hal_pq boot_status_prop:file { getattr map open };
+allow mtk_hal_pq sysfs_leds:dir search;
+allow mtk_hal_pq sysfs_leds:file { open read };
+allow mtk_hal_pq self:binder call;
+

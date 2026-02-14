@@ -1,0 +1,17 @@
+type hal_motorola_input, domain;
+type hal_motorola_input_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_motorola_input)
+
+add_hwservice(hal_motorola_input, hal_motinput_hwservice)
+allow hal_motorola_input hidl_base_hwservice:hwservice_manager add;
+
+allow hal_motorola_input self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow hal_motorola_input input_device:dir r_dir_perms;
+allow hal_motorola_input input_device:chr_file { rw_file_perms ioctl };
+allow hal_motorola_input vendor_sysfs_input:dir r_dir_perms;
+allow hal_motorola_input vendor_sysfs_input:file r_file_perms;
+
+get_prop(hal_motorola_input, hwservicemanager_prop)
+
+hwbinder_use(hal_motorola_input)

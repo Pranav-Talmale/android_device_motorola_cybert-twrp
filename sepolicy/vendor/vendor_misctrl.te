@@ -1,0 +1,8 @@
+type vendor_misctrl, domain;
+type vendor_misctrl_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_misctrl)
+
+allow vendor_misctrl sysfs_dt_firmware_android:dir search;
+allow vendor_misctrl sysfs_dt_firmware_android:file { getattr open read };
+

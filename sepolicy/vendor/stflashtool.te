@@ -1,0 +1,19 @@
+# Extension for Mediatek stflashtool
+
+allow stflashtool sysfs_soc:dir search;
+allow stflashtool sysfs_soc:file r_file_perms;
+
+# Additional permissions for stflashtool
+
+set_prop(stflashtool, vendor_nfc_prop)
+# dontaudit nfc_prop:file read (neverallow)
+get_prop(stflashtool, vendor_mot_prop)
+get_prop(stflashtool, vendor_nfc_prop)
+get_prop(stflashtool, vendor_persist_nfc_prop)
+
+# Property access
+allow stflashtool property_socket:sock_file write;
+allow stflashtool init:unix_stream_socket connectto;
+
+# Silence nfc_prop read (system prop, can't allow from vendor)
+dontaudit stflashtool nfc_prop:file r_file_perms;

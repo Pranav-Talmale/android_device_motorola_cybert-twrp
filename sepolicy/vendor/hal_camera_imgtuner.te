@@ -1,0 +1,11 @@
+type hal_camera_imgtuner, domain;
+type hal_camera_imgtuner_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_camera_imgtuner)
+
+hal_client_domain(hal_camera_imgtuner, hal_graphics_allocator)
+hal_client_domain(hal_camera_imgtuner, hal_configstore)
+
+allow hal_camera_imgtuner servicemanager:binder { call transfer };
+allow hal_camera_imgtuner ion_device:chr_file r_file_perms;
+get_prop(hal_camera_imgtuner, vendor_default_prop)

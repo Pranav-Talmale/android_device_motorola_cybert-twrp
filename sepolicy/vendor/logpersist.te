@@ -1,0 +1,7 @@
+# logpersist is a core domain (private/logpersist.te)
+# We augment it here to allow writing to /metadata for boot logs
+# dontaudit metadata_file:dir/file (neverallow)
+dontaudit logpersist vendor_boot_log_file:dir { read open write add_name };
+dontaudit logpersist vendor_boot_log_file:file { read open append create getattr };
+dontaudit logpersist metadata_file:dir { read open write add_name };
+dontaudit logpersist metadata_file:file { getattr read open create append };

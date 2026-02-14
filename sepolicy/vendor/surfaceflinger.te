@@ -1,0 +1,6 @@
+dontaudit surfaceflinger vendor_default_prop:file { getattr map open };
+
+
+
+allow surfaceflinger sysfs_leds:dir search;
+allow surfaceflinger hal_graphics_allocator_client_tmpfs:file rw_file_perms;

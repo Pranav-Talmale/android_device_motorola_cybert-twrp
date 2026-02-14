@@ -1,0 +1,19 @@
+type vendor_hal_face, domain;
+type vendor_hal_face_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_hal_face)
+
+hal_server_domain(vendor_hal_face, hal_face)
+
+allow vendor_hal_face servicemanager:binder { call transfer };
+
+set_prop(vendor_hal_face, vendor_faceauth_prop)
+dontaudit vendor_hal_face default_prop:file { read open getattr map };
+
+
+
+allow vendor_hal_face vendor_data_file:dir { write add_name create setattr };
+allow vendor_hal_face vendor_data_file:file { create write open getattr };
+
+allow vendor_hal_face property_socket:sock_file write;
+allow vendor_hal_face init:unix_stream_socket connectto;

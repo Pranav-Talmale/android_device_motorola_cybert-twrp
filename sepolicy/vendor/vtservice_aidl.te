@@ -8,3 +8,5 @@ allow vtservice_aidl self:capability { net_admin net_raw };
 allow vtservice_aidl self:udp_socket create_socket_perms_no_ioctl;
 allow vtservice_aidl fwmarkd_socket:sock_file write;
 allow vtservice_aidl netd:unix_stream_socket connectto;
+
+allow vtservice_aidl servicemanager:binder { call transfer };

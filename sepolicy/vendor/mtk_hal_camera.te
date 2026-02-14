@@ -12,6 +12,7 @@ allow mtk_hal_camera vendor_imager_metadata_file:file rw_file_perms;
 allow mtk_hal_camera vendor_imager_metadata_file:file { create setattr };
 allow mtk_hal_camera sysfs_therm:dir r_dir_perms;
 allow mtk_hal_camera sysfs_therm:file r_file_perms;
+allow mtk_hal_camera proc_cpu_loading:file r_file_perms;
 r_dir_file(mtk_hal_camera, persist_data_file)
 get_prop(mtk_hal_camera, vendor_mot_prop)
 get_prop(mtk_hal_camera, system_mot_camera_prop)
@@ -20,3 +21,12 @@ set_prop(mtk_hal_camera, vendor_mot_camera_prop)
 get_prop(mtk_hal_camera, vendor_persist_camera_prop)
 allow mtk_hal_camera motcamera_app:binder { call transfer };
 allow mtk_hal_camera motcamera_app:fd use;
+
+allow mtk_hal_camera sysfs_power_supply:dir r_dir_perms;
+allow mtk_hal_camera sysfs_power_supply:file r_file_perms;
+
+allow mtk_hal_camera hal_graphics_allocator_default_tmpfs:file rw_file_perms;
+get_prop(mtk_hal_camera, camera_config_prop)
+
+# Silence default_prop read noise
+dontaudit mtk_hal_camera default_prop:file r_file_perms;
