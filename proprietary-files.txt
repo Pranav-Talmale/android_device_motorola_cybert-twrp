@@ -1030,9 +1030,9 @@ product/etc/permissions/privapp-permissions-com.google.android.euicc.xml
 product/priv-app/EuiccGoogle/EuiccGoogle.apk;PRESIGNED
 
 # Face unlock
-vendor/bin/hw/android.hardware.biometrics.face-service.face-isv
-vendor/etc/init/android.hardware.biometrics.face-service.face.rc
-vendor/etc/vintf/manifest/face-default_3.xml
+# vendor/bin/hw/android.hardware.biometrics.face-service.face-isv
+# vendor/etc/init/android.hardware.biometrics.face-service.face.rc
+# vendor/etc/vintf/manifest/face-default_3.xml
 
 # Felica
 product/etc/felica/common.cfg
