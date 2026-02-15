@@ -65,13 +65,6 @@ vendor/lib64/vendor.mediatek.hardware.audio@8.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio@2.2.so
-vendor/lib64/soundfx/libbundlewrapper.so
-vendor/lib64/soundfx/libreverbwrapper.so
-vendor/lib64/soundfx/libvisualizer.so
-vendor/lib64/soundfx/libdownmix.so
-vendor/lib64/soundfx/libldnhncr.so
-vendor/lib64/soundfx/libdynproc.so
-vendor/lib64/soundfx/libeffectproxy.so
 
 # Power
 vendor/bin/hw/vendor.mediatek.hardware.mtkpower-service.mediatek
@@ -271,7 +264,6 @@ vendor/lib64/vendor.dolby.hardware.dms@2.1.so
 vendor/lib64/libcodec2_store_dolby.so
 vendor/lib64/soundfx/libswdap.so
 vendor/lib64/soundfx/libaudiopreprocessing.so
-vendor/lib64/soundfx/libaudiopreprocessing_mtk.so
 vendor/lib64/soundfx/libdlbvol.so
 vendor/lib64/soundfx/libswspatializer.so
 vendor/lib64/soundfx/libswgamedap.so

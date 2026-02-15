@@ -59,7 +59,16 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl \
     android.hardware.audio.effect@7.0-impl \
     android.hardware.audio.service \
-    android.hardware.soundtrigger@2.3-impl
+    android.hardware.soundtrigger@2.3-impl \
+    libbundlewrapper \
+    libreverbwrapper \
+    libvisualizer \
+    libdownmix \
+    libldnhncr \
+    libdynproc \
+    libeffectproxy \
+    libaudiopreprocessing \
+    libhapticgenerator
 
 PRODUCT_PACKAGES +=\
     android.hardware.audio.common-util
@@ -170,7 +179,9 @@ PRODUCT_PACKAGES += \
 
 # HIDL
 PRODUCT_HIDL_ENABLED := true
-PRODUCT_PACKAGES += hwservicemanager
+PRODUCT_PACKAGES += \
+    hwservicemanager \
+    android.hidl.allocator@1.0-service
 
 # Init
 PRODUCT_PACKAGES += \

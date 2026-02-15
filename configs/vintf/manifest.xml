@@ -243,4 +243,9 @@
         <version>2</version>
         <fqname>ILights/default</fqname>
     </hal>
+    <hal format="hidl">
+        <name>android.hidl.allocator</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IAllocator/ashmem</fqname>
+    </hal>
 </manifest>

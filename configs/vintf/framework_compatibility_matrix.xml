@@ -63,6 +63,14 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>android.hidl.allocator</name>
+        <version>1.0</version>
+        <interface>
+            <name>IAllocator</name>
+            <instance>ashmem</instance>
+        </interface>
+    </hal>
+    <hal format="hidl" optional="true">
         <name>android.hardware.radio</name>
         <version>1.2</version>
         <version>1.6</version>
