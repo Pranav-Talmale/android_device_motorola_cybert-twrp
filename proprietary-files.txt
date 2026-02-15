@@ -1495,7 +1495,7 @@ system_ext/framework/mediatek-framework.jar
 system_ext/framework/mtk-moto-telephony-ext.jar
 system_ext/framework/mtk-moto-ims-ext.jar
 system_ext/framework/mediatek-ims-base.jar
-system_ext/framework/mtk-telephony-common.jar;BOOT_JAR
+system_ext/framework/mtk-telephony-common.jar:system/framework/mtk-telephony-common.jar;BOOT_JAR
 
 # Secure element
 vendor/bin/hw/android.hardware.secure_element-service.thales
