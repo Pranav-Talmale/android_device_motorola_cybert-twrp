@@ -314,7 +314,7 @@ PRODUCT_PACKAGES += \
     hals.conf
 
 # Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 35
+PRODUCT_SHIPPING_API_LEVEL := 34
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
