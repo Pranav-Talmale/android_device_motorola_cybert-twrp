@@ -147,6 +147,11 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/bin/hw/vendor.mediatek.hardware.mtkpower-service.mediatek',
      'vendor/lib64/android.hardware.power-service-mediatek.so'): blob_fixup()
         .replace_needed('android.hardware.power-service-mediatek.so', 'android.hardware.power-service-mediatek.cybert.so'),
+
+    ('vendor/lib64/libjc_keymint-thales.so',
+    'vendor/bin/moto_eSE_tool',
+    'vendor/bin/hw/android.hardware.security.keymint-service.strongbox-thales'): blob_fixup()
+        .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 }
 
 module = ExtractUtilsModule(
