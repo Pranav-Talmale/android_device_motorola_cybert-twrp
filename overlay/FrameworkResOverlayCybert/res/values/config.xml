@@ -133,39 +133,6 @@
         <item>101</item>
     </integer-array>
 
-    <!-- Enrollment progress thresholds used to advance between different
-         UDFPS enrollment UI stages -->
-    <string-array name="config_udfps_enroll_stage_thresholds">
-        <item>0.25</item>
-        <item>0.5</item>
-        <item>0.75</item>
-        <item>0.875</item>
-    </string-array>
-
-    <!-- Whether UDFPS supports full navigation key interaction during
-         fingerprint authentication -->
-    <bool name="config_udfps_full_keys_supported">true</bool>
-
-    <!-- Whether UDFPS supports enabling local High Brightness Mode (HBM)
-         directly through the display driver -->
-    <bool name="config_udfps_local_hbm_supported">true</bool>
-
-    <!-- Whether UDFPS authentication is allowed while the screen is off,
-         typically used for ambient / always-on display interactions -->
-    <bool name="config_screen_off_udfps_enabled">true</bool>
-
-    <!-- Fixed display refresh rate to be used while local HBM is active
-         for UDFPS to ensure stable illumination and sensor readings -->
-    <integer name="config_udfps_local_hbm_fix_refresh_rate">120</integer>
-
-    <!-- Maximum number of concurrent High Brightness Mode (HBM) sessions
-         allowed; 0 indicates no explicit limit -->
-    <integer name="config_hbmSessionLimit">0</integer>
-
-    <!-- Duration (in ms) of the transition animation for UDFPS illumination.
-         Set to 0 since we use local HBM which handles brightness instantly/natively. -->
-    <integer name="config_udfps_illumination_transition_ms">0</integer>
-
     <!-- Ambient Light Sensor used for auto-brightness (matches Sensor HAL name) -->
     <string name="config_autoBrightnessLightSensorName">tcs3720_als</string>
 
