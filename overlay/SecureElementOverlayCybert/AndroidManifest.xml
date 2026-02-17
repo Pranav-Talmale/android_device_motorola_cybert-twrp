@@ -5,5 +5,9 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.se.overlay.target">
-    <overlay android:targetPackage="com.android.se" android:isStatic="true" android:priority="500" />
+    <overlay android:targetPackage="com.android.se"
+        android:isStatic="true"
+        android:priority="500"
+        android:requiredSystemPropertyName="ro.boot.strongbox_support"
+        android:requiredSystemPropertyValue="true" />
 </manifest>

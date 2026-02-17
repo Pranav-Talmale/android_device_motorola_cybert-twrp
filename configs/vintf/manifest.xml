@@ -256,9 +256,7 @@
     </hal>
     <hal format="aidl">
         <name>android.hardware.secure_element</name>
-        <fqname>ISecureElement/eSE1</fqname>
         <fqname>ISecureElement/SIM1</fqname>
         <fqname>ISecureElement/SIM2</fqname>
-        <fqname>ISecureElement/SIM3</fqname>
     </hal>
 </manifest>
