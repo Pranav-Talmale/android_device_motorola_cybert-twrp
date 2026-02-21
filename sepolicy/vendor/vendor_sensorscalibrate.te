@@ -1,0 +1,7 @@
+type vendor_sensorscalibrate, domain;
+init_daemon_domain(vendor_sensorscalibrate)
+
+allow vendor_sensorscalibrate same_process_hal_file:file { execute getattr open read map };
+allow vendor_sensorscalibrate servicemanager:binder { call transfer };
+allow vendor_sensorscalibrate vendor_shell_exec:file rx_file_perms;
+allow vendor_sensorscalibrate vendor_toolbox_exec:file rx_file_perms;

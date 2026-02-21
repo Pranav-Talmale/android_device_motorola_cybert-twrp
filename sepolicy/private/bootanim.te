@@ -1,4 +1,4 @@
-dontaudit bootanim vendor_default_prop:file read;
+# dontaudit bootanim vendor_default_prop:file read;
 
 allow bootanim hal_graphics_allocator_client_tmpfs:file rw_file_perms;
 allow bootanim hal_graphics_allocator_client_tmpfs:file map;

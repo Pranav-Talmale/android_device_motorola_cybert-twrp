@@ -12,6 +12,11 @@ type vendor_motobox_exec, exec_type, vendor_file_type, file_type;
 type prodpersist_block_device, dev_type;
 type tzapp_block_device, dev_type;
 
+type vendor_sysfs_wlc, fs_type, sysfs_type;
+type vendor_sysfs_otg, fs_type, sysfs_type;
+type vendor_sensorscalibrate_exec, exec_type, vendor_file_type, file_type;
+type vendor_alarm_exec, exec_type, vendor_file_type, file_type;
+
 type sysfs_hbm, sysfs_type, fs_type;
 
 type vendor_boot_log_file, file_type;

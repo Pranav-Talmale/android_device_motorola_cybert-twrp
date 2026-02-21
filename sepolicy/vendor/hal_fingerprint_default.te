@@ -12,6 +12,7 @@ allow hal_fingerprint_default hal_fingerprint_default:binder { call transfer };
 allow hal_fingerprint_default fingerprint_device:chr_file { open read write ioctl getattr };
 allow hal_fingerprint_default persist_data_file:dir search;
 set_prop(hal_fingerprint_default, vendor_mot_prop)
+set_prop(hal_fingerprint_default, vendor_mot_camera_prop)
 vndbinder_use(hal_fingerprint_default)
 hwbinder_use(hal_fingerprint_default)
 get_prop(hal_fingerprint_default, boot_status_prop)

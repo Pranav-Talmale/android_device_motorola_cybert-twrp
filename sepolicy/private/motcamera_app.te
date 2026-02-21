@@ -37,4 +37,5 @@ allow motcamera_app {
     vibrator_manager_service
     virtual_device_native_service
     voiceinteraction_service
+    media_quality_service
 }:service_manager find;

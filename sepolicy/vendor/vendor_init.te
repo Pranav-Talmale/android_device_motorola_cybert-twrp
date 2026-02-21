@@ -8,9 +8,9 @@ rw_dir_file(vendor_init, sysfs_power_supply)
 get_prop(vendor_init, vendor_sku_prop)
 set_prop(vendor_init, vendor_sku_prop)
 set_prop(vendor_init, system_mot_prop)
-dontaudit vendor_init vendor_bluetooth_prop:property_service set;
-dontaudit vendor_init vendor_mtk_rcs_prop:property_service set;
-dontaudit vendor_init vendor_mtk_vendor_vt_prop:property_service set;
+# dontaudit vendor_init vendor_bluetooth_prop:property_service set;
+# dontaudit vendor_init vendor_mtk_rcs_prop:property_service set;
+# dontaudit vendor_init vendor_mtk_vendor_vt_prop:property_service set;
 
 
 
@@ -20,20 +20,20 @@ allow vendor_init self:perf_event cpu;
 
 
 
-dontaudit vendor_init build_prop:property_service set;
-dontaudit vendor_init default_prop:property_service set;
+# dontaudit vendor_init build_prop:property_service set;
+# dontaudit vendor_init default_prop:property_service set;
 
-dontaudit vendor_init default_prop:file { read open };
+# dontaudit vendor_init default_prop:file { read open };
 
 # Silence binder/servicemanager noise
-dontaudit vendor_init servicemanager:binder { call transfer };
+# dontaudit vendor_init servicemanager:binder { call transfer };
 
-dontaudit vendor_init userdebug_or_eng_prop:property_service set;
+# dontaudit vendor_init userdebug_or_eng_prop:property_service set;
 dontaudit vendor_init vendor_userdir_file:dir { write add_name };
 
 # Camera property set
 set_prop(vendor_init, vendor_mot_camera_prop)
 
-# Silence property denials for system-managed props
-dontaudit vendor_init radio_prop:property_service set;
-dontaudit vendor_init vts_status_prop:file r_file_perms;
+# cybert logcat additions
+# Moved to system.prop so init sets them instead of vendor_init
+

@@ -22,5 +22,7 @@ vendor_internal_prop(vendor_faceauth_prop)
 # Custom/Mediatek
 vendor_internal_prop(vendor_bluetooth_prop)
 vendor_internal_prop(vendor_mtk_rcs_prop)
+vendor_internal_prop(vendor_mtk_uce_prop)
+vendor_internal_prop(vendor_media_prop)
 
 

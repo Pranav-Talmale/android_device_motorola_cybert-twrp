@@ -6,10 +6,11 @@ set_prop(init, vendor_mot_prop)
 allow init mnt_product_file:dir mounton;
 allow init functionfs:dir mounton;
 
-# Silence harmless execution attempts
-dontaudit init vendor_file:file { execute execute_no_trans };
-dontaudit init same_process_hal_file:file { execute execute_no_trans };
-dontaudit init socket_device:sock_file { create setattr };
-dontaudit init sysfs:file { open write };
-dontaudit init socket_device:sock_file unlink;
-dontaudit init servicemanager:binder { call transfer };
+# dontaudit init sysfs:file { open write };
+# dontaudit init socket_device:sock_file unlink;
+
+# cybert logcat additions
+allow init same_process_hal_file:file execute;
+allow init servicemanager:binder { call transfer };
+allow init socket_device:sock_file { create setattr };
+allow init vendor_sysfs_wlc:file open;

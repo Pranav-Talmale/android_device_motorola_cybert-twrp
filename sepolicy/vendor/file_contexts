@@ -152,7 +152,8 @@
 /dev/aol_geofence                                                   u:object_r:aol_geofence_device:s0
 
 # Suspend Wakeups
-/sys/devices/platform/[^/]+/power_supply/[^/]+/wakeup[0-9]+/name   u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/charger/power_supply/[^/]+/wakeup[0-9]+(/.*)?   u:object_r:sysfs_wakeup:s0
+/sys/devices/platform/smart_battery/power_supply/battery/wakeup[0-9]+(/.*)? u:object_r:sysfs_wakeup:s0
 /sys/devices/platform/smart_battery/wakeup/wakeup[0-9]+/name        u:object_r:sysfs_wakeup:s0
 
 # Utility binaries
@@ -161,9 +162,14 @@
 /vendor/bin/init_insmod_sh                                          u:object_r:init_insmod_sh_exec:s0
 
 # Missing HAL Binaries
-/vendor/bin/hw/motorola\.hardware\.wireless\.powershare-service     u:object_r:vendor_file:s0
-/vendor/bin/hw/vendor\.mediatek\.hardware\.mtkpower_applist-service\.mediatek u:object_r:vendor_file:s0
-/vendor/bin/hw/vendor\.zuialarm\.hardware\.alarm-service             u:object_r:vendor_file:s0
+/vendor/bin/hw/motorola\.hardware\.sensorscalibrate-service     u:object_r:vendor_sensorscalibrate_exec:s0
+/vendor/bin/hw/vendor\.zuialarm\.hardware\.alarm-service             u:object_r:vendor_alarm_exec:s0
+/vendor/bin/hw/motorola\.hardware\.wireless\.powershare-service     u:object_r:vendor_powershare_exec:s0
+
+# Sysfs additions
+/sys/devices/platform/11b72000\.i2c/i2c-10/10-0038/wlc_st_changed    u:object_r:vendor_sysfs_wlc:s0
+/sys/devices/platform/11b72000\.i2c/i2c-10/10-0038/tx_mode           u:object_r:vendor_sysfs_wlc:s0
+/sys/devices/platform/extcon-usb/extcon/extcon0/cable.1/name         u:object_r:vendor_sysfs_otg:s0
 
 # Metadata
 /metadata/boot_log\.txt                                             u:object_r:vendor_boot_log_file:s0
