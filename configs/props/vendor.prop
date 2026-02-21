@@ -1,7 +1,4 @@
 # Audio
-aaudio.mmap_exclusive_policy=2
-aaudio.mmap_policy=2
-ro.config.vc_call_vol_steps=8
 ro.vendor.audio.moto_sst_supported=true
 ro.vendor.mtk_audio_tuning_tool_ver=V1
 ro.vendor.mtk_hifiaudio_support=1
@@ -12,21 +9,6 @@ vendor.audio.usb.super_hifi=true
 persist.vendor.audio.usb.offload=true
 
 # Bluetooth
-bluetooth.device.class_of_device=90,2,12
-bluetooth.profile.a2dp.source.enabled?=true
-bluetooth.profile.asha.central.enabled?=true
-bluetooth.profile.avrcp.target.enabled?=true
-bluetooth.profile.bas.client.enabled?=true
-bluetooth.profile.gatt.enabled?=true
-bluetooth.profile.hfp.ag.enabled?=true
-bluetooth.profile.hid.device.enabled?=true
-bluetooth.profile.hid.host.enabled?=true
-bluetooth.profile.map.server.enabled?=true
-bluetooth.profile.opp.enabled?=true
-bluetooth.profile.pan.nap.enabled?=true
-bluetooth.profile.pan.panu.enabled?=true
-bluetooth.profile.pbap.server.enabled?=true
-bluetooth.profile.sap.server.enabled?=true
 ro.vendor.bt.platform=6879
 ro.vendor.mtk.bt_sap_enable=true
 vendor.bluetooth.ldac.abr=true
@@ -36,12 +18,8 @@ ro.bluetooth.leaudio_offload.supported=true
 persist.bluetooth.leaudio_offload.disabled=false
 persist.vendor.bluetooth.leaudio_mode=ums-cg
 persist.vendor.bluetooth.broadcaster.tx_pwr=10
-bluetooth.profile.bap.unicast.client.enabled=true
-bluetooth.profile.hap.client.enabled=true
-bluetooth.profile.csip.set_coordinator.enabled=true
 
 # Camera
-camera.disable_zsl_mode=1
 persist.vendor.camera.physical.num=5
 persist.vendor.camera3.pipeline.bufnum.base.imgo=4
 persist.vendor.camera3.pipeline.bufnum.base.lcso=4
@@ -212,11 +190,9 @@ ro.vendor.arm.gralloc.shared_access_usage_flags=0x10000000
 ro.vendor.arm.gralloc.shared_access_usage_mask=0x50000000
 
 # DRM
-drm.service.enabled=true
 ro.vendor.mtk_widevine_drm_l1_support=1
 
 # FUSE passthrough
-persist.sys.fuse.passthrough.enable=true
 
 # GPS
 ro.vendor.gps.chrdev=gps_drv_dl_v051
@@ -231,10 +207,6 @@ ro.hardware.gatekeeper=trustonic
 ro.hardware.kmsetkey=trustonic
 
 # Media
-debug.stagefright.c2inputsurface=-1
-debug.stagefright.ccodec=4
-debug.stagefright.omx_default_rank=1000
-media.c2.dmabuf.padding=3072
 ro.vendor.mtk.c2.vdec.fmt.support.level=2
 ro.vendor.mtk_hdr_video_support=1
 ro.vendor.mtk_backlight_hwc_support=1
@@ -243,7 +215,6 @@ persist.vendor.sys.pq.disp.aal.bypass=1
 ro.vendor.mtk_video_hevc_enc_support=1
 vendor.media.omx=0
 vendor.mtk.vdec.waitkeyframeforplay=9
-media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
 # Partition
 ro.vendor.mtk_emmc_support=1
@@ -259,9 +230,6 @@ ro.vendor.mtk_nn_baseline_support=1
 ro.vendor.mtk_nn_quant_preferred=1
 
 # Radio
-persist.radio.multisim.config=dsds
-persist.rcs.supported=1
-persist.sys.ams_ext_enabled=true
 persist.vendor.connsys.chipid=-1
 persist.vendor.connsys.dynamic.dump=0
 persist.vendor.connsys.patch.version=-1
@@ -272,8 +240,8 @@ persist.vendor.md_c2k_cap_dep_check=0
 persist.vendor.mims_support=2
 persist.vendor.mtk_ct_volte_support=3
 persist.vendor.mtk_dynamic_ims_switch=1
-persist.vendor.mtk_rcs_single_reg_support=0
 persist.vendor.mtk_sim_switch_policy=2
+
 persist.vendor.radio.fd.counter=150
 persist.vendor.radio.fd.off.counter=50
 persist.vendor.radio.fd.off.r8.counter=50
@@ -287,11 +255,8 @@ persist.vendor.vilte_support=1
 persist.vendor.viwifi_support=1
 persist.vendor.volte_support=1
 persist.vendor.vonr_setting_support=1
-persist.radio.is_vonr_enabled_0=true
-persist.radio.is_vonr_enabled_1=true
 persist.vendor.vt.RTPInfo=1
 persist.vendor.vt.supported=1
-ro.telephony.iwlan_operation_mode=AP-assisted
 ro.vendor.ap_info_monitor=0
 ro.vendor.connsys.dedicated.log.port=bt,wifi,gps,mcu
 ro.vendor.connsys.dedicated.log=1
@@ -326,16 +291,9 @@ ro.vendor.num_md_protocol=2
 ro.vendor.ril.set_sbp_place=2
 ro.vendor.sim_me_lock_mode=3
 ro.vendor.smvr.p2batch.hd=4
-telephony.active_modems.max_count=2
 vendor.connsys.driver.ready=no
-masterclear.allow_retain_esim_profiles_after_fdr=true
-persist.vendor.mtk_rcs_ua_support=1
-persist.vendor.mtk_uce_support=0
-persist.vendor.vt.RTPInfo=1
-persist.vendor.vt.supported=1
-ril.subscription.types=RUIM
+
 ro.mot.build.customerid=global
-ro.telephony.default_network=26,26
 ro.vendor.radio.imei.sv=15
 
 # SOC
@@ -363,7 +321,6 @@ debug.sf.scroll_boost_refreshrate=120
 debug.sf.touch_boost_refreshrate=90
 debug.sf.treat_170m_as_sRGB=1
 debug.sf.use_phase_offsets_as_durations=0
-persist.sys.sf.native_mode=300
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.has_HDR_display=true
 ro.surface_flinger.supports_background_blur=1
@@ -406,12 +363,8 @@ ro.vendor.wlan.gen=gen4m_6897
 ro.vendor.wlan.standalone.log=y
 
 # Zygote
-zygote.critical_window.minute=10
 
 # ADB Debugging
-ro.adb.secure=0
-ro.debuggable=1
-persist.sys.usb.config=adb
 
 # SKU Props
 import /vendor/etc/motorola/props/sku.${ro.boot.sku_variant}.prop
