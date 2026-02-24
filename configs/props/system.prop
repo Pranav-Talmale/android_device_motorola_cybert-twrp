@@ -4,3 +4,10 @@ vendor.camera.aux.packagelist=org.lineageos.aperture,com.motorola.camera5
 
 # Display
 sys.brightness.disable_gamma_conversion=true
+
+# Radio (platform-typed props that vendor_init cannot set)
+persist.radio.is_vonr_enabled_0=true
+persist.radio.is_vonr_enabled_1=true
+persist.vendor.mtk_rcs_single_reg_support=0
+persist.vendor.mtk_uce_support=0
+ril.subscription.types=RUIM
