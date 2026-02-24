@@ -47,6 +47,11 @@ vendor.faceauth.version u:object_r:vendor_faceauth_prop:s0 exact string
 persist.vendor.bluetooth.broadcaster.tx_pwr u:object_r:vendor_bluetooth_prop:s0
 
 # Denied properties from logcat
+persist.vendor.boot.bootseq.history u:object_r:vendor_mot_prop:s0
+ro.vendor.boot_seq u:object_r:vendor_mot_prop:s0
 
-
-
+# GPU / Mali
+vendor.mali. u:object_r:vendor_gpu_prop:s0
+ro.vendor.arm.egl. u:object_r:vendor_gpu_prop:s0
+persist.vendor.debug.gpud. u:object_r:vendor_gpu_prop:s0
+ro.vendor.mtk.gpud. u:object_r:vendor_gpu_prop:s0

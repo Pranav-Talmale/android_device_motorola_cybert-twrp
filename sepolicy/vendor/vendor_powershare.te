@@ -6,3 +6,6 @@ init_daemon_domain(vendor_powershare)
 allow vendor_powershare same_process_hal_file:file { execute getattr open read map };
 allow vendor_powershare sysfs:file { getattr open read write };
 allow vendor_powershare vendor_sysfs_wlc:file { getattr open read write };
+allow vendor_powershare sysfs_power_supply:dir search;
+binder_call(vendor_powershare, servicemanager)
+add_service(vendor_powershare, hal_mot_powershare_service)

@@ -5,3 +5,4 @@ allow vendor_alarm same_process_hal_file:file { execute getattr open read map };
 allow vendor_alarm servicemanager:binder { call transfer };
 allow vendor_alarm vendor_shell_exec:file rx_file_perms;
 allow vendor_alarm vendor_toolbox_exec:file rx_file_perms;
+add_service(vendor_alarm, hal_zui_alarm_service)

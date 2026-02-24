@@ -1,3 +1,6 @@
 # Removed broad property access silencer.
 
+get_prop(bootanim, vendor_gpu_prop)
 
+# GPU services needed for boot animation
+allow bootanim mtk_hal_mali_platform_default_service:service_manager find;

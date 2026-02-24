@@ -6,4 +6,6 @@ allow mtk_hal_pq boot_status_prop:file { getattr map open };
 allow mtk_hal_pq sysfs_leds:dir search;
 allow mtk_hal_pq sysfs_leds:file { open read };
 allow mtk_hal_pq self:binder call;
+add_service(mtk_hal_pq, mtk_hal_pq_service)
+add_service(mtk_hal_pq, mtk_hal_mmlpq_service)
 

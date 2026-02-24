@@ -5,3 +5,4 @@ allow vendor_sensorscalibrate same_process_hal_file:file { execute getattr open 
 allow vendor_sensorscalibrate servicemanager:binder { call transfer };
 allow vendor_sensorscalibrate vendor_shell_exec:file rx_file_perms;
 allow vendor_sensorscalibrate vendor_toolbox_exec:file rx_file_perms;
+add_service(vendor_sensorscalibrate, hal_mot_sensorscalibrate_service)

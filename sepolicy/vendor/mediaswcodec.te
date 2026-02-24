@@ -1,0 +1,2 @@
+get_prop(mediaswcodec, vendor_gpu_prop)
+allow mediaswcodec mtk_hal_mali_platform_default_service:service_manager find;

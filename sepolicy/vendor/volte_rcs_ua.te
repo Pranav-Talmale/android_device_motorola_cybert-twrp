@@ -1,4 +1,5 @@
 binder_use(volte_rcs_ua)
 binder_call(volte_rcs_ua, servicemanager)
 get_prop(volte_rcs_ua, radio_control_prop)
-
+init_daemon_domain(volte_rcs_ua)
+add_service(volte_rcs_ua, mtk_hal_rcs_service)

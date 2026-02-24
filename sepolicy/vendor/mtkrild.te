@@ -1,0 +1,32 @@
+# Moto-specific additions for rild (mtkfusionrild runs as rild domain)
+# The rild domain already has hal_telephony_server from platform policy,
+# giving it radio_prop, hal_radio_service, binder to radio, etc.
+# MTK mtkfusionrild.te and rild.te in sepolicy_vndr provide most
+# MTK-specific permissions. These are Motorola device additions only.
+
+# Moto vendor properties
+get_prop(rild, vendor_mot_prop)
+get_prop(rild, radio_control_prop)
+
+# Vendor property set - VoLTE/VoNR/WFC/ViLTE/IMS (some may duplicate MTK)
+set_prop(rild, vendor_mtk_wfc_prop)
+
+# /proc/bootinfo
+allow rild vendor_proc_hw:file r_file_perms;
+
+# CCCI wifi proxy - map permission (MTK rild.te has rw but not map)
+allow rild ccci_wifi_proxy_device:chr_file map;
+
+# Netlink netfilter socket - bind (MTK has create_socket_perms_no_ioctl)
+allow rild self:netlink_netfilter_socket { bind };
+
+# UDP socket ioctl
+allow rild self:udp_socket ioctl;
+
+# Allow volte_rcs_ua to connect
+allow volte_rcs_ua rild:unix_stream_socket connectto;
+
+# Allow netutils_wrapper interaction (for IP configuration)
+allow netutils_wrapper rild:fd use;
+allow netutils_wrapper rild:fifo_file { read write };
+allow netutils_wrapper rild:unix_stream_socket { read write };

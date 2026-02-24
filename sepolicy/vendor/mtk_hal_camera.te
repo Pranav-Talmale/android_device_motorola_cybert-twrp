@@ -28,9 +28,15 @@ allow mtk_hal_camera sysfs_power_supply:file r_file_perms;
 allow mtk_hal_camera hal_graphics_allocator_default_tmpfs:file rw_file_perms;
 allow mtk_hal_camera mtk_hal_mali_platform_default_service:service_manager find;
 get_prop(mtk_hal_camera, camera_config_prop)
+get_prop(mtk_hal_camera, vendor_gpu_prop)
 
 # Silence default_prop read noise
 dontaudit mtk_hal_camera default_prop:file r_file_perms;
 
 # cybert logcat additions
 allow mtk_hal_camera system_data_file:dir search;
+
+# Allow camera HAL to register its vendor services
+allow mtk_hal_camera mtk_hal_camera_bgservice:service_manager { add find };
+allow mtk_hal_camera mtk_hal_camera_atms_service:service_manager { add find };
+allow mtk_hal_camera mtk_hal_camera_aovservice:service_manager { add find };

@@ -1,0 +1,2 @@
+# Allow neural networks HAL to register its services
+allow mtk_hal_neuralnetworks mtk_hal_neuralnetworks_service:service_manager { add find };

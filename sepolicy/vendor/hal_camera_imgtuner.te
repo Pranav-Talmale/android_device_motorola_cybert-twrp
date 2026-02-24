@@ -9,3 +9,4 @@ hal_client_domain(hal_camera_imgtuner, hal_configstore)
 allow hal_camera_imgtuner servicemanager:binder { call transfer };
 allow hal_camera_imgtuner ion_device:chr_file r_file_perms;
 get_prop(hal_camera_imgtuner, vendor_default_prop)
+add_service(hal_camera_imgtuner, hal_mot_imgtuner_service)

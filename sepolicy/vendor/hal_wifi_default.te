@@ -1,0 +1,4 @@
+# Allow WiFi HAL full chr_file access to wmtWifi device
+# Platform only grants write/open via hal_wifi attribute but MTK driver
+# needs ioctl and read to complete driver state changes
+allow hal_wifi_default wmtWifi_device:chr_file { ioctl read getattr };

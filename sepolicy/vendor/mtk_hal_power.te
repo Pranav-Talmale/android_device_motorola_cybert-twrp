@@ -3,6 +3,7 @@ add_service(mtk_hal_power, mtk_hal_power_service)
 
 # Proc and Property
 allow mtk_hal_power proc:file { getattr ioctl open read };
+allowxperm mtk_hal_power proc:file ioctl 0x6704;
 dontaudit mtk_hal_power vendor_default_prop:property_service set;
 
 

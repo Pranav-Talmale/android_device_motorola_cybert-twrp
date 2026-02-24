@@ -29,7 +29,6 @@ set_prop(vendor_moto_init_shell, vendor_mtk_cxp_vendor_prop)
 set_prop(vendor_moto_init_shell, vendor_mtk_usb_prop)
 get_prop(vendor_moto_init_shell, vendor_sku_prop)
 set_prop(vendor_moto_init_shell, vendor_sku_prop)
-
 # KMod
 allow vendor_moto_init_shell self:capability sys_module;
 allow vendor_moto_init_shell vendor_file:system module_load;
@@ -70,5 +69,5 @@ dontaudit vendor_moto_init_shell default_prop:file { read open getattr map };
 dontaudit vendor_moto_init_shell system_prop:file { read open getattr map };
 
 # Silence ro.vendor property set denials
-# dontaudit vendor_moto_init_shell build_vendor_prop:property_service set;
-# dontaudit vendor_moto_init_shell vendor_default_prop:property_service set;
+dontaudit vendor_moto_init_shell build_vendor_prop:property_service set;
+dontaudit vendor_moto_init_shell vendor_default_prop:property_service set;

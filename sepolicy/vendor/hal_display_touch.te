@@ -9,3 +9,4 @@ allow hal_display_touch self:capability sys_nice;
 allow hal_display_touch vendor_sysfs_touchpanel:dir search;
 allow hal_display_touch vendor_data_file:dir create_dir_perms;
 allow hal_display_touch vendor_data_file:file create_file_perms;
+add_service(hal_display_touch, hal_mot_touch_service)

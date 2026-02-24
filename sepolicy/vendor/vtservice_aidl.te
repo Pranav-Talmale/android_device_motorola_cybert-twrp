@@ -10,3 +10,4 @@ allow vtservice_aidl fwmarkd_socket:sock_file write;
 allow vtservice_aidl netd:unix_stream_socket connectto;
 
 allow vtservice_aidl servicemanager:binder { call transfer };
+add_service(vtservice_aidl, hal_vtservice_aidl_service)

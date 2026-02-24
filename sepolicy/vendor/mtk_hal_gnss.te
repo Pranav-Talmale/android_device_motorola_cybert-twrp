@@ -1,1 +1,4 @@
 allow mtk_hal_gnss aol_geofence_device:chr_file rw_file_perms;
+
+# Allow GNSS HAL to register its service
+allow mtk_hal_gnss mtk_hal_gnss_service:service_manager { add find };
