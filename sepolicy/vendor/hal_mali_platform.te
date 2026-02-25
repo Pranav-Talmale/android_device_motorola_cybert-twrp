@@ -1,0 +1,8 @@
+# Mali GPU Platform Service HAL
+type hal_mali_platform, domain;
+type hal_mali_platform_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(hal_mali_platform)
+
+binder_use(hal_mali_platform)
+allow hal_mali_platform servicemanager:binder { call transfer };

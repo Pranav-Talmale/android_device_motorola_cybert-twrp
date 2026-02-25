@@ -150,6 +150,7 @@
 /dev/block/by-name/prodpersist                                                         u:object_r:prodpersist_block_device:s0
 /dev/block/by-name/tzapp                                                               u:object_r:tzapp_block_device:s0
 /dev/block/by-name/tzapp_[ab]                                                          u:object_r:tzapp_block_device:s0
+/dev/block/by-name/modem(_[ab])?                                                       u:object_r:md_block_device:s0
 /dev/block/sdc31                                                                       u:object_r:prodpersist_block_device:s0
 /dev/block/sdc61                                                                       u:object_r:tzapp_block_device:s0
 /vendor/bin/hw/com\.motorola\.hardware\.display\.panel-service                  u:object_r:hal_display_panel_exec:s0
@@ -172,6 +173,13 @@
 /vendor/bin/hw/motorola\.hardware\.sensorscalibrate-service     u:object_r:vendor_sensorscalibrate_exec:s0
 /vendor/bin/hw/vendor\.zuialarm\.hardware\.alarm-service             u:object_r:vendor_alarm_exec:s0
 /vendor/bin/hw/motorola\.hardware\.wireless\.powershare-service     u:object_r:vendor_powershare_exec:s0
+
+# Mali GPU Platform Service
+/vendor/bin/hw/mt6897/arm\.mali\.platform-service\.mediatek\.mt6897  u:object_r:hal_mali_platform_exec:s0
+
+# Motorola WLC & SAR WiFi
+/vendor/bin/hw/motorola\.hardware\.wireless\.wlc-service        u:object_r:vendor_wlc_exec:s0
+/vendor/bin/hw/motorola\.hardware\.sarwifi-srv                   u:object_r:vendor_sarwifi_exec:s0
 
 # Sysfs additions
 /sys/devices/platform/11b72000\.i2c/i2c-10/10-0038/wlc_st_changed    u:object_r:vendor_sysfs_wlc:s0

@@ -1,0 +1,3 @@
+# Allow AOSP misctrl to read device tree firmware info
+allow misctrl sysfs_dt_firmware_android:dir search;
+allow misctrl sysfs_dt_firmware_android:file { getattr open read };

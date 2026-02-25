@@ -1,0 +1,16 @@
+# Motorola Wireless Charging (WLC) Service
+type vendor_wlc, domain;
+type vendor_wlc_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_wlc)
+
+binder_use(vendor_wlc)
+allow vendor_wlc servicemanager:binder { call transfer };
+
+# Access power supply sysfs for wireless charging status
+allow vendor_wlc sysfs_power_supply:dir r_dir_perms;
+allow vendor_wlc sysfs_power_supply:file r_file_perms;
+
+# Access wlc-related sysfs nodes
+allow vendor_wlc vendor_sysfs_wlc:dir r_dir_perms;
+allow vendor_wlc vendor_sysfs_wlc:file r_file_perms;
