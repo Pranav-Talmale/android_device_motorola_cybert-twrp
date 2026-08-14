@@ -1,4 +1,0 @@
-allow thermal_core sysfs_leds:dir r_dir_perms;
-allow thermal_core sysfs_leds:file r_file_perms;
-allow thermal_core self:netlink_generic_socket create_socket_perms_no_ioctl;
-allow thermal_core mtk_hal_power_service:service_manager find;

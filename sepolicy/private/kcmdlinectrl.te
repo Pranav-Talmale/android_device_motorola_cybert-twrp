@@ -1,2 +1,0 @@
-# Allow AOSP kcmdlinectrl to read device tree firmware info
-allow kcmdlinectrl sysfs_dt_firmware_android:file { getattr open read };

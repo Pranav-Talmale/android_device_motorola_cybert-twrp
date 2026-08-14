@@ -1,2 +1,0 @@
-allow surfaceflinger mtk_hal_mali_platform_default_service:service_manager find;
-allow surfaceflinger sysfs_hbm:file rw_file_perms;

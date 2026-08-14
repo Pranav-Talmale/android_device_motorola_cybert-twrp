@@ -1,1 +1,0 @@
-allow permissioncontroller_app hal_graphics_allocator_client_tmpfs:file { read write getattr map };

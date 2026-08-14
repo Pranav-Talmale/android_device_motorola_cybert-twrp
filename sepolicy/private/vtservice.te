@@ -1,2 +1,0 @@
-# tel log property
-get_prop(vtservice, system_mtk_em_tel_log_prop)

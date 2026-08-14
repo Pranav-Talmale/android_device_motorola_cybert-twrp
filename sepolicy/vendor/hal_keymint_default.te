@@ -1,2 +1,0 @@
-allow hal_keymint_default proc_bootprof:file rw_file_perms;
-get_prop(hal_keymint_default, boot_status_prop)

@@ -37,18 +37,6 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a55
 
-# Force any prefer32 targets to be compiled as 64 bit.
-IGNORE_PREFER32_ON_DEVICE := true
-
-# Include 64-bit drmserver to support 64-bit only devices
-TARGET_DYNAMIC_64_32_DRMSERVER := true
-
-# Include 64-bit mediaserver to support 64-bit only devices
-TARGET_DYNAMIC_64_32_MEDIASERVER := true
-
-# Enable 64-bit for non-zygote.
-ZYGOTE_FORCE_64 := true
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := cybert
 TARGET_NO_BOOTLOADER := true
@@ -56,19 +44,8 @@ TARGET_NO_BOOTLOADER := true
 # Display
 TARGET_SCREEN_DENSITY := 450
 
-# HIDL
-DEVICE_MANIFEST_FILE += \
-    $(DEVICE_PATH)/configs/vintf/manifest.xml
-DEVICE_MATRIX_FILE += $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml \
-    $(DEVICE_PATH)/configs/vintf/framework_compatibility_matrix.xml
-
 # Fastboot
 TARGET_BOARD_FASTBOOT_INFO_FILE := $(DEVICE_PATH)/fastboot-info.txt
-
-# Filesystem
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/mot_aids.fs
 
 # Recovery
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
@@ -102,8 +79,6 @@ BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_BAZEL_BUILD_OUT)/dtbs
 PRODUCT_COPY_FILES += \
 	$(KERNEL_BAZEL_BUILD_OUT)/Image.gz:kernel
 
-BOARD_SYSTEM_KERNEL_MODULES := $(wildcard $(KERNEL_BAZEL_BUILD_OUT)/system/*.ko)
-BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.system))
 BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(KERNEL_BAZEL_BUILD_OUT)/vendor/*.ko)
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.vendor))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(KERNEL_BAZEL_BUILD_OUT)/vendor_ramdisk/*.ko)
@@ -166,42 +141,14 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 BOARD_USES_METADATA_PARTITION := true
 
 # Properties
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/props/system.prop
-TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/props/product.prop
-TARGET_ODM_PROP += $(DEVICE_PATH)/configs/props/odm.prop
-
-# RIL
-ENABLE_VENDOR_RIL_SERVICE := true
+# TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
+# TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/props/system.prop
+# TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/props/product.prop
+# TARGET_ODM_PROP += $(DEVICE_PATH)/configs/props/odm.prop
 
 # Security patch level
 BOOT_SECURITY_PATCH := 2025-08-01
 VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
-
-# Sepolicy
-include device/mediatek/sepolicy_vndr/SEPolicy.mk
-include device/lineage/sepolicy/libperfmgr/sepolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/basic/non_plat
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
-SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
-
-# SKU
-ODM_MANIFEST_SKUS += dn dns dnsf dsds n ns nsf qsqs ss tsts
-ODM_MANIFEST_DN_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dn.xml
-ODM_MANIFEST_DNS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dns.xml
-ODM_MANIFEST_DNSF_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dnsf.xml
-ODM_MANIFEST_DSDS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_dsds.xml
-ODM_MANIFEST_N_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_n.xml
-ODM_MANIFEST_NS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_ns.xml
-ODM_MANIFEST_NSF_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_nsf.xml
-ODM_MANIFEST_QSQS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_qsqs.xml
-ODM_MANIFEST_SS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_ss.xml
-ODM_MANIFEST_TSTS_FILES := $(DEVICE_PATH)/configs/vintf/sku/manifest_tsts.xml
-
-# Udfps
-TARGET_USES_FOD_ZPOS := true
-$(call soong_config_set,surfaceflinger,udfps_lib,//device/motorola/cybert/udfps:libudfps_extension.cybert)
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -215,29 +162,3 @@ BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := $(BOARD_AVB_ALGORITHM)
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := $(BOARD_AVB_KEY_PATH)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := 18
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
-
-# Wifi
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_HOSTAPD_DRIVER := NL80211
-WIFI_DRIVER_FW_PATH_PARAM := "/dev/wmtWifi"
-WIFI_DRIVER_FW_PATH_STA := "STA"
-WIFI_DRIVER_FW_PATH_AP := "AP"
-WIFI_DRIVER_FW_PATH_P2P := "P2P"
-WIFI_DRIVER_STATE_CTRL_PARAM := "/dev/wmtWifi"
-WIFI_DRIVER_STATE_ON := "1"
-WIFI_DRIVER_STATE_OFF := "0"
-WIFI_HAL_INTERFACE_COMBINATIONS := {{{STA}, 2}}
-WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{AP}, 2},}
-WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{AP}, 1}}
-WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{P2P}, 1}}
-WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{NAN}, 1}}
-WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
-
-# Debugging: Allow unauthorized ADB
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
-ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1
-ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=adb
-
-# Inherit the proprietary files
-include vendor/motorola/cybert/BoardConfigVendor.mk
-include vendor/motorola/cybert-motcamera/BoardConfigVendor.mk

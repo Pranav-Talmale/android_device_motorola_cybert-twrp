@@ -1,2 +1,0 @@
-type motcamera_app, domain, coredomain;
-typeattribute motcamera_app mlstrustedsubject;
