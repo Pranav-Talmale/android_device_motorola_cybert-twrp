@@ -65,7 +65,7 @@ PRODUCT_PACKAGES += \
 
 # First Stage Ramdisk
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/init/fstab.mt6897:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6897
+    $(DEVICE_PATH)/fstab.mt6897:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6897
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 34
