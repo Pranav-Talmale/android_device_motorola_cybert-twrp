@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_cybert.mk
+    $(LOCAL_DIR)/twrp_cybert.mk

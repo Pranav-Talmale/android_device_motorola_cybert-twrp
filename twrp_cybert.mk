@@ -8,15 +8,18 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
+# Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
+
 # Inherit from device makefile.
 $(call inherit-product, device/motorola/cybert/device.mk)
 
-# Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common TWRP stuff.
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 TARGET_BOOT_ANIMATION_RES := 1080
 
-PRODUCT_NAME := lineage_cybert
+PRODUCT_NAME := twrp_cybert
 PRODUCT_DEVICE := cybert
 PRODUCT_MANUFACTURER := motorola
 PRODUCT_BRAND := motorola
