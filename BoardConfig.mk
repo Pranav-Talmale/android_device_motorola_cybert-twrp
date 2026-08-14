@@ -47,6 +47,74 @@ TARGET_SCREEN_DENSITY := 450
 # Fastboot
 TARGET_BOARD_FASTBOOT_INFO_FILE := $(DEVICE_PATH)/fastboot-info.txt
 
+# TWRP Configuration
+TW_THEME := portrait_hdpi
+TARGET_SCREEN_WIDTH  := 1220
+TARGET_SCREEN_HEIGHT := 2712
+TARGET_SCREEN_DENSITY := 450
+
+TW_STATUS_ICONS_ALIGN := center
+TW_CUSTOM_CPU_POS     := "300"
+TW_CUSTOM_CLOCK_POS   := "70"
+TW_CUSTOM_BATTERY_POS := "790"
+
+OF_SCREEN_H := 2712
+OF_STATUS_H := 100
+OF_STATUS_INDENT_LEFT := 56
+OF_STATUS_INDENT_RIGHT := 48
+OF_HIDE_NOTCH := 1
+OF_CLOCK_POS := 1
+
+TW_EXTRA_LANGUAGES    := false
+TARGET_USES_MKE2FS    := true
+
+TW_FRAMERATE          := 60
+TW_BRIGHTNESS_PATH    := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS     := 2047
+TW_DEFAULT_BRIGHTNESS := 1200
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+
+# No vibration
+TW_NO_HAPTICS := true
+
+# No screen timeout
+TW_NO_SCREEN_TIMEOUT := true
+
+# Disable ADB backup/restore
+TW_EXCLUDE_TWRPAPP := true
+
+# Disable Experimental Wifi settings in TWRP
+TW_NO_NETWORK := true
+
+TW_INCLUDE_FB2PNG       := true
+TW_INCLUDE_NTFS_3G      := true
+TW_INCLUDE_REPACKTOOLS  := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_INCLUDE_RESETPROP    := true
+TW_INCLUDE_LPTOOLS      := true
+TW_EXCLUDE_LPDUMP       := true
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+
+# Disable decrypt (#TODO: Fix decryption)
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_CRYPTO_FBE := false
+TW_INCLUDE_FBE := false
+
+TW_EXCLUDE_APEX         := true
+
+# no recovery partition
+TW_HAS_NO_RECOVERY_PARTITION := true
+
+# FastbootD
+TW_INCLUDE_FASTBOOTD := true
+
+# USB Configuration
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+
+# USB OTG
+TW_USB_STORAGE := true
+
 # Recovery
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
 BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
