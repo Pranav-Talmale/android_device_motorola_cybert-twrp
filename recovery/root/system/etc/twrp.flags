@@ -1,0 +1,79 @@
+# TWRP flags generated from the supplied MT6897 Android fstab
+# Dynamic partitions
+/system_image emmc /dev/block/mapper/system flags=display="System Image";backup=1;flashimg=1;wipeingui=1;slotselect;logical
+/system ext4 /dev/block/mapper/system flags=display="System";slotselect;logical
+/vendor_image emmc /dev/block/mapper/vendor flags=display="Vendor Image";backup=1;flashimg=1;wipeingui=1;slotselect;logical
+/vendor ext4 /dev/block/mapper/vendor flags=display="Vendor";slotselect;logical
+/product_image emmc /dev/block/mapper/product flags=display="Product Image";backup=1;flashimg=1;wipeingui=1;slotselect;logical
+/product ext4 /dev/block/mapper/product flags=display="Product";slotselect;logical
+/system_ext_image emmc /dev/block/mapper/system_ext flags=display="System_ext Image";backup=1;flashimg=1;wipeingui=1;slotselect;logical
+/system_ext ext4 /dev/block/mapper/system_ext flags=display="System_ext";slotselect;logical
+/vendor_dlkm_image emmc /dev/block/mapper/vendor_dlkm flags=display="Vendor DLKM Image";backup=1;flashimg=1;wipeingui=1;slotselect;logical
+/vendor_dlkm ext4 /dev/block/mapper/vendor_dlkm flags=display="Vendor DLKM";slotselect;logical
+/system_dlkm_image emmc /dev/block/mapper/system_dlkm flags=display="System DLKM Image";backup=1;flashimg=1;wipeingui=1;slotselect;logical
+/system_dlkm ext4 /dev/block/mapper/system_dlkm flags=display="System DLKM";slotselect;logical
+
+# Metadata / userdata
+/metadata f2fs /dev/block/by-name/metadata flags=display="Metadata";backup=1;wipeingui=1
+/data f2fs /dev/block/by-name/userdata flags=display="Data";backup=1;wipeingui=1;encryptable=userdata
+
+# Boot-critical A/B partitions
+/boot emmc /dev/block/by-name/boot flags=display="Boot";backup=1;flashimg=1;slotselect
+/vendor_boot emmc /dev/block/by-name/vendor_boot flags=display="Vendor Boot";backup=1;flashimg=1;slotselect
+/init_boot emmc /dev/block/by-name/init_boot flags=display="Init Boot";backup=1;flashimg=1;slotselect
+/dtbo emmc /dev/block/by-name/dtbo flags=display="DTBO";backup=1;flashimg=1;slotselect
+/vbmeta emmc /dev/block/by-name/vbmeta flags=display="VBMeta";backup=1;flashimg=1;slotselect
+/vbmeta_system emmc /dev/block/by-name/vbmeta_system flags=display="VBMeta System";backup=1;flashimg=1;slotselect
+
+# Non-A/B raw partitions
+/frp emmc /dev/block/by-name/frp flags=display="FRP";backup=1
+/nvram emmc /dev/block/by-name/nvram flags=display="NVRAM";backup=1
+/proinfo emmc /dev/block/by-name/proinfo flags=display="Proinfo";backup=1
+/lk1 emmc /dev/block/by-name/lk1 flags=display="LK1";backup=1
+/bootloader2 emmc /dev/block/by-name/bootloader2 flags=display="Bootloader2";backup=1
+/para emmc /dev/block/by-name/para flags=display="Para";backup=1
+/misc emmc /dev/block/by-name/misc flags=display="Misc";backup=1
+/logo emmc /dev/block/by-name/logo flags=display="Logo";backup=1;flashimg=1
+/expdb emmc /dev/block/by-name/expdb flags=display="EXPDB";backup=1
+/seccfg emmc /dev/block/by-name/seccfg flags=display="SecCfg";backup=1
+/tee1 emmc /dev/block/by-name/tee1 flags=display="TEE1";backup=1
+/tee2 emmc /dev/block/by-name/tee2 flags=display="TEE2";backup=1
+/scp1 emmc /dev/block/by-name/scp1 flags=display="SCP1";backup=1
+/scp2 emmc /dev/block/by-name/scp2 flags=display="SCP2";backup=1
+/sspm1 emmc /dev/block/by-name/sspm1 flags=display="SSPM1";backup=1
+/sspm2 emmc /dev/block/by-name/sspm2 flags=display="SSPM2";backup=1
+/dpm1 emmc /dev/block/by-name/dpm1 flags=display="DPM1";backup=1
+/dpm2 emmc /dev/block/by-name/dpm2 flags=display="DPM2";backup=1
+/mcupm1 emmc /dev/block/by-name/mcupm1 flags=display="MCUPM1";backup=1
+/mcupm2 emmc /dev/block/by-name/mcupm2 flags=display="MCUPM2";backup=1
+/modem emmc /dev/block/by-name/modem flags=display="Modem";backup=1
+/md1dsp emmc /dev/block/by-name/md1dsp flags=display="MD1DSP";backup=1
+/md1arm7 emmc /dev/block/by-name/md1arm7 flags=display="MD1ARM7";backup=1
+/md3img emmc /dev/block/by-name/md3img flags=display="MD3IMG";backup=1
+/gz1 emmc /dev/block/by-name/gz1 flags=display="GZ1";backup=1
+/gz2 emmc /dev/block/by-name/gz2 flags=display="GZ2";backup=1
+/ccu emmc /dev/block/by-name/ccu flags=display="CCU";backup=1
+/vcp emmc /dev/block/by-name/vcp flags=display="VCP";backup=1
+/gpueb emmc /dev/block/by-name/gpueb flags=display="GPUEB";backup=1
+/mcf_ota emmc /dev/block/by-name/mcf_ota flags=display="MCF OTA";backup=1
+/mvpu_algo1 emmc /dev/block/by-name/mvpu_algo1 flags=display="MVPU Algo1";backup=1
+/mvpu_algo2 emmc /dev/block/by-name/mvpu_algo2 flags=display="MVPU Algo2";backup=1
+/apusys1 emmc /dev/block/by-name/apusys1 flags=display="APUSYS1";backup=1
+/apusys2 emmc /dev/block/by-name/apusys2 flags=display="APUSYS2";backup=1
+/spmfw emmc /dev/block/by-name/spmfw flags=display="SPMFW";backup=1
+/audio_dsp emmc /dev/block/by-name/audio_dsp flags=display="Audio DSP";backup=1
+/pi_img emmc /dev/block/by-name/pi_img flags=display="PI IMG";backup=1
+/boot_para emmc /dev/block/by-name/boot_para flags=display="Boot Para";backup=1
+/odmdtbo emmc /dev/block/by-name/odmdtbo flags=display="ODM DTBO";backup=1
+/connsys_wifi emmc /dev/block/by-name/connsys_wifi flags=display="Connsys WiFi";backup=1
+/connsys_bt emmc /dev/block/by-name/connsys_bt flags=display="Connsys BT";backup=1
+/otp emmc /dev/block/by-name/otp flags=display="OTP";backup=1
+
+# Vendor calibration / protection partitions: backup only, intentionally no flashimg.
+/mnt/vendor/protect_f ext4 /dev/block/by-name/protect1 flags=display="Protect F";backup=1
+/mnt/vendor/protect_s ext4 /dev/block/by-name/protect2 flags=display="Protect S";backup=1
+/mnt/vendor/nvdata ext4 /dev/block/by-name/nvdata flags=display="NVData";backup=1
+/mnt/vendor/nvcfg ext4 /dev/block/by-name/nvcfg flags=display="NVCFG";backup=1
+/mnt/vendor/persist ext4 /dev/block/by-name/persist flags=display="Persist";backup=1
+/mnt/product/persist ext4 /dev/block/by-name/prodpersist flags=display="Product Persist";backup=1
+/mnt/vendor/tzapp ext4 /dev/block/by-name/tzapp_a flags=display="TZApp";backup=1
