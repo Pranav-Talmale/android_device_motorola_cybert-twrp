@@ -75,13 +75,13 @@ BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=11201000.usb0
 TARGET_FORCE_PREBUILT_KERNEL := true
 
 KERNEL_BAZEL_BUILD_OUT := out/target/product/${TARGET_BOOTLOADER_BOARD_NAME}/obj/KLEAF_OBJ/dist
-BOARD_PREBUILT_DTBIMAGE_DIR := $(KERNEL_BAZEL_BUILD_OUT)/dtbs
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtbs
 PRODUCT_COPY_FILES += \
-	$(KERNEL_BAZEL_BUILD_OUT)/Image.gz:kernel
+	$(DEVICE_PATH)/prebuilt/Image.gz:kernel
 
-BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(KERNEL_BAZEL_BUILD_OUT)/vendor/*.ko)
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor/*.ko)
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.vendor))
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(KERNEL_BAZEL_BUILD_OUT)/vendor_ramdisk/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_ramdisk/*.ko)
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.vendor_ramdisk))
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
 BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)
@@ -94,7 +94,7 @@ RECOVERY_KERNEL_MODULES := \
     touchscreen_u_mmi \
     focaltech_touch_v3_u_mmi
 
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES += $(addprefix $(KERNEL_BAZEL_BUILD_OUT)/vendor/,$(addsuffix .ko,$(RECOVERY_KERNEL_MODULES)))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES += $(addprefix $(DEVICE_PATH)/prebuilt/modules/vendor/,$(addsuffix .ko,$(RECOVERY_KERNEL_MODULES)))
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD += $(RECOVERY_KERNEL_MODULES)
 
 BOARD_MKBOOTIMG_ARGS += \
@@ -108,7 +108,7 @@ BOARD_MKBOOTIMG_INIT_ARGS += \
     --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
 TARGET_NO_KERNEL_OVERRIDE := true
-TARGET_PREBUILT_KERNEL_HEADERS := $(DEVICE_PATH)-kernel/kernel-uapi-headers.tar.gz
+TARGET_PREBUILT_KERNEL_HEADERS := $(DEVICE_PATH)/prebuilt/kernel-uapi-headers.tar.gz
 
 # Partitions
 BOARD_PRODUCTIMAGE_MINIMAL_PARTITION_RESERVED_SIZE := false
