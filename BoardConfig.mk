@@ -169,7 +169,9 @@ BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD += $(RECOVERY_KERNEL_MODULES)
 
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
-TW_LOAD_VENDOR_MODULES := "mmi_info.ko mmi_relay.ko sensors_class.ko touchscreen_u_mmi.ko focaltech_touch_v3_u_mmi.ko goodix_brl_u_mmi.ko"
+TW_LOAD_VENDOR_MODULES := \
+    "$(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor/*.ko) \
+     $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_ramdisk/*.ko)"
 
 BOARD_MKBOOTIMG_ARGS += \
     --dtb_offset $(BOARD_TAGS_OFFSET) \
