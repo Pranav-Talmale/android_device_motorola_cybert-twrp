@@ -50,14 +50,6 @@ PRODUCT_PACKAGES += \
     update_engine_sideload \
     update_verifier
 
-# Boot control HAL
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-mtkimpl \
-    android.hardware.boot@1.2-mtkimpl.recovery
-
-PRODUCT_PACKAGES_DEBUG += \
-    bootctl
-
 # MTK plpath utils
 PRODUCT_PACKAGES += \
     mtk_plpath_utils \
@@ -68,18 +60,44 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl-mock \
     fastbootd
 
+# Keymaster and Keystore
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@4.1 \
+    android.system.keystore2
+
+# Encryption support
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.crypto.dm_default_key.options_format.version=2 \
+	ro.crypto.volume.metadata.method=dm-default-key \
+	keymaster_ver=4.1
+
+# Security
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint \
+    android.hardware.security.secureclock \
+    android.hardware.security.sharedsecret
+
+# Additional configs
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.1
+
+TARGET_RECOVERY_DEVICE_MODULES += \
+    android.hardware.keymaster@4.1
+
 # First Stage Ramdisk
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/fstab.mt6897:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6897
+
+# Libion
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libion
+
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 34
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
-    # hardware/mediatek \
-    # hardware/motorola \
-    # hardware/mediatek/libmtkperf_client \
-    # hardware/google/pixel \
-    # hardware/google/interfaces
+    $(DEVICE_PATH)

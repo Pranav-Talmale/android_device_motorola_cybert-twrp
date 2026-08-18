@@ -96,10 +96,15 @@ TW_EXCLUDE_LPDUMP       := true
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 
-# Disable decrypt (#TODO: Fix decryption)
-TW_INCLUDE_CRYPTO := false
-TW_INCLUDE_CRYPTO_FBE := false
-TW_INCLUDE_FBE := false
+# Decryption
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_USE_FSCRYPT_POLICY := 2
+TW_FORCE_KEYMASTER_VER := true
+
+# Enables proper handling of /data/media
+RECOVERY_SDCARD_ON_DATA := true
 
 TW_EXCLUDE_APEX         := true
 
@@ -186,6 +191,10 @@ BOARD_MKBOOTIMG_INIT_ARGS += \
 TARGET_NO_KERNEL_OVERRIDE := true
 TARGET_PREBUILT_KERNEL_HEADERS := $(DEVICE_PATH)/prebuilt/kernel-uapi-headers.tar.gz
 
+BOARD_HAS_MTK_HARDWARE := true
+BOARD_USES_MTK_HARDWARE := true
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+
 # Partitions
 BOARD_PRODUCTIMAGE_MINIMAL_PARTITION_RESERVED_SIZE := false
 -include vendor/lineage/config/BoardConfigReservedSize.mk
@@ -217,10 +226,7 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 BOARD_USES_METADATA_PARTITION := true
 
 # Properties
-# TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/props/vendor.prop
-# TARGET_SYSTEM_PROP += $(DEVICE_PATH)/configs/props/system.prop
-# TARGET_PRODUCT_PROP += $(DEVICE_PATH)/configs/props/product.prop
-# TARGET_ODM_PROP += $(DEVICE_PATH)/configs/props/odm.prop
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Security patch level
 PLATFORM_VERSION             := 99.87.36
