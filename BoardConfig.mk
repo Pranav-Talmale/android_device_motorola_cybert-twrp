@@ -68,9 +68,10 @@ OF_CLOCK_POS := 1
 TW_EXTRA_LANGUAGES    := false
 TARGET_USES_MKE2FS    := true
 
-TW_FRAMERATE          := 60
+TW_FRAMERATE          := 120
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone2/temp
 TW_BRIGHTNESS_PATH    := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS     := 2047
+TW_MAX_BRIGHTNESS     := 16180
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
