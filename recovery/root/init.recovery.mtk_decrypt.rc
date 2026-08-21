@@ -12,7 +12,6 @@ import /trustonic.rc
 on init
     # Extended library path for all security components
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
-    setprop crypto.ready 1
 
 on fs
     install_keyring

@@ -58,6 +58,10 @@ on post-fs
     restorecon /mnt/vendor/persist/mobicore
     write /proc/bootprof "MOBICORE: Starting mcDriverDaemon"
 
+on late-fs
+    # Start of decryption mechanism for recovery. Starts with keymint.
+    setprop crypto.ready 1
+
 on post-fs-data
     # Create /data/vendor/key_provisioning dir and get proper encryption policy installed
     # Key Installation
