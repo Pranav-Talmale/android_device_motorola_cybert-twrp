@@ -6,6 +6,8 @@
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_NINJA_USES_ENV_VARS += RTIC_MPGEN
+BUILD_BROKEN_PLUGIN_VALIDATION := soong-libaosprecovery_defaults soong-libguitwrp_defaults soong-libtwrpminui_defaults soong-vold_defaults
 
 DEVICE_PATH := device/motorola/cybert
 
@@ -177,7 +179,8 @@ TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
 TW_LOAD_VENDOR_MODULES := \
     "$(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor/*.ko) \
-     $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_ramdisk/*.ko)"
+     $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_ramdisk/*.ko) \
+     mmi_info.ko mmi_relay.ko sensors_class.ko touchscreen_u_mmi.ko focaltech_touch_v3_u_mmi.ko goodix_brl_u_mmi.ko mtk_disp_notify.ko"
 
 BOARD_MKBOOTIMG_ARGS += \
     --dtb_offset $(BOARD_TAGS_OFFSET) \
