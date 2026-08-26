@@ -33,6 +33,8 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.twrp.vendor_boot=true
 
+TW_DEVICE_VERSION := cybert_v1.0.0
+
 PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceName=cybert \
     BuildDesc="cybert_g_sys-user 16 W1VV36M.7-21-5 bb36b3 test-keys" \
